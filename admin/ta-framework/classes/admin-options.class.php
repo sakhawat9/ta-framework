@@ -654,7 +654,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
 
         echo '<div class="clear"></div>';
 
-        echo ( ! empty( $this->args['footer_after'] ) ) ? $this->args['footer_after'] : '';
+        echo ( ! empty( $this->args['footer_after'] ) ) ? wp_kses_post($this->args['footer_after']) : '';
 
       echo '</div>';
 
