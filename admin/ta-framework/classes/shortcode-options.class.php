@@ -181,7 +181,7 @@ if ( ! class_exists( 'TAF_Shortcoder' ) ) {
 
             echo '<div class="taf-fields">';
 
-            echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. $section['description'] .'</div>' : '';
+            echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. wp_kses_post($section['description']) .'</div>' : '';
 
             foreach ( $section['fields'] as $field ) {
 

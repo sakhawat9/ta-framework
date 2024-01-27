@@ -504,7 +504,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
             $notice_class = ( ! empty( $this->notice ) ) ? 'taf-form-show' : '';
             $notice_text  = ( ! empty( $this->notice ) ) ? $this->notice : '';
 
-            echo '<div class="taf-form-result taf-form-success '. esc_attr( $notice_class ) .'">'. $notice_text .'</div>';
+            echo '<div class="taf-form-result taf-form-success '. esc_attr( $notice_class ) .'">'. wp_kses_post($notice_text) .'</div>';
 
             echo ( $this->args['show_form_warning'] ) ? '<div class="taf-form-result taf-form-warning">'. esc_html__( 'You have unsaved changes, save your changes!', 'ta-framework' ) .'</div>' : '';
 
@@ -542,7 +542,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
 
                   echo '<li class="taf-tab-item">';
 
-                    echo '<a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'" class="taf-arrow">'. $tab_icon . $tab['title'] . $tab_error .'</a>';
+                    echo '<a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'" class="taf-arrow">'. wp_kses_post($tab_icon) . esc_html($tab['title']) . esc_html($tab_error) .'</a>';
 
                     echo '<ul>';
 
@@ -562,7 +562,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
 
                 } else {
 
-                  echo '<li class="taf-tab-item"><a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'">'. $tab_icon . $tab['title'] . $tab_error .'</a></li>';
+                  echo '<li class="taf-tab-item"><a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'">'. wp_kses_post($tab_icon) . esc_html($tab['title']) . esc_html($tab_error) .'</a></li>';
 
                 }
 
@@ -588,8 +588,8 @@ if ( ! class_exists( 'TAF_Options' ) ) {
               $section_slug   = ( ! empty( $section['title'] ) ) ? sanitize_title( $section_title ) : '';
 
               echo '<div class="taf-section hidden'. esc_attr( $section_onload . $section_class ) .'" data-section-id="'. esc_attr( $section_parent . $section_slug ) .'">';
-              echo ( $has_nav ) ? '<div class="taf-section-title"><h3>'. $section_icon . $section_title .'</h3></div>' : '';
-              echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. $section['description'] .'</div>' : '';
+              echo ( $has_nav ) ? '<div class="taf-section-title"><h3>'. wp_kses_post($section_icon) . esc_html($section_title) .'</h3></div>' : '';
+              echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. wp_kses_post($section['description']) .'</div>' : '';
 
               if ( ! empty( $section['fields'] ) ) {
 
@@ -641,7 +641,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
           echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="taf_transient[reset]" class="button taf-warning-primary taf-reset-all taf-confirm" value="'. ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All', 'ta-framework' ) : esc_html__( 'Reset', 'ta-framework' ) ) .'" data-confirm="'. esc_html__( 'Are you sure you want to reset all settings to default values?', 'ta-framework' ) .'">' : '';
           echo '</div>';
 
-          echo ( ! empty( $this->args['footer_text'] ) ) ? '<div class="taf-copyright">'. $this->args['footer_text'] .'</div>' : '';
+          echo ( ! empty( $this->args['footer_text'] ) ) ? '<div class="taf-copyright">'. wp_kses_post($this->args['footer_text']) .'</div>' : '';
 
           echo '<div class="clear"></div>';
           echo '</div>';

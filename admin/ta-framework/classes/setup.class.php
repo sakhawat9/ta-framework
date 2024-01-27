@@ -67,9 +67,6 @@ if ( ! class_exists( 'TAF_Setup' ) ) {
       // Init action
       do_action( 'taf_init' );
 
-      // Setup textdomain
-      self::textdomain();
-
       add_action( 'after_setup_theme', array( 'TAF', 'setup' ) );
       add_action( 'init', array( 'TAF', 'setup' ) );
       add_action( 'switch_theme', array( 'TAF', 'setup' ) );
@@ -459,11 +456,6 @@ if ( ! class_exists( 'TAF_Setup' ) ) {
         }
       }
 
-    }
-
-    // Setup textdomain
-    public static function textdomain() {
-      load_textdomain( 'taf', self::$dir .'/languages/'. get_locale() .'.mo' );
     }
 
     // Set all of used fields

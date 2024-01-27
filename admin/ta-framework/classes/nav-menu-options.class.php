@@ -113,8 +113,8 @@ if ( ! class_exists( 'TAF_Nav_Menu_Options' ) ) {
 
           echo '<div class="taf-fields">';
 
-          echo ( $section_title || $section_icon ) ? '<div class="taf-nav-menu-title"><h4>'. $section_icon . $section_title .'</h4></div>' : '';
-          echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. $section['description'] .'</div>' : '';
+          echo ( $section_title || $section_icon ) ? '<div class="taf-nav-menu-title"><h4>'. wp_kses_post($section_icon) . esc_html($section_title) .'</h4></div>' : '';
+          echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. wp_kses_post($section['description']) .'</div>' : '';
 
           if ( ! empty( $section['fields'] ) ) {
 
