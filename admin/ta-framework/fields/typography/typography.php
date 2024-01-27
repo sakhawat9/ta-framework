@@ -94,7 +94,7 @@ if ( ! class_exists( 'TAF_Field_typography' ) ) {
 
 			//
 			// Font Family
-			if ( ! empty( $args['font_family'] ) ) {
+			if ( ! empty( $args['font_family'] ) ) {	
 				echo '<div class="taf--block">';
 				echo '<div class="taf--title">' . esc_html__( 'Font Family', 'ta-framework' ) . '</div>';
 				echo $this->create_select( array( $this->value['font-family'] => $this->value['font-family'] ), 'font-family', esc_html__( 'Select a font', 'ta-framework' ) );

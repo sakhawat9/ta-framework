@@ -90,7 +90,7 @@ if ( ! class_exists( 'TAF_Field_repeater' ) ) {
 
 				echo '<div class="taf-repeater-alert taf-repeater-max">' . esc_html__( 'You cannot add more.', 'ta-framework' ) . '</div>';
 				echo '<div class="taf-repeater-alert taf-repeater-min">' . esc_html__( 'You cannot remove more.', 'ta-framework' ) . '</div>';
-				echo '<a href="#" class="button button-primary taf-repeater-add">' . $args['button_title'] . '</a>';
+				echo '<a href="#" class="button button-primary taf-repeater-add">' . esc_html( $args['button_title'] ) . '</a>';
 
 				echo wp_kses_post( $this->field_after() );
 

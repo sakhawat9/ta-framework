@@ -38,7 +38,7 @@ if ( ! class_exists( 'TAF_Field_checkbox' ) ) {
 
 				if ( is_array( $options ) && ! empty( $options ) ) {
 
-					echo '<ul' . $inline_class . '>';
+					echo '<ul' . wp_kses_post($inline_class) . '>';
 
 					foreach ( $options as $option_key => $option_value ) {
 
@@ -51,7 +51,7 @@ if ( ! class_exists( 'TAF_Field_checkbox' ) ) {
 								$checked = ( in_array( $sub_key, $value ) ) ? ' checked' : '';
 								echo '<li>';
 								echo '<label>';
-								echo '<input type="checkbox" name="' . esc_attr( $this->field_name( '[]' ) ) . '" value="' . esc_attr( $sub_key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
+								echo '<input type="checkbox" name="' . esc_attr( $this->field_name( '[]' ) ) . '" value="' . esc_attr( $sub_key ) . '"' . wp_kses_post( $this->field_attributes() ) . esc_attr( $checked ) . '/>';
 								echo '<span class="taf--text">' . esc_attr( $sub_value ) . '</span>';
 								echo '</label>';
 								echo '</li>';
@@ -65,7 +65,7 @@ if ( ! class_exists( 'TAF_Field_checkbox' ) ) {
 
 							echo '<li>';
 							echo '<label>';
-							echo '<input type="checkbox" name="' . esc_attr( $this->field_name( '[]' ) ) . '" value="' . esc_attr( $option_key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
+							echo '<input type="checkbox" name="' . esc_attr( $this->field_name( '[]' ) ) . '" value="' . esc_attr( $option_key ) . '"' . wp_kses_post( $this->field_attributes() ) . esc_attr( $checked ) . '/>';
 							echo '<span class="taf--text">' . esc_attr( $option_value ) . '</span>';
 							echo '</label>';
 							echo '</li>';
@@ -86,8 +86,8 @@ if ( ! class_exists( 'TAF_Field_checkbox' ) ) {
 			} else {
 
 					echo '<label class="taf-checkbox">';
-					echo '<input type="hidden" name="' . esc_attr( $this->field_name() ) . '" value="' . $this->value . '" class="taf--input"' . $this->field_attributes() . '/>';
-					echo '<input type="checkbox" name="_pseudo" class="taf--checkbox"' . esc_attr( checked( $this->value, 1, false ) ) . $this->field_attributes() . '/>';
+					echo '<input type="hidden" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr($this->value) . '" class="taf--input"' . wp_kses_post( $this->field_attributes() ) . '/>';
+					echo '<input type="checkbox" name="_pseudo" class="taf--checkbox"' . esc_attr( checked( $this->value, 1, false ) ) . wp_kses_post( $this->field_attributes() ) . '/>';
 					echo ( ! empty( $this->field['label'] ) ) ? '<span class="taf--text">' . esc_attr( $this->field['label'] ) . '</span>' : '';
 					echo '</label>';
 

@@ -142,7 +142,7 @@ if ( ! class_exists( 'TAF_Field_group' ) ) {
 
 				echo '<div class="taf-cloneable-alert taf-cloneable-max">' . esc_html__( 'You cannot add more.', 'ta-framework' ) . '</div>';
 				echo '<div class="taf-cloneable-alert taf-cloneable-min">' . esc_html__( 'You cannot remove more.', 'ta-framework' ) . '</div>';
-				echo '<a href="#" class="button button-primary taf-cloneable-add">' . $args['button_title'] . '</a>';
+				echo '<a href="#" class="button button-primary taf-cloneable-add">' . esc_html( $args['button_title'] ) . '</a>';
 
 				echo wp_kses_post( $this->field_after() );
 

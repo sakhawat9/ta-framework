@@ -28,7 +28,7 @@ if ( ! class_exists( 'TAF_Field_color_group' ) ) {
 
 					echo '<div class="taf--left taf-field-color">';
 					echo '<div class="taf--title">' . $option . '</div>';
-					echo '<input type="text" name="' . esc_attr( $this->field_name( '[' . $key . ']' ) ) . '" value="' . esc_attr( $color_value ) . '" class="taf-color"' . $default_attr . $this->field_attributes() . '/>';
+					echo '<input type="text" name="' . esc_attr( $this->field_name( '[' . $key . ']' ) ) . '" value="' . esc_attr( $color_value ) . '" class="taf-color"' . $default_attr . wp_kses_post( $this->field_attributes() ) . '/>';
 					echo '</div>';
 
 				}

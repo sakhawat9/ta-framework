@@ -78,9 +78,9 @@ if ( ! class_exists( 'TAF_Field_media' ) ) {
 			}
 
 			echo '<div class="taf--placeholder">';
-			echo '<input type="text" name="' . esc_attr( $this->field_name( '[url]' ) ) . '" value="' . esc_attr( $this->value['url'] ) . '" class="taf--url' . esc_attr( $hidden_url ) . '" readonly="readonly"' . $this->field_attributes() . $placeholder . ' />';
-			echo '<a href="#" class="button button-primary taf--button" data-library="' . esc_attr( $library ) . '" data-preview-size="' . esc_attr( $args['preview_size'] ) . '">' . $args['button_title'] . '</a>';
-			echo ( empty( $args['preview'] ) ) ? '<a href="#" class="button button-secondary taf-warning-primary taf--remove' . esc_attr( $hidden_auto ) . '">' . $args['remove_title'] . '</a>' : '';
+			echo '<input type="text" name="' . esc_attr( $this->field_name( '[url]' ) ) . '" value="' . esc_attr( $this->value['url'] ) . '" class="taf--url' . esc_attr( $hidden_url ) . '" readonly="readonly"' . wp_kses_post( $this->field_attributes() ) . wp_kses_post($placeholder) . ' />';
+			echo '<a href="#" class="button button-primary taf--button" data-library="' . esc_attr( $library ) . '" data-preview-size="' . esc_attr( $args['preview_size'] ) . '">' . esc_html( $args['button_title'] ) . '</a>';
+			echo ( empty( $args['preview'] ) ) ? '<a href="#" class="button button-secondary taf-warning-primary taf--remove' . esc_attr( $hidden_auto ) . '">' . esc_html( $args['remove_title'] ) . '</a>' : '';
 			echo '</div>';
 
 			echo '<input type="hidden" name="' . esc_attr( $this->field_name( '[id]' ) ) . '" value="' . esc_attr( $this->value['id'] ) . '" class="taf--id"/>';

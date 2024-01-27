@@ -62,8 +62,8 @@ if ( ! class_exists( 'TAF_Field_spacing' ) ) {
 				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? ' placeholder="' . esc_attr( $args['all_placeholder'] ) . '"' : '';
 
 				echo '<div class="taf--input">';
-				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="taf--label taf--icon">' . $args['all_icon'] . '</span>' : '';
-				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '"' . $placeholder . ' class="taf-input-number' . esc_attr( $is_unit ) . '" step="any" />';
+				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="taf--label taf--icon">' . wp_kses_post($args['all_icon']) . '</span>' : '';
+				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '"' . wp_kses_post($placeholder) . ' class="taf-input-number' . esc_attr( $is_unit ) . '" step="any" />';
 				echo ( $unit ) ? '<span class="taf--label taf--unit">' . esc_attr( $args['units'][0] ) . '</span>' : '';
 				echo '</div>';
 
@@ -84,8 +84,8 @@ if ( ! class_exists( 'TAF_Field_spacing' ) ) {
 					$placeholder = ( ! empty( $args[ $property . '_placeholder' ] ) ) ? ' placeholder="' . esc_attr( $args[ $property . '_placeholder' ] ) . '"' : '';
 
 					echo '<div class="taf--input">';
-					echo ( ! empty( $args[ $property . '_icon' ] ) ) ? '<span class="taf--label taf--icon">' . $args[ $property . '_icon' ] . '</span>' : '';
-					echo '<input type="number" name="' . esc_attr( $this->field_name( '[' . $property . ']' ) ) . '" value="' . esc_attr( $value[ $property ] ) . '"' . $placeholder . ' class="taf-input-number' . esc_attr( $is_unit ) . '" step="any" />';
+					echo ( ! empty( $args[ $property . '_icon' ] ) ) ? '<span class="taf--label taf--icon">' . wp_kses_post($args[ $property . '_icon' ]) . '</span>' : '';
+					echo '<input type="number" name="' . esc_attr( $this->field_name( '[' . $property . ']' ) ) . '" value="' . esc_attr( $value[ $property ] ) . '"' . wp_kses_post($placeholder) . ' class="taf-input-number' . esc_attr( $is_unit ) . '" step="any" />';
 					echo ( $unit ) ? '<span class="taf--label taf--unit">' . esc_attr( $args['units'][0] ) . '</span>' : '';
 					echo '</div>';
 

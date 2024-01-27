@@ -35,7 +35,7 @@ if ( ! class_exists( 'TAF_Field_radio' ) ) {
 
 				if ( is_array( $options ) && ! empty( $options ) ) {
 
-					echo '<ul' . $inline_class . '>';
+					echo '<ul' . wp_kses_post($inline_class) . '>';
 
 					foreach ( $options as $option_key => $option_value ) {
 
@@ -48,7 +48,7 @@ if ( ! class_exists( 'TAF_Field_radio' ) ) {
 								$checked = ( $sub_key == $this->value ) ? ' checked' : '';
 								echo '<li>';
 								echo '<label>';
-								echo '<input type="radio" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $sub_key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
+								echo '<input type="radio" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $sub_key ) . '"' . wp_kses_post( $this->field_attributes() ) . esc_attr( $checked ) . '/>';
 								echo '<span class="taf--text">' . esc_attr( $sub_value ) . '</span>';
 								echo '</label>';
 								echo '</li>';
@@ -62,7 +62,7 @@ if ( ! class_exists( 'TAF_Field_radio' ) ) {
 
 							echo '<li>';
 							echo '<label>';
-							echo '<input type="radio" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $option_key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
+							echo '<input type="radio" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $option_key ) . '"' . wp_kses_post( $this->field_attributes() ) . esc_attr( $checked ) . '/>';
 							echo '<span class="taf--text">' . esc_attr( $option_value ) . '</span>';
 							echo '</label>';
 							echo '</li>';
@@ -80,7 +80,7 @@ if ( ! class_exists( 'TAF_Field_radio' ) ) {
 			} else {
 
 					$label = ( isset( $this->field['label'] ) ) ? $this->field['label'] : '';
-					echo '<label><input type="radio" name="' . esc_attr( $this->field_name() ) . '" value="1"' . $this->field_attributes() . esc_attr( checked( $this->value, 1, false ) ) . '/>';
+					echo '<label><input type="radio" name="' . esc_attr( $this->field_name() ) . '" value="1"' . wp_kses_post( $this->field_attributes() ) . esc_attr( checked( $this->value, 1, false ) ) . '/>';
 					echo ( ! empty( $this->field['label'] ) ) ? '<span class="taf--text">' . esc_attr( $this->field['label'] ) . '</span>' : '';
 					echo '</label>';
 

@@ -75,8 +75,8 @@ if ( ! class_exists( 'TAF_Field_border' ) ) {
 				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? ' placeholder="' . esc_attr( $args['all_placeholder'] ) . '"' : '';
 
 				echo '<div class="taf--input">';
-				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="taf--label taf--icon">' . $args['all_icon'] . '</span>' : '';
-				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '"' . $placeholder . ' class="taf-input-number taf--is-unit" step="any" />';
+				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="taf--label taf--icon">' . wp_kses_post($args['all_icon']) . '</span>' : '';
+				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '"' . wp_kses_post($placeholder) . ' class="taf-input-number taf--is-unit" step="any" />';
 				echo ( ! empty( $args['unit'] ) ) ? '<span class="taf--label taf--unit">' . esc_attr( $args['unit'] ) . '</span>' : '';
 				echo '</div>';
 
@@ -97,8 +97,8 @@ if ( ! class_exists( 'TAF_Field_border' ) ) {
 					$placeholder = ( ! empty( $args[ $property . '_placeholder' ] ) ) ? ' placeholder="' . esc_attr( $args[ $property . '_placeholder' ] ) . '"' : '';
 
 					echo '<div class="taf--input">';
-					echo ( ! empty( $args[ $property . '_icon' ] ) ) ? '<span class="taf--label taf--icon">' . $args[ $property . '_icon' ] . '</span>' : '';
-					echo '<input type="number" name="' . esc_attr( $this->field_name( '[' . $property . ']' ) ) . '" value="' . esc_attr( $value[ $property ] ) . '"' . $placeholder . ' class="taf-input-number taf--is-unit" step="any" />';
+					echo ( ! empty( $args[ $property . '_icon' ] ) ) ? '<span class="taf--label taf--icon">' . wp_kses_post($args[ $property . '_icon' ]) . '</span>' : '';
+					echo '<input type="number" name="' . esc_attr( $this->field_name( '[' . $property . ']' ) ) . '" value="' . esc_attr( $value[ $property ] ) . '"' . wp_kses_post($placeholder) . ' class="taf-input-number taf--is-unit" step="any" />';
 					echo ( ! empty( $args['unit'] ) ) ? '<span class="taf--label taf--unit">' . esc_attr( $args['unit'] ) . '</span>' : '';
 					echo '</div>';
 
@@ -122,7 +122,7 @@ if ( ! class_exists( 'TAF_Field_border' ) ) {
 				$default_color_attr = ( ! empty( $default_value['color'] ) ) ? ' data-default-color="' . esc_attr( $default_value['color'] ) . '"' : '';
 				echo '<div class="taf--color">';
 				echo '<div class="taf-field-color">';
-				echo '<input type="text" name="' . esc_attr( $this->field_name( '[color]' ) ) . '" value="' . esc_attr( $value['color'] ) . '" class="taf-color"' . $default_color_attr . ' />';
+				echo '<input type="text" name="' . esc_attr( $this->field_name( '[color]' ) ) . '" value="' . esc_attr( $value['color'] ) . '" class="taf-color"' . wp_kses_post($default_color_attr) . ' />';
 				echo '</div>';
 				echo '</div>';
 			}

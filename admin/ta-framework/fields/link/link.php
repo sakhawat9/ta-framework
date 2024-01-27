@@ -49,7 +49,7 @@ if ( ! class_exists( 'TAF_Field_link' ) ) {
 
 			echo '<a href="#" class="button button-primary taf--add' . esc_attr( $hidden ) . '">' . $args['add_title'] . '</a> ';
 			echo '<a href="#" class="button taf--edit' . esc_attr( $maybe_hidden ) . '">' . $args['edit_title'] . '</a> ';
-			echo '<a href="#" class="button taf-warning-primary taf--remove' . esc_attr( $maybe_hidden ) . '">' . $args['remove_title'] . '</a>';
+			echo '<a href="#" class="button taf-warning-primary taf--remove' . esc_attr( $maybe_hidden ) . '">' . esc_html( $args['remove_title'] ) . '</a>';
 
 			echo wp_kses_post( $this->field_after() );
 		}

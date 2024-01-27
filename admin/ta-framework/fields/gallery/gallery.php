@@ -44,7 +44,7 @@ if ( ! class_exists( 'TAF_Field_gallery' ) ) {
 			echo '<a href="#" class="button button-primary taf-button">' . $args['add_title'] . '</a>';
 			echo '<a href="#" class="button taf-edit-gallery' . esc_attr( $hidden ) . '">' . $args['edit_title'] . '</a>';
 			echo '<a href="#" class="button taf-warning-primary taf-clear-gallery' . esc_attr( $hidden ) . '">' . $args['clear_title'] . '</a>';
-			echo '<input type="hidden" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '"' . $this->field_attributes() . '/>';
+			echo '<input type="hidden" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '"' . wp_kses_post( $this->field_attributes() ) . '/>';
 
 			echo wp_kses_post( $this->field_after() );
 		}

@@ -46,8 +46,8 @@ if ( ! class_exists( 'TAF_Field_button_set' ) ) {
 						$checked = ( in_array( $key, $value ) || ( empty( $value ) && empty( $key ) ) ) ? ' checked' : '';
 
 						echo '<div class="taf--sibling taf--button' . esc_attr( $active ) . '">';
-						echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name( $extra ) ) . '" value="' . esc_attr( $key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
-						echo $option;
+						echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name( $extra ) ) . '" value="' . esc_attr( $key ) . '"' . wp_kses_post( $this->field_attributes() ) . esc_attr( $checked ) . '/>';
+						echo esc_html($option);
 						echo '</div>';
 
 					}

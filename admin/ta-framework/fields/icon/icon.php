@@ -31,9 +31,9 @@ if ( ! class_exists( 'TAF_Field_icon' ) ) {
 
 			echo '<div class="taf-icon-select">';
 			echo '<span class="taf-icon-preview' . esc_attr( $hidden ) . '"><i class="' . esc_attr( $this->value ) . '"></i></span>';
-			echo '<a href="#" class="button button-primary taf-icon-add" data-nonce="' . esc_attr( $nonce ) . '">' . $args['button_title'] . '</a>';
-			echo '<a href="#" class="button taf-warning-primary taf-icon-remove' . esc_attr( $hidden ) . '">' . $args['remove_title'] . '</a>';
-			echo '<input type="hidden" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" class="taf-icon-value"' . $this->field_attributes() . ' />';
+			echo '<a href="#" class="button button-primary taf-icon-add" data-nonce="' . esc_attr( $nonce ) . '">' . esc_html( $args['button_title'] ) . '</a>';
+			echo '<a href="#" class="button taf-warning-primary taf-icon-remove' . esc_attr( $hidden ) . '">' . esc_html( $args['remove_title'] ) . '</a>';
+			echo '<input type="hidden" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" class="taf-icon-value"' . wp_kses_post( $this->field_attributes() ) . ' />';
 			echo '</div>';
 
 			echo wp_kses_post( $this->field_after() );

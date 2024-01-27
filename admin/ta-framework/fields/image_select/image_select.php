@@ -47,7 +47,7 @@ if ( ! class_exists( 'TAF_Field_image_select' ) ) {
 					echo '<div class="taf--sibling taf--image' . esc_attr( $active ) . '">';
 					echo '<figure>';
 						echo '<img src="' . esc_url( $option ) . '" alt="img-' . esc_attr( $num++ ) . '" />';
-						echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name( $extra ) ) . '" value="' . esc_attr( $key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>';
+						echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name( $extra ) ) . '" value="' . esc_attr( $key ) . '"' . wp_kses_post( $this->field_attributes() ) . esc_attr( $checked ) . '/>';
 					echo '</figure>';
 					echo '</div>';
 
