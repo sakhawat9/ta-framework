@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) { die; } // Cannot access directly.
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	die; } // Cannot access directly.
 /**
  *
  * Sanitize
@@ -6,12 +7,11 @@
  *
  * @since 1.0.0
  * @version 1.0.0
- *
  */
 if ( ! function_exists( 'taf_sanitize_replace_a_to_b' ) ) {
-  function taf_sanitize_replace_a_to_b( $value ) {
-    return str_replace( 'a', 'b', $value );
-  }
+	function taf_sanitize_replace_a_to_b( $value ) {
+		return str_replace( 'a', 'b', $value );
+	}
 }
 
 /**
@@ -20,10 +20,9 @@ if ( ! function_exists( 'taf_sanitize_replace_a_to_b' ) ) {
  *
  * @since 1.0.0
  * @version 1.0.0
- *
  */
 if ( ! function_exists( 'taf_sanitize_title' ) ) {
-  function taf_sanitize_title( $value ) {
-    return sanitize_title( $value );
-  }
+	function taf_sanitize_title( $value ) {
+		return sanitize_title( $value );
+	}
 }

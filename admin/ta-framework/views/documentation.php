@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) { die; } // Cannot access directly. ?>
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	die; } // Cannot access directly. ?>
 
 <p>If you are new to Codestar Framework, here is a step-by-step plan for getting started.</p>
 
