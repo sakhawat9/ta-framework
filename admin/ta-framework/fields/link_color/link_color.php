@@ -55,7 +55,7 @@ if ( ! class_exists( 'TAF_Field_link_color' ) ) {
 
 					echo '<div class="taf--left taf-field-color">';
 					echo '<div class="taf--title">' . esc_attr( $color_prop_value ) . '</div>';
-					echo '<input type="text" name="' . esc_attr( $this->field_name( '[' . $color_prop_key . ']' ) ) . '" value="' . esc_attr( $value[ $color_prop_key ] ) . '" class="taf-color"' . $default_attr . wp_kses_post( $this->field_attributes() ) . '/>';
+					echo '<input type="text" name="' . esc_attr( $this->field_name( '[' . $color_prop_key . ']' ) ) . '" value="' . esc_attr( $value[ $color_prop_key ] ) . '" class="taf-color"' . wp_kses_post($default_attr) . wp_kses_post( $this->field_attributes() ) . '/>';
 					echo '</div>';
 
 				}

@@ -18,7 +18,7 @@ if ( ! class_exists( 'TAF_Field_submessage' ) ) {
 
 			$style = ( ! empty( $this->field['style'] ) ) ? $this->field['style'] : 'normal';
 
-			echo '<div class="taf-submessage taf-submessage-' . esc_attr( $style ) . '">' . $this->field['content'] . '</div>';
+			echo '<div class="taf-submessage taf-submessage-' . esc_attr( $style ) . '">' . wp_kses_post($this->field['content']) . '</div>';
 		}
 	}
 }

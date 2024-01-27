@@ -23,7 +23,7 @@ if ( ! class_exists( 'TAF_Field_switcher' ) ) {
 
 			echo wp_kses_post( $this->field_before() );
 
-			echo '<div class="taf--switcher' . esc_attr( $active ) . '"' . $text_width . '>';
+			echo '<div class="taf--switcher' . esc_attr( $active ) . '"' . wp_kses_post($text_width) . '>';
 			echo '<span class="taf--on">' . esc_attr( $text_on ) . '</span>';
 			echo '<span class="taf--off">' . esc_attr( $text_off ) . '</span>';
 			echo '<span class="taf--ball"></span>';

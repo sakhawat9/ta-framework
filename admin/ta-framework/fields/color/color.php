@@ -19,7 +19,7 @@ if ( ! class_exists( 'TAF_Field_color' ) ) {
 			$default_attr = ( ! empty( $this->field['default'] ) ) ? ' data-default-color="' . esc_attr( $this->field['default'] ) . '"' : '';
 
 			echo wp_kses_post( $this->field_before() );
-			echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" class="taf-color"' . $default_attr . wp_kses_post( $this->field_attributes() ) . '/>';
+			echo '<input type="text" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '" class="taf-color"' . wp_kses_post($default_attr) . wp_kses_post( $this->field_attributes() ) . '/>';
 			echo wp_kses_post( $this->field_after() );
 		}
 

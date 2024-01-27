@@ -33,7 +33,7 @@ if ( ! class_exists( 'TAF_Field_slider' ) ) {
 			echo '<div class="taf--wrap">';
 			echo '<div class="taf-slider-ui"></div>';
 			echo '<div class="taf--input">';
-			echo '<input type="number" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '"' . $this->field_attributes( array( 'class' => 'taf-input-number' . esc_attr( $is_unit ) ) ) . ' data-min="' . esc_attr( $args['min'] ) . '" data-max="' . esc_attr( $args['max'] ) . '" data-step="' . esc_attr( $args['step'] ) . '" step="any" />';
+			echo '<input type="number" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '"' . wp_kses_post($this->field_attributes( array( 'class' => 'taf-input-number' . esc_attr( $is_unit ) ) )) . ' data-min="' . esc_attr( $args['min'] ) . '" data-max="' . esc_attr( $args['max'] ) . '" data-step="' . esc_attr( $args['step'] ) . '" step="any" />';
 			echo ( ! empty( $args['unit'] ) ) ? '<span class="taf--unit">' . esc_attr( $args['unit'] ) . '</span>' : '';
 			echo '</div>';
 			echo '</div>';

@@ -70,7 +70,7 @@ if ( ! class_exists( 'TAF_Field_media' ) ) {
 				$preview_style  = ( ! empty( $preview_width ) || ! empty( $preview_height ) ) ? ' style="' . esc_attr( $preview_width . $preview_height ) . '"' : '';
 
 				echo '<div class="taf--preview' . esc_attr( $hidden_auto ) . '">';
-				echo '<div class="taf-image-preview"' . $preview_style . '>';
+				echo '<div class="taf-image-preview"' . wp_kses_post($preview_style) . '>';
 				echo '<i class="taf--remove fas fa-times"></i><span><img src="' . esc_url( $preview_src ) . '" class="taf--src" /></span>';
 				echo '</div>';
 				echo '</div>';

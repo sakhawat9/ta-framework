@@ -18,7 +18,7 @@ if ( ! class_exists( 'TAF_Field_content' ) ) {
 
 			if ( ! empty( $this->field['content'] ) ) {
 
-				echo $this->field['content'];
+				echo wp_kses_post($this->field['content']);
 
 			}
 		}

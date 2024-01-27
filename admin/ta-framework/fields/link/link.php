@@ -41,14 +41,14 @@ if ( ! class_exists( 'TAF_Field_link' ) ) {
 
 			echo '<textarea readonly="readonly" class="taf--link hidden"></textarea>';
 
-			echo '<div class="' . esc_attr( $maybe_hidden ) . '"><div class="taf--result">' . sprintf( '{url:"%s", text:"%s", target:"%s"}', $value['url'], $value['text'], $value['target'] ) . '</div></div>';
+			echo '<div class="' . esc_attr( $maybe_hidden ) . '"><div class="taf--result">' . sprintf( '{url:"%s", text:"%s", target:"%s"}', esc_url($value['url']), esc_html($value['text']), esc_attr($value['target']) ) . '</div></div>';
 
-			echo '<input type="hidden" name="' . esc_attr( $this->field_name( '[url]' ) ) . '" value="' . esc_attr( $value['url'] ) . '"' . $this->field_attributes( array( 'class' => 'taf--url' ) ) . ' />';
+			echo '<input type="hidden" name="' . esc_attr( $this->field_name( '[url]' ) ) . '" value="' . esc_attr( $value['url'] ) . '"' . wp_kses_post($this->field_attributes( array( 'class' => 'taf--url' ) )) . ' />';
 			echo '<input type="hidden" name="' . esc_attr( $this->field_name( '[text]' ) ) . '" value="' . esc_attr( $value['text'] ) . '" class="taf--text" />';
 			echo '<input type="hidden" name="' . esc_attr( $this->field_name( '[target]' ) ) . '" value="' . esc_attr( $value['target'] ) . '" class="taf--target" />';
 
-			echo '<a href="#" class="button button-primary taf--add' . esc_attr( $hidden ) . '">' . $args['add_title'] . '</a> ';
-			echo '<a href="#" class="button taf--edit' . esc_attr( $maybe_hidden ) . '">' . $args['edit_title'] . '</a> ';
+			echo '<a href="#" class="button button-primary taf--add' . esc_attr( $hidden ) . '">' . esc_html($args['add_title']) . '</a> ';
+			echo '<a href="#" class="button taf--edit' . esc_attr( $maybe_hidden ) . '">' . esc_html($args['edit_title']) . '</a> ';
 			echo '<a href="#" class="button taf-warning-primary taf--remove' . esc_attr( $maybe_hidden ) . '">' . esc_html( $args['remove_title'] ) . '</a>';
 
 			echo wp_kses_post( $this->field_after() );
