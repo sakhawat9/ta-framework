@@ -578,10 +578,10 @@ if ( ! class_exists( 'TAF_Setup' ) ) {
 
       // Font awesome 4 and 5 loader
       if ( apply_filters( 'taf_fa4', false ) ) {
-        wp_enqueue_style( 'taf-fa', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), '4.7.0', 'all' );
+        wp_enqueue_style( 'font-awesome_v4-fa', TAF_DIR_URL . 'admin/ta-framework/assets/css/font-awesome_v4.min.css', array(), '4.7.0', 'all' );
       } else {
-        wp_enqueue_style( 'taf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), '5.15.5', 'all' );
-        wp_enqueue_style( 'taf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/v4-shims.min.css', array(), '5.15.5', 'all' );
+        wp_enqueue_style( 'font-awesome_v5-fa5', TAF_DIR_URL .'admin/ta-framework/assets/css/font-awesome_v5.min.css', array(), '5.15.5', 'all' );
+        wp_enqueue_style( 'font-awesome_v4-v4-shims', TAF_DIR_URL .'admin/ta-framework/assets/css/font-awesome_v4-shims.min.css', array(), '5.15.5', 'all' );
       }
 
       // Check for developer mode

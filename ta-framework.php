@@ -46,6 +46,11 @@ function activate_ta_framework() {
 	Ta_Framework_Activator::activate();
 }
 
+// Define constants for plugin directory path.
+if ( ! defined( 'TAF_DIR_URL' ) ) {
+	define( 'TAF_DIR_URL', plugin_dir_url( __FILE__ ) );
+}
+
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-ta-framework-deactivator.php
