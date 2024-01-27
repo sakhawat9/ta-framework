@@ -375,7 +375,7 @@ if ( ! class_exists( 'TAF_Field_typography' ) ) {
 
 				TAF::include_plugin_file( 'fields/typography/google-fonts.php' );
 
-				wp_enqueue_script( 'taf-webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js', array( 'ta-framework' ), '1.6.28', true );
+				wp_enqueue_script( 'webfontloader', TAF_DIR_URL . 'admin/ta-framework/assets/js/webfontloader.min.js', array( 'ta-framework' ), '1.6.28', true );
 
 				$webfonts = array();
 
@@ -424,24 +424,24 @@ if ( ! class_exists( 'TAF_Field_typography' ) ) {
 				$googlestyles = apply_filters(
 					'taf_field_typography_googlestyles',
 					array(
-						'100'       => 'Thin 100',
-						'100italic' => 'Thin 100 Italic',
-						'200'       => 'Extra-Light 200',
-						'200italic' => 'Extra-Light 200 Italic',
-						'300'       => 'Light 300',
-						'300italic' => 'Light 300 Italic',
-						'normal'    => 'Normal 400',
-						'italic'    => 'Normal 400 Italic',
-						'500'       => 'Medium 500',
-						'500italic' => 'Medium 500 Italic',
-						'600'       => 'Semi-Bold 600',
-						'600italic' => 'Semi-Bold 600 Italic',
-						'700'       => 'Bold 700',
-						'700italic' => 'Bold 700 Italic',
-						'800'       => 'Extra-Bold 800',
-						'800italic' => 'Extra-Bold 800 Italic',
-						'900'       => 'Black 900',
-						'900italic' => 'Black 900 Italic',
+						'100'       => __('Thin 100', 'ta-framework'),
+						'100italic' => __('Thin 100 Italic', 'ta-framework'),
+						'200'       => __('Extra-Light 200', 'ta-framework'),
+						'200italic' => __('Extra-Light 200 Italic', 'ta-framework'),
+						'300'       => __('Light 300', 'ta-framework'),
+						'300italic' => __('Light 300 Italic', 'ta-framework'),
+						'normal'    => __('Normal 400', 'ta-framework'),
+						'italic'    => __('Normal 400 Italic', 'ta-framework'),
+						'500'       => __('Medium 500', 'ta-framework'),
+						'500italic' => __('Medium 500 Italic', 'ta-framework'),
+						'600'       => __('Semi-Bold 600', 'ta-framework'),
+						'600italic' => __('Semi-Bold 600 Italic', 'ta-framework'),
+						'700'       => __('Bold 700', 'ta-framework'),
+						'700italic' => __('Bold 700 Italic', 'ta-framework'),
+						'800'       => __('Extra-Bold 800', 'ta-framework'),
+						'800italic' => __('Extra-Bold 800 Italic', 'ta-framework'),
+						'900'       => __('Black 900', 'ta-framework'),
+						'900italic' => __('Black 900 Italic', 'ta-framework'),
 					)
 				);
 

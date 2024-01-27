@@ -11,7 +11,6 @@ if ( ! class_exists( 'TAF_Field_code_editor' ) ) {
 	class TAF_Field_code_editor extends TAF_Fields {
 
 		public $version = '6.65.7';
-		public $cdn_url = 'https://cdn.jsdelivr.net/npm/codemirror@';
 
 		public function __construct( $field, $value = '', $unique = '', $where = '', $parent = '' ) {
 			parent::__construct( $field, $value, $unique, $where, $parent );
@@ -24,7 +23,6 @@ if ( ! class_exists( 'TAF_Field_code_editor' ) ) {
 				'lineNumbers' => true,
 				'theme'       => 'default',
 				'mode'        => 'htmlmixed',
-				'cdnURL'      => $this->cdn_url . $this->version,
 			);
 
 			$settings = ( ! empty( $this->field['settings'] ) ) ? $this->field['settings'] : array();
@@ -44,12 +42,12 @@ if ( ! class_exists( 'TAF_Field_code_editor' ) ) {
 				return; }
 
 			if ( ! wp_script_is( 'taf-codemirror' ) ) {
-				wp_enqueue_script( 'taf-codemirror', esc_url( $this->cdn_url . $this->version . '/lib/codemirror.min.js' ), array( 'ta-framework' ), $this->version, true );
-				wp_enqueue_script( 'taf-codemirror-loadmode', esc_url( $this->cdn_url . $this->version . '/addon/mode/loadmode.min.js' ), array( 'taf-codemirror' ), $this->version, true );
+				wp_enqueue_script( 'codemirror', TAF_DIR_URL . 'admin/ta-framework/assets/js/codemirror.min.js', array( 'ta-framework' ), $this->version, true );
+				wp_enqueue_script( 'loadmode', TAF_DIR_URL . 'admin/ta-framework/assets/js/loadmode.min.js', array( 'taf-codemirror' ), $this->version, true );
 			}
 
 			if ( ! wp_style_is( 'taf-codemirror' ) ) {
-				wp_enqueue_style( 'taf-codemirror', esc_url( $this->cdn_url . $this->version . '/lib/codemirror.min.css' ), array(), $this->version );
+				wp_enqueue_style( 'codemirror', TAF_DIR_URL . 'admin/ta-framework/assets/css/codemirror.min.css', array(), $this->version );
 			}
 		}
 	}

@@ -11,7 +11,6 @@ if ( ! class_exists( 'TAF_Field_map' ) ) {
 	class TAF_Field_map extends TAF_Fields {
 
 		public $version = '1.9.2';
-		public $cdn_url = 'https://cdn.jsdelivr.net/npm/leaflet@';
 
 		public function __construct( $field, $value = '', $unique = '', $where = '', $parent = '' ) {
 			parent::__construct( $field, $value, $unique, $where, $parent );
@@ -86,11 +85,11 @@ if ( ! class_exists( 'TAF_Field_map' ) ) {
 		public function enqueue() {
 
 			if ( ! wp_script_is( 'taf-leaflet' ) ) {
-				wp_enqueue_script( 'taf-leaflet', esc_url( $this->cdn_url . $this->version . '/dist/leaflet.js' ), array( 'ta-framework' ), $this->version, true );
+				wp_enqueue_script( 'leaflet', TAF_DIR_URL . 'admin/ta-framework/assets/js/leaflet.js', array( 'ta-framework' ), $this->version, true );
 			}
 
 			if ( ! wp_style_is( 'taf-leaflet' ) ) {
-				wp_enqueue_style( 'taf-leaflet', esc_url( $this->cdn_url . $this->version . '/dist/leaflet.css' ), array(), $this->version );
+				wp_enqueue_style( 'leaflet', TAF_DIR_URL . 'admin/ta-framework/assets/css/leaflet.css', array(), $this->version );
 			}
 
 			if ( ! wp_script_is( 'jquery-ui-autocomplete' ) ) {
