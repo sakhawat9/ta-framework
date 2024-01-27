@@ -1,41 +1,41 @@
 /**
  * 04. Widget
  */
-.csf-widgets{
+.taf-widgets{
 
-  > .csf-field{
+  > .taf-field{
     position: relative;
     top: -1px;
     margin-left: -15px;
     margin-right: -15px;
     padding: 12px 15px;
 
-    .csf-title{
+    .taf-title{
       float: none;
       width: 100%;
       margin-bottom: 5px;
     }
 
-    .csf-fieldset{
+    .taf-fieldset{
       float: none;
       width: 100%;
     }
   }
 
-  .csf-field-text input{
+  .taf-field-text input{
     width: 100%;
   }
 
-  .csf-field-notice .csf-notice{
+  .taf-field-notice .taf-notice{
     padding: 15px;
   }
 }
 
 .control-section{
 
-  .csf-widgets{
+  .taf-widgets{
 
-    > .csf-field{
+    > .taf-field{
       margin-left: -10px;
       margin-right: -10px;
       padding: 10px 12px;
@@ -45,10 +45,10 @@
 
 .wp-block{
 
-  .csf-widgets{
+  .taf-widgets{
     font-size: 13px;
 
-    > .csf-field{
+    > .taf-field{
       margin-left: -10px;
       margin-right: -10px;
 
@@ -56,7 +56,7 @@
         color: #fff;
       }
 
-      > .csf-title{
+      > .taf-title{
 
         > h4{
           font-size: 13px;

@@ -7,8 +7,8 @@
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'CSF_Options' ) ) {
-  class CSF_Options extends CSF_Abstract {
+if ( ! class_exists( 'TAF_Options' ) ) {
+  class TAF_Options extends TAF_Abstract {
 
     // constans
     public $unique       = '';
@@ -92,8 +92,8 @@ if ( ! class_exists( 'CSF_Options' ) ) {
     public function __construct( $key, $params = array() ) {
 
       $this->unique   = $key;
-      $this->args     = apply_filters( "csf_{$this->unique}_args", wp_parse_args( $params['args'], $this->args ), $this );
-      $this->sections = apply_filters( "csf_{$this->unique}_sections", $params['sections'], $this );
+      $this->args     = apply_filters( "taf_{$this->unique}_args", wp_parse_args( $params['args'], $this->args ), $this );
+      $this->sections = apply_filters( "taf_{$this->unique}_sections", $params['sections'], $this );
 
       // run only is admin panel options, avoid performance loss
       $this->pre_tabs     = $this->pre_tabs( $this->sections );
@@ -106,7 +106,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
       add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), $this->args['admin_bar_menu_priority'] );
-      add_action( 'wp_ajax_csf_'. $this->unique .'_ajax_save', array( $this, 'ajax_save' ) );
+      add_action( 'wp_ajax_taf_'. $this->unique .'_ajax_save', array( $this, 'ajax_save' ) );
 
       if ( $this->args['database'] === 'network' && ! empty( $this->args['show_in_network'] ) ) {
         add_action( 'network_admin_menu', array( $this, 'add_admin_menu' ) );
@@ -138,7 +138,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
         global $submenu;
 
         $menu_slug = $this->args['menu_slug'];
-        $menu_icon = ( ! empty( $this->args['admin_bar_menu_icon'] ) ) ? '<span class="csf-ab-icon ab-icon '. esc_attr( $this->args['admin_bar_menu_icon'] ) .'"></span>' : '';
+        $menu_icon = ( ! empty( $this->args['admin_bar_menu_icon'] ) ) ? '<span class="taf-ab-icon ab-icon '. esc_attr( $this->args['admin_bar_menu_icon'] ) .'"></span>' : '';
 
         $wp_admin_bar->add_node( array(
           'id'    => $menu_slug,
@@ -166,7 +166,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
       $result = $this->set_options( true );
 
       if ( ! $result ) {
-        wp_send_json_error( array( 'error' => esc_html__( 'Error while saving the changes.', 'csf' ) ) );
+        wp_send_json_error( array( 'error' => esc_html__( 'Error while saving the changes.', 'ta-framework' ) ) );
       } else {
         wp_send_json_success( array( 'notice' => $this->notice, 'errors' => $this->errors ) );
       }
@@ -209,24 +209,24 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       // Set variables.
       $data      = array();
-      $noncekey  = 'csf_options_nonce'. $this->unique;
+      $noncekey  = 'taf_options_nonce'. $this->unique;
       $nonce     = ( ! empty( $response[$noncekey] ) ) ? $response[$noncekey] : '';
       $options   = ( ! empty( $response[$this->unique] ) ) ? $response[$this->unique] : array();
-      $transient = ( ! empty( $response['csf_transient'] ) ) ? $response['csf_transient'] : array();
+      $transient = ( ! empty( $response['taf_transient'] ) ) ? $response['taf_transient'] : array();
 
-      if ( wp_verify_nonce( $nonce, 'csf_options_nonce' ) ) {
+      if ( wp_verify_nonce( $nonce, 'taf_options_nonce' ) ) {
 
         $importing  = false;
         $section_id = ( ! empty( $transient['section'] ) ) ? $transient['section'] : '';
 
-        if ( ! $ajax && ! empty( $response[ 'csf_import_data' ] ) ) {
+        if ( ! $ajax && ! empty( $response[ 'taf_import_data' ] ) ) {
 
           // XSS ok.
           // No worries, This "POST" requests is sanitizing in the below foreach. see #L337 - #L341
-          $import_data  = json_decode( wp_unslash( trim( $response[ 'csf_import_data' ] ) ), true );
+          $import_data  = json_decode( wp_unslash( trim( $response[ 'taf_import_data' ] ) ), true );
           $options      = ( is_array( $import_data ) && ! empty( $import_data ) ) ? $import_data : array();
           $importing    = true;
-          $this->notice = esc_html__( 'Settings successfully imported.', 'csf' );
+          $this->notice = esc_html__( 'Settings successfully imported.', 'ta-framework' );
 
         }
 
@@ -238,7 +238,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
             }
           }
 
-          $this->notice = esc_html__( 'Default settings restored.', 'csf' );
+          $this->notice = esc_html__( 'Default settings restored.', 'ta-framework' );
 
         } else if ( ! empty( $transient['reset_section'] ) && ! empty( $section_id ) ) {
 
@@ -254,7 +254,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
           $data = wp_parse_args( $data, $this->options );
 
-          $this->notice = esc_html__( 'Default settings restored.', 'csf' );
+          $this->notice = esc_html__( 'Default settings restored.', 'ta-framework' );
 
         } else {
 
@@ -314,18 +314,18 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
         }
 
-        $data = apply_filters( "csf_{$this->unique}_save", $data, $this );
+        $data = apply_filters( "taf_{$this->unique}_save", $data, $this );
 
-        do_action( "csf_{$this->unique}_save_before", $data, $this );
+        do_action( "taf_{$this->unique}_save_before", $data, $this );
 
         $this->options = $data;
 
         $this->save_options( $data );
 
-        do_action( "csf_{$this->unique}_save_after", $data, $this );
+        do_action( "taf_{$this->unique}_save_after", $data, $this );
 
         if ( empty( $this->notice ) ) {
-          $this->notice = esc_html__( 'Settings saved.', 'csf' );
+          $this->notice = esc_html__( 'Settings saved.', 'ta-framework' );
         }
 
         return true;
@@ -349,7 +349,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
         update_option( $this->unique, $data );
       }
 
-      do_action( "csf_{$this->unique}_saved", $data, $this );
+      do_action( "taf_{$this->unique}_saved", $data, $this );
 
     }
 
@@ -446,7 +446,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
           foreach ( $sections['fields'] as $field ) {
             if ( ! empty( $field['id'] ) ) {
               if ( array_key_exists( $field['id'], $this->errors ) ) {
-                $err = '<span class="csf-label-error">!</span>';
+                $err = '<span class="taf-label-error">!</span>';
               }
             }
           }
@@ -471,51 +471,51 @@ if ( ! class_exists( 'CSF_Options' ) ) {
     public function add_options_html() {
 
       $has_nav       = ( count( $this->pre_tabs ) > 1 ) ? true : false;
-      $show_all      = ( ! $has_nav ) ? ' csf-show-all' : '';
-      $ajax_class    = ( $this->args['ajax_save'] ) ? ' csf-save-ajax' : '';
-      $sticky_class  = ( $this->args['sticky_header'] ) ? ' csf-sticky-header' : '';
+      $show_all      = ( ! $has_nav ) ? ' taf-show-all' : '';
+      $ajax_class    = ( $this->args['ajax_save'] ) ? ' taf-save-ajax' : '';
+      $sticky_class  = ( $this->args['sticky_header'] ) ? ' taf-sticky-header' : '';
       $wrapper_class = ( $this->args['framework_class'] ) ? ' '. $this->args['framework_class'] : '';
-      $theme         = ( $this->args['theme'] ) ? ' csf-theme-'. $this->args['theme'] : '';
+      $theme         = ( $this->args['theme'] ) ? ' taf-theme-'. $this->args['theme'] : '';
       $class         = ( $this->args['class'] ) ? ' '. $this->args['class'] : '';
       $nav_type      = ( $this->args['nav'] === 'inline' ) ? 'inline' : 'normal';
       $form_action   = ( $this->args['form_action'] ) ? $this->args['form_action'] : '';
 
-      do_action( 'csf_options_before' );
+      do_action( 'taf_options_before' );
 
-      echo '<div class="csf csf-options'. esc_attr( $theme . $class . $wrapper_class ) .'" data-slug="'. esc_attr( $this->args['menu_slug'] ) .'" data-unique="'. esc_attr( $this->unique ) .'">';
+      echo '<div class="taf taf-options'. esc_attr( $theme . $class . $wrapper_class ) .'" data-slug="'. esc_attr( $this->args['menu_slug'] ) .'" data-unique="'. esc_attr( $this->unique ) .'">';
 
-        echo '<div class="csf-container">';
+        echo '<div class="taf-container">';
 
-        echo '<form method="post" action="'. esc_attr( $form_action ) .'" enctype="multipart/form-data" id="csf-form" autocomplete="off" novalidate="novalidate">';
+        echo '<form method="post" action="'. esc_attr( $form_action ) .'" enctype="multipart/form-data" id="taf-form" autocomplete="off" novalidate="novalidate">';
 
-        echo '<input type="hidden" class="csf-section-id" name="csf_transient[section]" value="1">';
+        echo '<input type="hidden" class="taf-section-id" name="taf_transient[section]" value="1">';
 
-        wp_nonce_field( 'csf_options_nonce', 'csf_options_nonce'. $this->unique );
+        wp_nonce_field( 'taf_options_nonce', 'taf_options_nonce'. $this->unique );
 
-        echo '<div class="csf-header'. esc_attr( $sticky_class ) .'">';
-        echo '<div class="csf-header-inner">';
+        echo '<div class="taf-header'. esc_attr( $sticky_class ) .'">';
+        echo '<div class="taf-header-inner">';
 
-          echo '<div class="csf-header-left">';
+          echo '<div class="taf-header-left">';
           echo '<h1>'. $this->args['framework_title'] .'</h1>';
           echo '</div>';
 
-          echo '<div class="csf-header-right">';
+          echo '<div class="taf-header-right">';
 
-            $notice_class = ( ! empty( $this->notice ) ) ? 'csf-form-show' : '';
+            $notice_class = ( ! empty( $this->notice ) ) ? 'taf-form-show' : '';
             $notice_text  = ( ! empty( $this->notice ) ) ? $this->notice : '';
 
-            echo '<div class="csf-form-result csf-form-success '. esc_attr( $notice_class ) .'">'. $notice_text .'</div>';
+            echo '<div class="taf-form-result taf-form-success '. esc_attr( $notice_class ) .'">'. $notice_text .'</div>';
 
-            echo ( $this->args['show_form_warning'] ) ? '<div class="csf-form-result csf-form-warning">'. esc_html__( 'You have unsaved changes, save your changes!', 'csf' ) .'</div>' : '';
+            echo ( $this->args['show_form_warning'] ) ? '<div class="taf-form-result taf-form-warning">'. esc_html__( 'You have unsaved changes, save your changes!', 'ta-framework' ) .'</div>' : '';
 
-            echo ( $has_nav && $this->args['show_all_options'] ) ? '<div class="csf-expand-all" title="'. esc_html__( 'show all settings', 'csf' ) .'"><i class="fas fa-outdent"></i></div>' : '';
+            echo ( $has_nav && $this->args['show_all_options'] ) ? '<div class="taf-expand-all" title="'. esc_html__( 'show all settings', 'ta-framework' ) .'"><i class="fas fa-outdent"></i></div>' : '';
 
-            echo ( $this->args['show_search'] ) ? '<div class="csf-search"><input type="text" name="csf-search" placeholder="'. esc_html__( 'Search...', 'csf' ) .'" autocomplete="off" /></div>' : '';
+            echo ( $this->args['show_search'] ) ? '<div class="taf-search"><input type="text" name="taf-search" placeholder="'. esc_html__( 'Search...', 'ta-framework' ) .'" autocomplete="off" /></div>' : '';
 
-            echo '<div class="csf-buttons">';
-            echo '<input type="submit" name="'. esc_attr( $this->unique ) .'[_nonce][save]" class="button button-primary csf-top-save csf-save'. esc_attr( $ajax_class ) .'" value="'. esc_html__( 'Save', 'csf' ) .'" data-save="'. esc_html__( 'Saving...', 'csf' ) .'">';
-            echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="csf_transient[reset_section]" class="button button-secondary csf-reset-section csf-confirm" value="'. esc_html__( 'Reset Section', 'csf' ) .'" data-confirm="'. esc_html__( 'Are you sure to reset this section options?', 'csf' ) .'">' : '';
-            echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="csf_transient[reset]" class="button csf-warning-primary csf-reset-all csf-confirm" value="'. ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All', 'csf' ) : esc_html__( 'Reset', 'csf' ) ) .'" data-confirm="'. esc_html__( 'Are you sure you want to reset all settings to default values?', 'csf' ) .'">' : '';
+            echo '<div class="taf-buttons">';
+            echo '<input type="submit" name="'. esc_attr( $this->unique ) .'[_nonce][save]" class="button button-primary taf-top-save taf-save'. esc_attr( $ajax_class ) .'" value="'. esc_html__( 'Save', 'ta-framework' ) .'" data-save="'. esc_html__( 'Saving...', 'ta-framework' ) .'">';
+            echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="taf_transient[reset_section]" class="button button-secondary taf-reset-section taf-confirm" value="'. esc_html__( 'Reset Section', 'ta-framework' ) .'" data-confirm="'. esc_html__( 'Are you sure to reset this section options?', 'ta-framework' ) .'">' : '';
+            echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="taf_transient[reset]" class="button taf-warning-primary taf-reset-all taf-confirm" value="'. ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All', 'ta-framework' ) : esc_html__( 'Reset', 'ta-framework' ) ) .'" data-confirm="'. esc_html__( 'Are you sure you want to reset all settings to default values?', 'ta-framework' ) .'">' : '';
             echo '</div>';
 
           echo '</div>';
@@ -524,11 +524,11 @@ if ( ! class_exists( 'CSF_Options' ) ) {
           echo '</div>';
         echo '</div>';
 
-        echo '<div class="csf-wrapper'. esc_attr( $show_all ) .'">';
+        echo '<div class="taf-wrapper'. esc_attr( $show_all ) .'">';
 
           if ( $has_nav ) {
 
-            echo '<div class="csf-nav csf-nav-'. esc_attr( $nav_type ) .' csf-nav-options">';
+            echo '<div class="taf-nav taf-nav-'. esc_attr( $nav_type ) .' taf-nav-options">';
 
               echo '<ul>';
 
@@ -536,13 +536,13 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
                 $tab_id    = sanitize_title( $tab['title'] );
                 $tab_error = $this->error_check( $tab );
-                $tab_icon  = ( ! empty( $tab['icon'] ) ) ? '<i class="csf-tab-icon '. esc_attr( $tab['icon'] ) .'"></i>' : '';
+                $tab_icon  = ( ! empty( $tab['icon'] ) ) ? '<i class="taf-tab-icon '. esc_attr( $tab['icon'] ) .'"></i>' : '';
 
                 if ( ! empty( $tab['subs'] ) ) {
 
-                  echo '<li class="csf-tab-item">';
+                  echo '<li class="taf-tab-item">';
 
-                    echo '<a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'" class="csf-arrow">'. $tab_icon . $tab['title'] . $tab_error .'</a>';
+                    echo '<a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'" class="taf-arrow">'. $tab_icon . $tab['title'] . $tab_error .'</a>';
 
                     echo '<ul>';
 
@@ -550,7 +550,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
                       $sub_id    = $tab_id .'/'. sanitize_title( $sub['title'] );
                       $sub_error = $this->error_check( $sub );
-                      $sub_icon  = ( ! empty( $sub['icon'] ) ) ? '<i class="csf-tab-icon '. esc_attr( $sub['icon'] ) .'"></i>' : '';
+                      $sub_icon  = ( ! empty( $sub['icon'] ) ) ? '<i class="taf-tab-icon '. esc_attr( $sub['icon'] ) .'"></i>' : '';
 
                       echo '<li><a href="#tab='. esc_attr( $sub_id ) .'" data-tab-id="'. esc_attr( $sub_id ) .'">'. $sub_icon . $sub['title'] . $sub_error .'</a></li>';
 
@@ -562,7 +562,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
                 } else {
 
-                  echo '<li class="csf-tab-item"><a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'">'. $tab_icon . $tab['title'] . $tab_error .'</a></li>';
+                  echo '<li class="taf-tab-item"><a href="#tab='. esc_attr( $tab_id ) .'" data-tab-id="'. esc_attr( $tab_id ) .'">'. $tab_icon . $tab['title'] . $tab_error .'</a></li>';
 
                 }
 
@@ -574,22 +574,22 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
           }
 
-          echo '<div class="csf-content">';
+          echo '<div class="taf-content">';
 
-            echo '<div class="csf-sections">';
+            echo '<div class="taf-sections">';
 
             foreach ( $this->pre_sections as $section ) {
 
-              $section_onload = ( ! $has_nav ) ? ' csf-onload' : '';
+              $section_onload = ( ! $has_nav ) ? ' taf-onload' : '';
               $section_class  = ( ! empty( $section['class'] ) ) ? ' '. $section['class'] : '';
-              $section_icon   = ( ! empty( $section['icon'] ) ) ? '<i class="csf-section-icon '. esc_attr( $section['icon'] ) .'"></i>' : '';
+              $section_icon   = ( ! empty( $section['icon'] ) ) ? '<i class="taf-section-icon '. esc_attr( $section['icon'] ) .'"></i>' : '';
               $section_title  = ( ! empty( $section['title'] ) ) ? $section['title'] : '';
               $section_parent = ( ! empty( $section['ptitle'] ) ) ? sanitize_title( $section['ptitle'] ) .'/' : '';
               $section_slug   = ( ! empty( $section['title'] ) ) ? sanitize_title( $section_title ) : '';
 
-              echo '<div class="csf-section hidden'. esc_attr( $section_onload . $section_class ) .'" data-section-id="'. esc_attr( $section_parent . $section_slug ) .'">';
-              echo ( $has_nav ) ? '<div class="csf-section-title"><h3>'. $section_icon . $section_title .'</h3></div>' : '';
-              echo ( ! empty( $section['description'] ) ) ? '<div class="csf-field csf-section-description">'. $section['description'] .'</div>' : '';
+              echo '<div class="taf-section hidden'. esc_attr( $section_onload . $section_class ) .'" data-section-id="'. esc_attr( $section_parent . $section_slug ) .'">';
+              echo ( $has_nav ) ? '<div class="taf-section-title"><h3>'. $section_icon . $section_title .'</h3></div>' : '';
+              echo ( ! empty( $section['description'] ) ) ? '<div class="taf-field taf-section-description">'. $section['description'] .'</div>' : '';
 
               if ( ! empty( $section['fields'] ) ) {
 
@@ -607,13 +607,13 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
                   $value = ( ! empty( $field['id'] ) && isset( $this->options[$field['id']] ) ) ? $this->options[$field['id']] : '';
 
-                  CSF::field( $field, $value, $this->unique, 'options' );
+                  TAF::field( $field, $value, $this->unique, 'options' );
 
                 }
 
               } else {
 
-                echo '<div class="csf-no-option">'. esc_html__( 'No data available.', 'csf' ) .'</div>';
+                echo '<div class="taf-no-option">'. esc_html__( 'No data available.', 'ta-framework' ) .'</div>';
 
               }
 
@@ -627,21 +627,21 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
           echo '</div>';
 
-          echo ( $has_nav && $nav_type === 'normal' ) ? '<div class="csf-nav-background"></div>' : '';
+          echo ( $has_nav && $nav_type === 'normal' ) ? '<div class="taf-nav-background"></div>' : '';
 
         echo '</div>';
 
         if ( ! empty( $this->args['show_footer'] ) ) {
 
-          echo '<div class="csf-footer">';
+          echo '<div class="taf-footer">';
 
-          echo '<div class="csf-buttons">';
-          echo '<input type="submit" name="csf_transient[save]" class="button button-primary csf-save'. esc_attr( $ajax_class ) .'" value="'. esc_html__( 'Save', 'csf' ) .'" data-save="'. esc_html__( 'Saving...', 'csf' ) .'">';
-          echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="csf_transient[reset_section]" class="button button-secondary csf-reset-section csf-confirm" value="'. esc_html__( 'Reset Section', 'csf' ) .'" data-confirm="'. esc_html__( 'Are you sure to reset this section options?', 'csf' ) .'">' : '';
-          echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="csf_transient[reset]" class="button csf-warning-primary csf-reset-all csf-confirm" value="'. ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All', 'csf' ) : esc_html__( 'Reset', 'csf' ) ) .'" data-confirm="'. esc_html__( 'Are you sure you want to reset all settings to default values?', 'csf' ) .'">' : '';
+          echo '<div class="taf-buttons">';
+          echo '<input type="submit" name="taf_transient[save]" class="button button-primary taf-save'. esc_attr( $ajax_class ) .'" value="'. esc_html__( 'Save', 'ta-framework' ) .'" data-save="'. esc_html__( 'Saving...', 'ta-framework' ) .'">';
+          echo ( $this->args['show_reset_section'] ) ? '<input type="submit" name="taf_transient[reset_section]" class="button button-secondary taf-reset-section taf-confirm" value="'. esc_html__( 'Reset Section', 'ta-framework' ) .'" data-confirm="'. esc_html__( 'Are you sure to reset this section options?', 'ta-framework' ) .'">' : '';
+          echo ( $this->args['show_reset_all'] ) ? '<input type="submit" name="taf_transient[reset]" class="button taf-warning-primary taf-reset-all taf-confirm" value="'. ( ( $this->args['show_reset_section'] ) ? esc_html__( 'Reset All', 'ta-framework' ) : esc_html__( 'Reset', 'ta-framework' ) ) .'" data-confirm="'. esc_html__( 'Are you sure you want to reset all settings to default values?', 'ta-framework' ) .'">' : '';
           echo '</div>';
 
-          echo ( ! empty( $this->args['footer_text'] ) ) ? '<div class="csf-copyright">'. $this->args['footer_text'] .'</div>' : '';
+          echo ( ! empty( $this->args['footer_text'] ) ) ? '<div class="taf-copyright">'. $this->args['footer_text'] .'</div>' : '';
 
           echo '<div class="clear"></div>';
           echo '</div>';
@@ -658,7 +658,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       echo '</div>';
 
-      do_action( 'csf_options_after' );
+      do_action( 'taf_options_after' );
 
     }
   }

@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) { die; } // Cannot access directly. ?>
 
-<table class="csf--table-compare widefat fixed striped">
+<table class="taf--table-compare widefat fixed striped">
   <thead>
     <tr>
       <td><strong>Features</strong></td>

@@ -3,22 +3,22 @@
 //
 // Set a unique slug-like ID
 //
-$prefix = 'csf_demo_shortcodes';
+$prefix = 'taf_demo_shortcodes';
 
 //
 // Create a shortcoder
 //
-CSF::createShortcoder( $prefix, array(
+TAF::createShortcoder( $prefix, array(
   // 'button_title'   => 'Add Shortcode',
   // 'select_title'   => 'Select a shortcode',
   // 'insert_title'   => 'Insert Shortcode',
   // 'show_in_editor' => true,
   // 'gutenberg'      => array(
-  //   'title'        => 'CSF Shortcodes',
-  //   'description'  => 'CSF Shortcode Block',
+  //   'title'        => 'TAF Shortcodes',
+  //   'description'  => 'TAF Shortcode Block',
   //   'icon'         => 'screenoptions',
   //   'category'     => 'widgets',
-  //   'keywords'     => array( 'shortcode', 'csf', 'insert' ),
+  //   'keywords'     => array( 'shortcode', 'taf', 'insert' ),
   //   'placeholder'  => 'Write shortcode here...',
   // )
 ) );
@@ -26,7 +26,7 @@ CSF::createShortcoder( $prefix, array(
 //
 // A shortcode [foo title=""]
 //
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'     => '[foo] view: normal',
   'view'      => 'normal',
   'shortcode' => 'foo',
@@ -51,7 +51,7 @@ CSF::createSection( $prefix, array(
 //
 // A shortcode [foo title=""]content[/foo]
 //
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'     => '[foo] view: normal alternative',
   'view'      => 'normal',
   'shortcode' => 'foo',
@@ -97,7 +97,7 @@ CSF::createSection( $prefix, array(
 //
 // A shortcode [content]content[/content][content]content[/content]
 //
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'     => '[foo] view: contents',
   'view'      => 'contents',
   'shortcode' => 'content',
@@ -121,7 +121,7 @@ CSF::createSection( $prefix, array(
 //
 // A shortcode [opt_content_1]content[/opt_content_1][opt_content_2]content[/opt_content_2]
 //
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'  => '[foo] view: contents alternative',
   'view'   => 'contents',
   'fields' => array(
@@ -141,7 +141,7 @@ CSF::createSection( $prefix, array(
   )
 ) );
 
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'           => '[foo] view: group',
   'view'            => 'group',
   'shortcode'       => 'foo',
@@ -163,7 +163,7 @@ CSF::createSection( $prefix, array(
   )
 ) );
 
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'     => '[foo] view: group alternative',
   'view'      => 'group',
   'shortcode' => 'foo',
@@ -206,7 +206,7 @@ CSF::createSection( $prefix, array(
   )
 ) );
 
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'     => '[foo] view: repeater',
   'view'      => 'repeater',
   'shortcode' => 'foo',
@@ -239,7 +239,7 @@ CSF::createSection( $prefix, array(
   )
 ) );
 
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'title'     => '[foo] view: repeater alternative',
   'view'      => 'repeater',
   'shortcode' => 'foo',

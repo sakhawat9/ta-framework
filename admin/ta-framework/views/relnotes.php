@@ -121,7 +121,7 @@
   <li>Fixed: Sortable field append new fields after saved issue.</li>
   <li>Fixed: Customizer dependency issue after v2.1.6 update.</li>
   <li>Fixed: Typography field "Normal 400" style embed issue.</li>
-  <li>Updated: Assets library (csf.css to style.css, csf.js to main.js).</li>
+  <li>Updated: Assets library (taf.css to style.css, taf.js to main.js).</li>
   <li>Improved: Sanitize/Validate callback method.</li>
   <li>Improved: Global dependency feature.</li>
   <li>Improved: Usage anywhere framework fields.</li>

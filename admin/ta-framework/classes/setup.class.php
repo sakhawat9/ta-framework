@@ -7,8 +7,8 @@
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'CSF_Setup' ) ) {
-  class CSF_Setup {
+if ( ! class_exists( 'TAF_Setup' ) ) {
+  class TAF_Setup {
 
     // Default constants
     public static $premium  = true;
@@ -65,18 +65,18 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
     public function __construct() {
 
       // Init action
-      do_action( 'csf_init' );
+      do_action( 'taf_init' );
 
       // Setup textdomain
       self::textdomain();
 
-      add_action( 'after_setup_theme', array( 'CSF', 'setup' ) );
-      add_action( 'init', array( 'CSF', 'setup' ) );
-      add_action( 'switch_theme', array( 'CSF', 'setup' ) );
-      add_action( 'admin_enqueue_scripts', array( 'CSF', 'add_admin_enqueue_scripts' ) );
-      add_action( 'wp_enqueue_scripts', array( 'CSF', 'add_typography_enqueue_styles' ), 80 );
-      add_action( 'wp_head', array( 'CSF', 'add_custom_css' ), 80 );
-      add_filter( 'admin_body_class', array( 'CSF', 'add_admin_body_class' ) );
+      add_action( 'after_setup_theme', array( 'TAF', 'setup' ) );
+      add_action( 'init', array( 'TAF', 'setup' ) );
+      add_action( 'switch_theme', array( 'TAF', 'setup' ) );
+      add_action( 'admin_enqueue_scripts', array( 'TAF', 'add_admin_enqueue_scripts' ) );
+      add_action( 'wp_enqueue_scripts', array( 'TAF', 'add_typography_enqueue_styles' ), 80 );
+      add_action( 'wp_head', array( 'TAF', 'add_custom_css' ), 80 );
+      add_filter( 'admin_body_class', array( 'TAF', 'add_admin_body_class' ) );
 
     }
 
@@ -88,7 +88,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup admin option framework
       $params = array();
-      if ( class_exists( 'CSF_Options' ) && ! empty( self::$args['admin_options'] ) ) {
+      if ( class_exists( 'TAF_Options' ) && ! empty( self::$args['admin_options'] ) ) {
         foreach ( self::$args['admin_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -96,7 +96,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Options::instance( $key, $params );
+            TAF_Options::instance( $key, $params );
 
             if ( ! empty( $value['show_in_customizer'] ) ) {
               $value['output_css'] = false;
@@ -111,7 +111,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup customize option framework
       $params = array();
-      if ( class_exists( 'CSF_Customize_Options' ) && ! empty( self::$args['customize_options'] ) ) {
+      if ( class_exists( 'TAF_Customize_Options' ) && ! empty( self::$args['customize_options'] ) ) {
         foreach ( self::$args['customize_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -119,7 +119,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Customize_Options::instance( $key, $params );
+            TAF_Customize_Options::instance( $key, $params );
 
           }
         }
@@ -127,7 +127,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup metabox option framework
       $params = array();
-      if ( class_exists( 'CSF_Metabox' ) && ! empty( self::$args['metabox_options'] ) ) {
+      if ( class_exists( 'TAF_Metabox' ) && ! empty( self::$args['metabox_options'] ) ) {
         foreach ( self::$args['metabox_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -135,7 +135,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Metabox::instance( $key, $params );
+            TAF_Metabox::instance( $key, $params );
 
           }
         }
@@ -143,7 +143,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup nav menu option framework
       $params = array();
-      if ( class_exists( 'CSF_Nav_Menu_Options' ) && ! empty( self::$args['nav_menu_options'] ) ) {
+      if ( class_exists( 'TAF_Nav_Menu_Options' ) && ! empty( self::$args['nav_menu_options'] ) ) {
         foreach ( self::$args['nav_menu_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -151,7 +151,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Nav_Menu_Options::instance( $key, $params );
+            TAF_Nav_Menu_Options::instance( $key, $params );
 
           }
         }
@@ -159,7 +159,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup profile option framework
       $params = array();
-      if ( class_exists( 'CSF_Profile_Options' ) && ! empty( self::$args['profile_options'] ) ) {
+      if ( class_exists( 'TAF_Profile_Options' ) && ! empty( self::$args['profile_options'] ) ) {
         foreach ( self::$args['profile_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -167,7 +167,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Profile_Options::instance( $key, $params );
+            TAF_Profile_Options::instance( $key, $params );
 
           }
         }
@@ -175,7 +175,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup taxonomy option framework
       $params = array();
-      if ( class_exists( 'CSF_Taxonomy_Options' ) && ! empty( self::$args['taxonomy_options'] ) ) {
+      if ( class_exists( 'TAF_Taxonomy_Options' ) && ! empty( self::$args['taxonomy_options'] ) ) {
         $taxonomy = ( isset( $_GET['taxonomy'] ) ) ? sanitize_text_field( wp_unslash( $_GET['taxonomy'] ) ) : '';
         foreach ( self::$args['taxonomy_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
@@ -184,21 +184,21 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Taxonomy_Options::instance( $key, $params );
+            TAF_Taxonomy_Options::instance( $key, $params );
 
           }
         }
       }
 
       // Setup widget option framework
-      if ( class_exists( 'CSF_Widget' ) && class_exists( 'WP_Widget_Factory' ) && ! empty( self::$args['widget_options'] ) ) {
+      if ( class_exists( 'TAF_Widget' ) && class_exists( 'WP_Widget_Factory' ) && ! empty( self::$args['widget_options'] ) ) {
         $wp_widget_factory = new WP_Widget_Factory();
         global $wp_widget_factory;
         foreach ( self::$args['widget_options'] as $key => $value ) {
           if ( ! isset( self::$inited[$key] ) ) {
 
             self::$inited[$key] = true;
-            $wp_widget_factory->register( CSF_Widget::instance( $key, $value ) );
+            $wp_widget_factory->register( TAF_Widget::instance( $key, $value ) );
 
           }
         }
@@ -206,7 +206,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup comment option framework
       $params = array();
-      if ( class_exists( 'CSF_Comment_Metabox' ) && ! empty( self::$args['comment_options'] ) ) {
+      if ( class_exists( 'TAF_Comment_Metabox' ) && ! empty( self::$args['comment_options'] ) ) {
         foreach ( self::$args['comment_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -214,7 +214,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Comment_Metabox::instance( $key, $params );
+            TAF_Comment_Metabox::instance( $key, $params );
 
           }
         }
@@ -222,7 +222,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       // Setup shortcode option framework
       $params = array();
-      if ( class_exists( 'CSF_Shortcoder' ) && ! empty( self::$args['shortcode_options'] ) ) {
+      if ( class_exists( 'TAF_Shortcoder' ) && ! empty( self::$args['shortcode_options'] ) ) {
         foreach ( self::$args['shortcode_options'] as $key => $value ) {
           if ( ! empty( self::$args['sections'][$key] ) && ! isset( self::$inited[$key] ) ) {
 
@@ -230,16 +230,16 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $params['sections'] = self::$args['sections'][$key];
             self::$inited[$key] = true;
 
-            CSF_Shortcoder::instance( $key, $params );
+            TAF_Shortcoder::instance( $key, $params );
 
           }
         }
 
         // Once editor setup for gutenberg and media buttons
-        if ( class_exists( 'CSF_Shortcoder' ) && ! empty( self::$shortcode_instances ) ) {
+        if ( class_exists( 'TAF_Shortcoder' ) && ! empty( self::$shortcode_instances ) ) {
           foreach ( self::$shortcode_instances as $instance ) {
             if ( ! empty( $instance['show_in_editor'] ) ) {
-              CSF_Shortcoder::once_editor_setup();
+              TAF_Shortcoder::once_editor_setup();
               break;
             }
           }
@@ -247,7 +247,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       }
 
-      do_action( 'csf_loaded' );
+      do_action( 'taf_loaded' );
 
     }
 
@@ -328,7 +328,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       $path     = '';
       $file     = ltrim( $file, '/' );
-      $override = apply_filters( 'csf_override', 'csf-override' );
+      $override = apply_filters( 'taf_override', 'taf-override' );
 
       if ( file_exists( get_parent_theme_file_path( $override .'/'. $file ) ) ) {
         $path = get_parent_theme_file_path( $override .'/'. $file );
@@ -404,7 +404,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
       }
 
       // Include all framework fields
-      $fields = apply_filters( 'csf_fields', array(
+      $fields = apply_filters( 'taf_fields', array(
         'accordion',
         'background',
         'backup',
@@ -453,7 +453,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
       if ( ! empty( $fields ) ) {
         foreach ( $fields as $field ) {
-          if ( ! class_exists( 'CSF_Field_'. $field ) && class_exists( 'CSF_Fields' ) ) {
+          if ( ! class_exists( 'TAF_Field_'. $field ) && class_exists( 'TAF_Fields' ) ) {
             self::include_plugin_file( 'fields/'. $field .'/'. $field .'.php' );
           }
         }
@@ -463,7 +463,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
     // Setup textdomain
     public static function textdomain() {
-      load_textdomain( 'csf', self::$dir .'/languages/'. get_locale() .'.mo' );
+      load_textdomain( 'taf', self::$dir .'/languages/'. get_locale() .'.mo' );
     }
 
     // Set all of used fields
@@ -559,13 +559,13 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
           self::$enqueue = true;
         }
 
-        if ( $wpscreen->id === 'tools_page_csf-welcome' ) {
+        if ( $wpscreen->id === 'tools_page_taf-welcome' ) {
           self::$enqueue = true;
         }
 
       }
 
-      if ( ! apply_filters( 'csf_enqueue_assets', self::$enqueue ) ) {
+      if ( ! apply_filters( 'taf_enqueue_assets', self::$enqueue ) ) {
         return;
       }
 
@@ -577,36 +577,36 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
       wp_enqueue_script( 'wp-color-picker' );
 
       // Font awesome 4 and 5 loader
-      if ( apply_filters( 'csf_fa4', false ) ) {
-        wp_enqueue_style( 'csf-fa', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), '4.7.0', 'all' );
+      if ( apply_filters( 'taf_fa4', false ) ) {
+        wp_enqueue_style( 'taf-fa', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), '4.7.0', 'all' );
       } else {
-        wp_enqueue_style( 'csf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), '5.15.5', 'all' );
-        wp_enqueue_style( 'csf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/v4-shims.min.css', array(), '5.15.5', 'all' );
+        wp_enqueue_style( 'taf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), '5.15.5', 'all' );
+        wp_enqueue_style( 'taf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/v4-shims.min.css', array(), '5.15.5', 'all' );
       }
 
       // Check for developer mode
       $min = ( self::$premium && SCRIPT_DEBUG ) ? '' : '.min';
 
       // Main style
-      wp_enqueue_style( 'csf', self::include_plugin_url( 'assets/css/style'. $min .'.css' ), array(), self::$version, 'all' );
+      wp_enqueue_style( 'taf', self::include_plugin_url( 'assets/css/style'. $min .'.css' ), array(), self::$version, 'all' );
 
       // Main RTL styles
       if ( is_rtl() ) {
-        wp_enqueue_style( 'csf-rtl', self::include_plugin_url( 'assets/css/style-rtl'. $min .'.css' ), array(), self::$version, 'all' );
+        wp_enqueue_style( 'taf-rtl', self::include_plugin_url( 'assets/css/style-rtl'. $min .'.css' ), array(), self::$version, 'all' );
       }
 
       // Main scripts
-      wp_enqueue_script( 'csf-plugins', self::include_plugin_url( 'assets/js/plugins'. $min .'.js' ), array(), self::$version, true );
-      wp_enqueue_script( 'csf', self::include_plugin_url( 'assets/js/main'. $min .'.js' ), array( 'csf-plugins' ), self::$version, true );
+      wp_enqueue_script( 'taf-plugins', self::include_plugin_url( 'assets/js/plugins'. $min .'.js' ), array(), self::$version, true );
+      wp_enqueue_script( 'taf', self::include_plugin_url( 'assets/js/main'. $min .'.js' ), array( 'taf-plugins' ), self::$version, true );
 
       // Main variables
-      wp_localize_script( 'csf', 'csf_vars', array(
-        'color_palette'     => apply_filters( 'csf_color_palette', array() ),
+      wp_localize_script( 'taf', 'taf_vars', array(
+        'color_palette'     => apply_filters( 'taf_color_palette', array() ),
         'i18n'              => array(
-          'confirm'         => esc_html__( 'Are you sure?', 'csf' ),
-          'typing_text'     => esc_html__( 'Please enter %s or more characters', 'csf' ),
-          'searching_text'  => esc_html__( 'Searching...', 'csf' ),
-          'no_results_text' => esc_html__( 'No results found.', 'csf' ),
+          'confirm'         => esc_html__( 'Are you sure?', 'ta-framework' ),
+          'typing_text'     => esc_html__( 'Please enter %s or more characters', 'ta-framework' ),
+          'searching_text'  => esc_html__( 'Searching...', 'ta-framework' ),
+          'no_results_text' => esc_html__( 'No results found.', 'ta-framework' ),
         ),
       ) );
 
@@ -616,7 +616,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
       if ( ! empty( self::$fields ) ) {
         foreach ( self::$fields as $field ) {
           if ( ! empty( $field['type'] ) ) {
-            $classname = 'CSF_Field_' . $field['type'];
+            $classname = 'TAF_Field_' . $field['type'];
             if ( class_exists( $classname ) && method_exists( $classname, 'enqueue' ) ) {
               $instance = new $classname( $field );
               if ( method_exists( $classname, 'enqueue' ) ) {
@@ -628,7 +628,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
         }
       }
 
-      do_action( 'csf_enqueue' );
+      do_action( 'taf_enqueue' );
 
     }
 
@@ -656,7 +656,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
           $query['display'] = 'swap';
 
-          wp_enqueue_style( 'csf-google-web-fonts', esc_url( add_query_arg( $query, '//fonts.googleapis.com/css' ) ), array(), null );
+          wp_enqueue_style( 'taf-google-web-fonts', esc_url( add_query_arg( $query, '//fonts.googleapis.com/css' ) ), array(), null );
 
         }
 
@@ -668,9 +668,9 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
             $fonts[] = $family . ( ( ! empty( $styles ) ) ? ':'. implode( ',', $styles ) : '' );
           }
 
-          wp_enqueue_script( 'csf-google-web-fonts', esc_url( '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js' ), array(), null );
+          wp_enqueue_script( 'taf-google-web-fonts', esc_url( '//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js' ), array(), null );
 
-          wp_localize_script( 'csf-google-web-fonts', 'WebFontConfig', array( 'google' => array( 'families' => $fonts ) ) );
+          wp_localize_script( 'taf-google-web-fonts', 'WebFontConfig', array( 'google' => array( 'families' => $fonts ) ) );
 
         }
 
@@ -681,8 +681,8 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
     // Add admin body class
     public static function add_admin_body_class( $classes ) {
 
-      if ( apply_filters( 'csf_fa4', false ) ) {
-        $classes .= 'csf-fa5-shims';
+      if ( apply_filters( 'taf_fa4', false ) ) {
+        $classes .= 'taf-fa5-shims';
       }
 
       return $classes;
@@ -707,7 +707,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
         $field_type = $field['type'];
 
         $field            = array();
-        $field['content'] = esc_html__( 'Oops! Not allowed.', 'csf' ) .' <strong>('. $field_type .')</strong>';
+        $field['content'] = esc_html__( 'Oops! Not allowed.', 'ta-framework' ) .' <strong>('. $field_type .')</strong>';
         $field['type']    = 'notice';
         $field['style']   = 'danger';
 
@@ -717,7 +717,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
       $visible    = '';
       $unique     = ( ! empty( $unique ) ) ? $unique : '';
       $class      = ( ! empty( $field['class'] ) ) ? ' ' . esc_attr( $field['class'] ) : '';
-      $is_pseudo  = ( ! empty( $field['pseudo'] ) ) ? ' csf-pseudo-field' : '';
+      $is_pseudo  = ( ! empty( $field['pseudo'] ) ) ? ' taf-pseudo-field' : '';
       $field_type = ( ! empty( $field['type'] ) ) ? esc_attr( $field['type'] ) : '';
 
       if ( ! empty( $field['dependency'] ) ) {
@@ -748,38 +748,38 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
         $depend .= ' data-value="'. esc_attr( $data_value ) .'"';
         $depend .= ( ! empty( $data_global ) ) ? ' data-depend-global="true"' : '';
 
-        $visible = ( ! empty( $depend_visible ) ) ? ' csf-depend-visible' : ' csf-depend-hidden';
+        $visible = ( ! empty( $depend_visible ) ) ? ' taf-depend-visible' : ' taf-depend-hidden';
 
       }
 
       // These attributes has been sanitized above.
-      echo '<div class="csf-field csf-field-'. $field_type . $is_pseudo . $class . $visible .'"'. $depend .'>';
+      echo '<div class="taf-field taf-field-'. $field_type . $is_pseudo . $class . $visible .'"'. $depend .'>';
 
       if ( ! empty( $field_type ) ) {
 
         if ( ! empty( $field['title'] ) ) {
-          echo '<div class="csf-title">';
+          echo '<div class="taf-title">';
           echo '<h4>'. $field['title'] .'</h4>';
-          echo ( ! empty( $field['subtitle'] ) ) ? '<div class="csf-subtitle-text">'. $field['subtitle'] .'</div>' : '';
+          echo ( ! empty( $field['subtitle'] ) ) ? '<div class="taf-subtitle-text">'. $field['subtitle'] .'</div>' : '';
           echo '</div>';
         }
 
-        echo ( ! empty( $field['title'] ) ) ? '<div class="csf-fieldset">' : '';
+        echo ( ! empty( $field['title'] ) ) ? '<div class="taf-fieldset">' : '';
 
         $value = ( ! isset( $value ) && isset( $field['default'] ) ) ? $field['default'] : $value;
         $value = ( isset( $field['value'] ) ) ? $field['value'] : $value;
 
-        $classname = 'CSF_Field_'. $field_type;
+        $classname = 'TAF_Field_'. $field_type;
 
         if ( class_exists( $classname ) ) {
           $instance = new $classname( $field, $value, $unique, $where, $parent );
           $instance->render();
         } else {
-          echo '<p>'. esc_html__( 'Field not found!', 'csf' ) .'</p>';
+          echo '<p>'. esc_html__( 'Field not found!', 'ta-framework' ) .'</p>';
         }
 
       } else {
-        echo '<p>'. esc_html__( 'Field not found!', 'csf' ) .'</p>';
+        echo '<p>'. esc_html__( 'Field not found!', 'ta-framework' ) .'</p>';
       }
 
       echo ( ! empty( $field['title'] ) ) ? '</div>' : '';
@@ -792,7 +792,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
 }
 
-CSF_Setup::init( __FILE__, true );
+TAF_Setup::init( __FILE__, true );
 
 /**
  *
@@ -802,6 +802,6 @@ CSF_Setup::init( __FILE__, true );
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'CSF' ) ) {
-  class CSF extends CSF_Setup{}
+if ( ! class_exists( 'ta-framework' ) ) {
+  class TAF extends TAF_Setup{}
 }

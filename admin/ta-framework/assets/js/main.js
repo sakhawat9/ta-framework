@@ -14,11 +14,11 @@
   //
   // Constants
   //
-  var CSF   = CSF || {};
+  var TAF   = TAF || {};
 
-  CSF.funcs = {};
+  TAF.funcs = {};
 
-  CSF.vars  = {
+  TAF.vars  = {
     onloaded: false,
     $body: $('body'),
     $window: $(window),
@@ -33,7 +33,7 @@
   //
   // Helper Functions
   //
-  CSF.helper = {
+  TAF.helper = {
 
     //
     // Generate UID
@@ -54,7 +54,7 @@
     name_nested_replace: function( $selector, field_id ) {
 
       var checks = [];
-      var regex  = new RegExp(CSF.helper.preg_quote(field_id +'[\\d+]'), 'g');
+      var regex  = new RegExp(TAF.helper.preg_quote(field_id +'[\\d+]'), 'g');
 
       $selector.find(':radio').each(function() {
         if ( this.checked || this.orginal_checked ) {
@@ -100,7 +100,7 @@
   //
   // Custom clone for textarea and select clone() bug
   //
-  $.fn.csf_clone = function() {
+  $.fn.taf_clone = function() {
 
     var base   = $.fn.clone.apply(this, arguments),
         clone  = this.find('select').add(this.filter('select')),
@@ -127,13 +127,13 @@
   //
   // Expand All Options
   //
-  $.fn.csf_expand_all = function() {
+  $.fn.taf_expand_all = function() {
     return this.each( function() {
       $(this).on('click', function( e ) {
 
         e.preventDefault();
-        $('.csf-wrapper').toggleClass('csf-show-all');
-        $('.csf-section').csf_reload_script();
+        $('.taf-wrapper').toggleClass('taf-show-all');
+        $('.taf-section').taf_reload_script();
         $(this).find('.fa').toggleClass('fa-indent').toggleClass('fa-outdent');
 
       });
@@ -143,7 +143,7 @@
   //
   // Options Navigation
   //
-  $.fn.csf_nav_options = function() {
+  $.fn.taf_nav_options = function() {
     return this.each( function() {
 
       var $nav    = $(this),
@@ -152,7 +152,7 @@
           $links  = $nav.find('a'),
           $last;
 
-      $window.on('hashchange csf.hashchange', function() {
+      $window.on('hashchange taf.hashchange', function() {
 
         var hash  = window.location.hash.replace('#tab=', '');
         var slug  = hash ? hash : $links.first().attr('href').replace('#tab=', '');
@@ -160,7 +160,7 @@
 
         if ( $link.length ) {
 
-          $link.closest('.csf-tab-item').addClass('csf-tab-expanded').siblings().removeClass('csf-tab-expanded');
+          $link.closest('.taf-tab-item').addClass('taf-tab-expanded').siblings().removeClass('taf-tab-expanded');
 
           if( $link.next().is('ul') ) {
 
@@ -169,8 +169,8 @@
 
           }
 
-          $links.removeClass('csf-active');
-          $link.addClass('csf-active');
+          $links.removeClass('taf-active');
+          $link.addClass('taf-active');
 
           if ( $last ) {
             $last.addClass('hidden');
@@ -179,9 +179,9 @@
           var $section = $('[data-section-id="'+slug+'"]');
 
           $section.removeClass('hidden');
-          $section.csf_reload_script();
+          $section.taf_reload_script();
 
-          $('.csf-section-id').val( $section.index()+1 );
+          $('.taf-section-id').val( $section.index()+1 );
 
           $last = $section;
 
@@ -192,7 +192,7 @@
 
         }
 
-      }).trigger('csf.hashchange');
+      }).trigger('taf.hashchange');
 
     });
   };
@@ -200,12 +200,12 @@
   //
   // Metabox Tabs
   //
-  $.fn.csf_nav_metabox = function() {
+  $.fn.taf_nav_metabox = function() {
     return this.each( function() {
 
       var $nav      = $(this),
           $links    = $nav.find('a'),
-          $sections = $nav.parent().find('.csf-section'),
+          $sections = $nav.parent().find('.taf-section'),
           $last;
 
       $links.each( function( index ) {
@@ -216,8 +216,8 @@
 
           var $link = $(this);
 
-          $links.removeClass('csf-active');
-          $link.addClass('csf-active');
+          $links.removeClass('taf-active');
+          $link.addClass('taf-active');
 
           if ( $last !== undefined ) {
             $last.addClass('hidden');
@@ -226,7 +226,7 @@
           var $section = $sections.eq(index);
 
           $section.removeClass('hidden');
-          $section.csf_reload_script();
+          $section.taf_reload_script();
 
           $last = $section;
 
@@ -242,15 +242,15 @@
   //
   // Metabox Page Templates Listener
   //
-  $.fn.csf_page_templates = function() {
+  $.fn.taf_page_templates = function() {
     if ( this.length ) {
 
       $(document).on('change', '.editor-page-attributes__template select, #page_template, .edit-post-post-status + div select', function() {
 
         var maybe_value = $(this).val() || 'default';
 
-        $('.csf-page-templates').removeClass('csf-metabox-show').addClass('csf-metabox-hide');
-        $('.csf-page-'+maybe_value.toLowerCase().replace(/[^a-zA-Z0-9]+/g,'-')).removeClass('csf-metabox-hide').addClass('csf-metabox-show');
+        $('.taf-page-templates').removeClass('taf-metabox-show').addClass('taf-metabox-hide');
+        $('.taf-page-'+maybe_value.toLowerCase().replace(/[^a-zA-Z0-9]+/g,'-')).removeClass('taf-metabox-hide').addClass('taf-metabox-show');
 
       });
 
@@ -260,7 +260,7 @@
   //
   // Metabox Post Formats Listener
   //
-  $.fn.csf_post_formats = function() {
+  $.fn.taf_post_formats = function() {
     if ( this.length ) {
 
       $(document).on('change', '.editor-post-format select, #formatdiv input[name="post_format"]', function() {
@@ -270,8 +270,8 @@
         // Fallback for classic editor version
         maybe_value = ( maybe_value === '0' ) ? 'default' : maybe_value;
 
-        $('.csf-post-formats').removeClass('csf-metabox-show').addClass('csf-metabox-hide');
-        $('.csf-post-format-'+maybe_value).removeClass('csf-metabox-hide').addClass('csf-metabox-show');
+        $('.taf-post-formats').removeClass('taf-metabox-show').addClass('taf-metabox-hide');
+        $('.taf-post-format-'+maybe_value).removeClass('taf-metabox-hide').addClass('taf-metabox-show');
 
       });
 
@@ -281,7 +281,7 @@
   //
   // Search
   //
-  $.fn.csf_search = function() {
+  $.fn.taf_search = function() {
     return this.each( function() {
 
       var $this  = $(this),
@@ -290,15 +290,15 @@
       $input.on('change keyup', function() {
 
         var value    = $(this).val(),
-            $wrapper = $('.csf-wrapper'),
-            $section = $wrapper.find('.csf-section'),
-            $fields  = $section.find('> .csf-field:not(.csf-depend-on)'),
-            $titles  = $fields.find('> .csf-title, .csf-search-tags');
+            $wrapper = $('.taf-wrapper'),
+            $section = $wrapper.find('.taf-section'),
+            $fields  = $section.find('> .taf-field:not(.taf-depend-on)'),
+            $titles  = $fields.find('> .taf-title, .taf-search-tags');
 
         if ( value.length > 3 ) {
 
-          $fields.addClass('csf-metabox-hide');
-          $wrapper.addClass('csf-search-all');
+          $fields.addClass('taf-metabox-hide');
+          $wrapper.addClass('taf-search-all');
 
           $titles.each( function() {
 
@@ -306,10 +306,10 @@
 
             if ( $title.text().match( new RegExp('.*?' + value + '.*?', 'i') ) ) {
 
-              var $field = $title.closest('.csf-field');
+              var $field = $title.closest('.taf-field');
 
-              $field.removeClass('csf-metabox-hide');
-              $field.parent().csf_reload_script();
+              $field.removeClass('taf-metabox-hide');
+              $field.parent().taf_reload_script();
 
             }
 
@@ -317,8 +317,8 @@
 
         } else {
 
-          $fields.removeClass('csf-metabox-hide');
-          $wrapper.removeClass('csf-search-all');
+          $fields.removeClass('taf-metabox-hide');
+          $wrapper.removeClass('taf-search-all');
 
         }
 
@@ -330,12 +330,12 @@
   //
   // Sticky Header
   //
-  $.fn.csf_sticky = function() {
+  $.fn.taf_sticky = function() {
     return this.each( function() {
 
       var $this     = $(this),
           $window   = $(window),
-          $inner    = $this.find('.csf-header-inner'),
+          $inner    = $this.find('.taf-header-inner'),
           padding   = parseInt( $inner.css('padding-left') ) + parseInt( $inner.css('padding-right') ),
           offset    = 32,
           scrollTop = 0,
@@ -349,10 +349,10 @@
 
             if ( stickyTop <= offset && winWidth > 782 ) {
               $inner.css({width: $this.outerWidth()-padding});
-              $this.css({height: $this.outerHeight()}).addClass( 'csf-sticky' );
+              $this.css({height: $this.outerHeight()}).addClass( 'taf-sticky' );
             } else {
               $inner.removeAttr('style');
-              $this.removeAttr('style').removeClass( 'csf-sticky' );
+              $this.removeAttr('style').removeClass( 'taf-sticky' );
             }
 
           },
@@ -385,7 +385,7 @@
   //
   // Dependency System
   //
-  $.fn.csf_dependency = function() {
+  $.fn.taf_dependency = function() {
     return this.each( function() {
 
       var $this   = $(this),
@@ -393,8 +393,8 @@
 
       if( $fields.length ) {
 
-        var normal_ruleset = $.csf_deps.createRuleset(),
-            global_ruleset = $.csf_deps.createRuleset(),
+        var normal_ruleset = $.taf_deps.createRuleset(),
+            global_ruleset = $.taf_deps.createRuleset(),
             normal_depends = [],
             global_depends = [];
 
@@ -427,11 +427,11 @@
         });
 
         if ( normal_depends.length ) {
-          $.csf_deps.enable($this, normal_ruleset, normal_depends);
+          $.taf_deps.enable($this, normal_ruleset, normal_depends);
         }
 
         if ( global_depends.length ) {
-          $.csf_deps.enable(CSF.vars.$body, global_ruleset, global_depends);
+          $.taf_deps.enable(TAF.vars.$body, global_ruleset, global_depends);
         }
 
       }
@@ -442,15 +442,15 @@
   //
   // Field: accordion
   //
-  $.fn.csf_field_accordion = function() {
+  $.fn.taf_field_accordion = function() {
     return this.each( function() {
 
-      var $titles = $(this).find('.csf-accordion-title');
+      var $titles = $(this).find('.taf-accordion-title');
 
       $titles.on('click', function() {
 
         var $title   = $(this),
-            $icon    = $title.find('.csf-accordion-icon'),
+            $icon    = $title.find('.taf-accordion-icon'),
             $content = $title.next();
 
         if ( $icon.hasClass('fa-angle-right') ) {
@@ -461,12 +461,12 @@
 
         if ( !$content.data( 'opened' ) ) {
 
-          $content.csf_reload_script();
+          $content.taf_reload_script();
           $content.data( 'opened', true );
 
         }
 
-        $content.toggleClass('csf-accordion-open');
+        $content.toggleClass('taf-accordion-open');
 
       });
 
@@ -476,7 +476,7 @@
   //
   // Field: backup
   //
-  $.fn.csf_field_backup = function() {
+  $.fn.taf_field_backup = function() {
     return this.each( function() {
 
       if ( window.wp.customize === undefined ) { return; }
@@ -484,8 +484,8 @@
       var base    = this,
           $this   = $(this),
           $body   = $('body'),
-          $import = $this.find('.csf-import'),
-          $reset  = $this.find('.csf-reset');
+          $import = $this.find('.taf-import'),
+          $reset  = $this.find('.taf-reset');
 
       base.notificationOverlay = function() {
 
@@ -499,7 +499,7 @@
           }
 
           // then show a notification overlay
-          wp.customize.notifications.add( new wp.customize.OverlayNotification('csf_field_backup_notification', {
+          wp.customize.notifications.add( new wp.customize.OverlayNotification('taf_field_backup_notification', {
             type: 'default',
             message: '&nbsp;',
             loading: true
@@ -513,11 +513,11 @@
 
         e.preventDefault();
 
-        if ( CSF.vars.is_confirm ) {
+        if ( TAF.vars.is_confirm ) {
 
           base.notificationOverlay();
 
-          window.wp.ajax.post('csf-reset', {
+          window.wp.ajax.post('taf-reset', {
             unique: $reset.data('unique'),
             nonce: $reset.data('nonce')
           })
@@ -526,7 +526,7 @@
           })
           .fail( function( response ) {
             alert( response.error );
-            wp.customize.notifications.remove('csf_field_backup_notification');
+            wp.customize.notifications.remove('taf_field_backup_notification');
           });
 
         }
@@ -537,19 +537,19 @@
 
         e.preventDefault();
 
-        if ( CSF.vars.is_confirm ) {
+        if ( TAF.vars.is_confirm ) {
 
           base.notificationOverlay();
 
-          window.wp.ajax.post( 'csf-import', {
+          window.wp.ajax.post( 'taf-import', {
             unique: $import.data('unique'),
             nonce: $import.data('nonce'),
-            data: $this.find('.csf-import-data').val()
+            data: $this.find('.taf-import-data').val()
           }).done( function( response ) {
             window.location.reload(true);
           }).fail( function( response ) {
             alert( response.error );
-            wp.customize.notifications.remove('csf_field_backup_notification');
+            wp.customize.notifications.remove('taf_field_backup_notification');
           });
 
         }
@@ -562,16 +562,16 @@
   //
   // Field: background
   //
-  $.fn.csf_field_background = function() {
+  $.fn.taf_field_background = function() {
     return this.each( function() {
-      $(this).find('.csf--background-image').csf_reload_script();
+      $(this).find('.taf--background-image').taf_reload_script();
     });
   };
 
   //
   // Field: code_editor
   //
-  $.fn.csf_field_code_editor = function() {
+  $.fn.taf_field_code_editor = function() {
     return this.each( function() {
 
       if ( typeof CodeMirror !== 'function' ) { return; }
@@ -591,21 +591,21 @@
           var code_editor = CodeMirror.fromTextArea( $textarea[0], data_editor );
 
           // load code-mirror theme css.
-          if ( data_editor.theme !== 'default' && CSF.vars.code_themes.indexOf(data_editor.theme) === -1 ) {
+          if ( data_editor.theme !== 'default' && TAF.vars.code_themes.indexOf(data_editor.theme) === -1 ) {
 
             var $cssLink = $('<link>');
 
-            $('#csf-codemirror-css').after( $cssLink );
+            $('#taf-codemirror-css').after( $cssLink );
 
             $cssLink.attr({
               rel: 'stylesheet',
-              id: 'csf-codemirror-'+ data_editor.theme +'-css',
+              id: 'taf-codemirror-'+ data_editor.theme +'-css',
               href: data_editor.cdnURL +'/theme/'+ data_editor.theme +'.min.css',
               type: 'text/css',
               media: 'all'
             });
 
-            CSF.vars.code_themes.push(data_editor.theme);
+            TAF.vars.code_themes.push(data_editor.theme);
 
           }
 
@@ -627,21 +627,21 @@
   //
   // Field: date
   //
-  $.fn.csf_field_date = function() {
+  $.fn.taf_field_date = function() {
     return this.each( function() {
 
       var $this    = $(this),
           $inputs  = $this.find('input'),
-          settings = $this.find('.csf-date-settings').data('settings'),
-          wrapper  = '<div class="csf-datepicker-wrapper"></div>';
+          settings = $this.find('.taf-date-settings').data('settings'),
+          wrapper  = '<div class="taf-datepicker-wrapper"></div>';
 
       var defaults = {
         showAnim: '',
         beforeShow: function(input, inst) {
-          $(inst.dpDiv).addClass('csf-datepicker-wrapper');
+          $(inst.dpDiv).addClass('taf-datepicker-wrapper');
         },
         onClose: function( input, inst ) {
-          $(inst.dpDiv).removeClass('csf-datepicker-wrapper');
+          $(inst.dpDiv).removeClass('taf-datepicker-wrapper');
         },
       };
 
@@ -682,16 +682,16 @@
   //
   // Field: datetime
   //
-  $.fn.csf_field_datetime = function() {
+  $.fn.taf_field_datetime = function() {
     return this.each( function() {
 
       var $this    = $(this),
           $inputs  = $this.find('input'),
-          settings = $this.find('.csf-datetime-settings').data('settings');
+          settings = $this.find('.taf-datetime-settings').data('settings');
 
       settings = $.extend({}, settings, {
         onReady: function( selectedDates, dateStr, instance) {
-          $(instance.calendarContainer).addClass('csf-flatpickr');
+          $(instance.calendarContainer).addClass('taf-flatpickr');
         },
       });
 
@@ -717,31 +717,31 @@
   //
   // Field: fieldset
   //
-  $.fn.csf_field_fieldset = function() {
+  $.fn.taf_field_fieldset = function() {
     return this.each( function() {
-      $(this).find('.csf-fieldset-content').csf_reload_script();
+      $(this).find('.taf-fieldset-content').taf_reload_script();
     });
   };
 
   //
   // Field: gallery
   //
-  $.fn.csf_field_gallery = function() {
+  $.fn.taf_field_gallery = function() {
     return this.each( function() {
 
       var $this  = $(this),
-          $edit  = $this.find('.csf-edit-gallery'),
-          $clear = $this.find('.csf-clear-gallery'),
+          $edit  = $this.find('.taf-edit-gallery'),
+          $clear = $this.find('.taf-clear-gallery'),
           $list  = $this.find('ul'),
           $input = $this.find('input'),
           $img   = $this.find('img'),
           wp_media_frame;
 
-      $this.on('click', '.csf-button, .csf-edit-gallery', function( e ) {
+      $this.on('click', '.taf-button, .taf-edit-gallery', function( e ) {
 
         var $el   = $(this),
             ids   = $input.val(),
-            what  = ( $el.hasClass('csf-edit-gallery') ) ? 'edit' : 'add',
+            what  = ( $el.hasClass('taf-edit-gallery') ) ? 'edit' : 'add',
             state = ( what === 'add' && !ids.length ) ? 'gallery' : 'gallery-edit';
 
         e.preventDefault();
@@ -811,16 +811,16 @@
   //
   // Field: group
   //
-  $.fn.csf_field_group = function() {
+  $.fn.taf_field_group = function() {
     return this.each( function() {
 
       var $this           = $(this),
-          $fieldset    = $this.children('.csf-fieldset'),
+          $fieldset    = $this.children('.taf-fieldset'),
           $group       = $fieldset.length ? $fieldset : $this,
-          $wrapper     = $group.children('.csf-cloneable-wrapper'),
-          $hidden      = $group.children('.csf-cloneable-hidden'),
-          $max         = $group.children('.csf-cloneable-max'),
-          $min         = $group.children('.csf-cloneable-min'),
+          $wrapper     = $group.children('.taf-cloneable-wrapper'),
+          $hidden      = $group.children('.taf-cloneable-hidden'),
+          $max         = $group.children('.taf-cloneable-max'),
+          $min         = $group.children('.taf-cloneable-min'),
           title_by     = $wrapper.data('title-by'),
           title_prefix = $wrapper.data('title-by-prefix'),
           field_id     = $wrapper.data('field-id'),
@@ -834,20 +834,20 @@
       }
 
       var update_title_numbers = function( $selector ) {
-        $selector.find('.csf-cloneable-title-number').each( function( index ) {
-          $(this).html( ( $(this).closest('.csf-cloneable-item').index()+1 ) + '.' );
+        $selector.find('.taf-cloneable-title-number').each( function( index ) {
+          $(this).html( ( $(this).closest('.taf-cloneable-item').index()+1 ) + '.' );
         });
       };
 
       $wrapper.accordion({
-        header: '> .csf-cloneable-item > .csf-cloneable-title',
+        header: '> .taf-cloneable-item > .taf-cloneable-title',
         collapsible : true,
         active: false,
         animate: false,
         heightStyle: 'content',
         icons: {
-          'header': 'csf-cloneable-header-icon fas fa-angle-right',
-          'activeHeader': 'csf-cloneable-header-icon fas fa-angle-down'
+          'header': 'taf-cloneable-header-icon fas fa-angle-right',
+          'activeHeader': 'taf-cloneable-header-icon fas fa-angle-down'
         },
         activate: function( event, ui ) {
 
@@ -856,7 +856,7 @@
 
           if ( $panel.length && !$panel.data( 'opened' ) ) {
 
-            var $title = $header.find('.csf-cloneable-value');
+            var $title = $header.find('.taf-cloneable-value');
             var inputs = [];
 
             $.each(title_by, function( key, title_key ) {
@@ -865,7 +865,7 @@
 
             $.each(inputs, function( key, $input ) {
 
-              $input.on('change keyup csf.keyup', function() {
+              $input.on('change keyup taf.keyup', function() {
 
                 var titles = [];
 
@@ -883,17 +883,17 @@
                   $title.text( titles.join( title_prefix ) );
                 }
 
-              }).trigger('csf.keyup');
+              }).trigger('taf.keyup');
 
             });
 
-            $panel.csf_reload_script();
+            $panel.taf_reload_script();
             $panel.data( 'opened', true );
             $panel.data( 'retry', false );
 
           } else if ( $panel.data( 'retry' ) ) {
 
-            $panel.csf_reload_script_retry();
+            $panel.taf_reload_script_retry();
             $panel.data( 'retry', false );
 
           }
@@ -903,7 +903,7 @@
 
       $wrapper.sortable({
         axis: 'y',
-        handle: '.csf-cloneable-title,.csf-cloneable-sort',
+        handle: '.taf-cloneable-title,.taf-cloneable-sort',
         helper: 'original',
         cursor: 'move',
         placeholder: 'widget-placeholder',
@@ -911,13 +911,13 @@
 
           $wrapper.accordion({ active:false });
           $wrapper.sortable('refreshPositions');
-          ui.item.children('.csf-cloneable-content').data('retry', true);
+          ui.item.children('.taf-cloneable-content').data('retry', true);
 
         },
         update: function( event, ui ) {
 
-          CSF.helper.name_nested_replace( $wrapper.children('.csf-cloneable-item'), field_id );
-          $wrapper.csf_customizer_refresh();
+          TAF.helper.name_nested_replace( $wrapper.children('.taf-cloneable-item'), field_id );
+          $wrapper.taf_customizer_refresh();
 
           if ( is_number ) {
             update_title_numbers($wrapper);
@@ -926,11 +926,11 @@
         },
       });
 
-      $group.children('.csf-cloneable-add').on('click', function( e ) {
+      $group.children('.taf-cloneable-add').on('click', function( e ) {
 
         e.preventDefault();
 
-        var count = $wrapper.children('.csf-cloneable-item').length;
+        var count = $wrapper.children('.taf-cloneable-item').length;
 
         $min.hide();
 
@@ -939,9 +939,9 @@
           return;
         }
 
-        var $cloned_item = $hidden.csf_clone(true);
+        var $cloned_item = $hidden.taf_clone(true);
 
-        $cloned_item.removeClass('csf-cloneable-hidden');
+        $cloned_item.removeClass('taf-cloneable-hidden');
 
         $cloned_item.find(':input[name!="_pseudo"]').each( function() {
           this.name = this.name.replace( '___', '' ).replace( field_id +'[0]', field_id +'['+ count +']' );
@@ -950,8 +950,8 @@
         $wrapper.append($cloned_item);
         $wrapper.accordion('refresh');
         $wrapper.accordion({active: count});
-        $wrapper.csf_customizer_refresh();
-        $wrapper.csf_customizer_listen({closest: true});
+        $wrapper.taf_customizer_refresh();
+        $wrapper.taf_customizer_listen({closest: true});
 
         if ( is_number ) {
           update_title_numbers($wrapper);
@@ -963,7 +963,7 @@
 
         e.preventDefault();
 
-        var count = $wrapper.children('.csf-cloneable-item').length;
+        var count = $wrapper.children('.taf-cloneable-item').length;
 
         $min.hide();
 
@@ -974,10 +974,10 @@
 
         var $this           = $(this),
             $parent         = $this.parent().parent(),
-            $cloned_helper  = $parent.children('.csf-cloneable-helper').csf_clone(true),
-            $cloned_title   = $parent.children('.csf-cloneable-title').csf_clone(),
-            $cloned_content = $parent.children('.csf-cloneable-content').csf_clone(),
-            $cloned_item    = $('<div class="csf-cloneable-item" />');
+            $cloned_helper  = $parent.children('.taf-cloneable-helper').taf_clone(true),
+            $cloned_title   = $parent.children('.taf-cloneable-title').taf_clone(),
+            $cloned_content = $parent.children('.taf-cloneable-content').taf_clone(),
+            $cloned_item    = $('<div class="taf-cloneable-item" />');
 
         $cloned_item.append($cloned_helper);
         $cloned_item.append($cloned_title);
@@ -985,11 +985,11 @@
 
         $wrapper.children().eq($parent.index()).after($cloned_item);
 
-        CSF.helper.name_nested_replace( $wrapper.children('.csf-cloneable-item'), field_id );
+        TAF.helper.name_nested_replace( $wrapper.children('.taf-cloneable-item'), field_id );
 
         $wrapper.accordion('refresh');
-        $wrapper.csf_customizer_refresh();
-        $wrapper.csf_customizer_listen({closest: true});
+        $wrapper.taf_customizer_refresh();
+        $wrapper.taf_customizer_listen({closest: true});
 
         if ( is_number ) {
           update_title_numbers($wrapper);
@@ -997,14 +997,14 @@
 
       };
 
-      $wrapper.children('.csf-cloneable-item').children('.csf-cloneable-helper').on('click', '.csf-cloneable-clone', event_clone);
-      $group.children('.csf-cloneable-hidden').children('.csf-cloneable-helper').on('click', '.csf-cloneable-clone', event_clone);
+      $wrapper.children('.taf-cloneable-item').children('.taf-cloneable-helper').on('click', '.taf-cloneable-clone', event_clone);
+      $group.children('.taf-cloneable-hidden').children('.taf-cloneable-helper').on('click', '.taf-cloneable-clone', event_clone);
 
       var event_remove = function( e ) {
 
         e.preventDefault();
 
-        var count = $wrapper.children('.csf-cloneable-item').length;
+        var count = $wrapper.children('.taf-cloneable-item').length;
 
         $max.hide();
         $min.hide();
@@ -1014,11 +1014,11 @@
           return;
         }
 
-        $(this).closest('.csf-cloneable-item').remove();
+        $(this).closest('.taf-cloneable-item').remove();
 
-        CSF.helper.name_nested_replace( $wrapper.children('.csf-cloneable-item'), field_id );
+        TAF.helper.name_nested_replace( $wrapper.children('.taf-cloneable-item'), field_id );
 
-        $wrapper.csf_customizer_refresh();
+        $wrapper.taf_customizer_refresh();
 
         if ( is_number ) {
           update_title_numbers($wrapper);
@@ -1026,8 +1026,8 @@
 
       };
 
-      $wrapper.children('.csf-cloneable-item').children('.csf-cloneable-helper').on('click', '.csf-cloneable-remove', event_remove);
-      $group.children('.csf-cloneable-hidden').children('.csf-cloneable-helper').on('click', '.csf-cloneable-remove', event_remove);
+      $wrapper.children('.taf-cloneable-item').children('.taf-cloneable-helper').on('click', '.taf-cloneable-remove', event_remove);
+      $group.children('.taf-cloneable-hidden').children('.taf-cloneable-helper').on('click', '.taf-cloneable-remove', event_remove);
 
     });
   };
@@ -1035,35 +1035,35 @@
   //
   // Field: icon
   //
-  $.fn.csf_field_icon = function() {
+  $.fn.taf_field_icon = function() {
     return this.each( function() {
 
       var $this = $(this);
 
-      $this.on('click', '.csf-icon-add', function( e ) {
+      $this.on('click', '.taf-icon-add', function( e ) {
 
         e.preventDefault();
 
         var $button = $(this);
-        var $modal  = $('#csf-modal-icon');
+        var $modal  = $('#taf-modal-icon');
 
         $modal.removeClass('hidden');
 
-        CSF.vars.$icon_target = $this;
+        TAF.vars.$icon_target = $this;
 
-        if ( !CSF.vars.icon_modal_loaded ) {
+        if ( !TAF.vars.icon_modal_loaded ) {
 
-          $modal.find('.csf-modal-loading').show();
+          $modal.find('.taf-modal-loading').show();
 
-          window.wp.ajax.post( 'csf-get-icons', {
+          window.wp.ajax.post( 'taf-get-icons', {
             nonce: $button.data('nonce')
           }).done( function( response ) {
 
-            $modal.find('.csf-modal-loading').hide();
+            $modal.find('.taf-modal-loading').hide();
 
-            CSF.vars.icon_modal_loaded = true;
+            TAF.vars.icon_modal_loaded = true;
 
-            var $load = $modal.find('.csf-modal-load').html( response.content );
+            var $load = $modal.find('.taf-modal-load').html( response.content );
 
             $load.on('click', 'i', function( e ) {
 
@@ -1071,16 +1071,16 @@
 
               var icon = $(this).attr('title');
 
-              CSF.vars.$icon_target.find('.csf-icon-preview i').removeAttr('class').addClass(icon);
-              CSF.vars.$icon_target.find('.csf-icon-preview').removeClass('hidden');
-              CSF.vars.$icon_target.find('.csf-icon-remove').removeClass('hidden');
-              CSF.vars.$icon_target.find('input').val(icon).trigger('change');
+              TAF.vars.$icon_target.find('.taf-icon-preview i').removeAttr('class').addClass(icon);
+              TAF.vars.$icon_target.find('.taf-icon-preview').removeClass('hidden');
+              TAF.vars.$icon_target.find('.taf-icon-remove').removeClass('hidden');
+              TAF.vars.$icon_target.find('input').val(icon).trigger('change');
 
               $modal.addClass('hidden');
 
             });
 
-            $modal.on('change keyup', '.csf-icon-search', function() {
+            $modal.on('change keyup', '.taf-icon-search', function() {
 
               var value  = $(this).val(),
                   $icons = $load.find('i');
@@ -1099,13 +1099,13 @@
 
             });
 
-            $modal.on('click', '.csf-modal-close, .csf-modal-overlay', function() {
+            $modal.on('click', '.taf-modal-close, .taf-modal-overlay', function() {
               $modal.addClass('hidden');
             });
 
           }).fail( function( response ) {
-            $modal.find('.csf-modal-loading').hide();
-            $modal.find('.csf-modal-load').html( response.error );
+            $modal.find('.taf-modal-loading').hide();
+            $modal.find('.taf-modal-load').html( response.error );
             $modal.on('click', function() {
               $modal.addClass('hidden');
             });
@@ -1114,9 +1114,9 @@
 
       });
 
-      $this.on('click', '.csf-icon-remove', function( e ) {
+      $this.on('click', '.taf-icon-remove', function( e ) {
         e.preventDefault();
-        $this.find('.csf-icon-preview').addClass('hidden');
+        $this.find('.taf-icon-preview').addClass('hidden');
         $this.find('input').val('').trigger('change');
         $(this).addClass('hidden');
       });
@@ -1127,17 +1127,17 @@
   //
   // Field: map
   //
-  $.fn.csf_field_map = function() {
+  $.fn.taf_field_map = function() {
     return this.each( function() {
 
       if ( typeof L === 'undefined' ) { return; }
 
       var $this         = $(this),
-          $map          = $this.find('.csf--map-osm'),
-          $search_input = $this.find('.csf--map-search input'),
-          $latitude     = $this.find('.csf--latitude'),
-          $longitude    = $this.find('.csf--longitude'),
-          $zoom         = $this.find('.csf--zoom'),
+          $map          = $this.find('.taf--map-osm'),
+          $search_input = $this.find('.taf--map-search input'),
+          $latitude     = $this.find('.taf--latitude'),
+          $longitude    = $this.find('.taf--longitude'),
+          $zoom         = $this.find('.taf--zoom'),
           map_data      = $map.data( 'map' );
 
       var mapInit = L.map( $map.get(0), map_data);
@@ -1168,7 +1168,7 @@
       });
 
       if ( ! $search_input.length ) {
-        $search_input = $( '[data-depend-id="'+ $this.find('.csf--address-field').data( 'address-field' ) +'"]' );
+        $search_input = $( '[data-depend-id="'+ $this.find('.taf--address-field').data( 'address-field' ) +'"]' );
       }
 
       var cache = {};
@@ -1224,7 +1224,7 @@
 
         },
         create: function (event, ui) {
-          $(this).autocomplete('widget').addClass('csf-map-ui-autocomplate');
+          $(this).autocomplete('widget').addClass('taf-map-ui-autocomplate');
         }
       });
 
@@ -1246,16 +1246,16 @@
   //
   // Field: link
   //
-  $.fn.csf_field_link = function() {
+  $.fn.taf_field_link = function() {
     return this.each( function() {
 
       var $this   = $(this),
-          $link   = $this.find('.csf--link'),
-          $add    = $this.find('.csf--add'),
-          $edit   = $this.find('.csf--edit'),
-          $remove = $this.find('.csf--remove'),
-          $result = $this.find('.csf--result'),
-          uniqid  = CSF.helper.uid('csf-wplink-textarea-');
+          $link   = $this.find('.taf--link'),
+          $add    = $this.find('.taf--add'),
+          $edit   = $this.find('.taf--edit'),
+          $remove = $this.find('.taf--remove'),
+          $result = $this.find('.taf--result'),
+          uniqid  = TAF.helper.uid('taf-wplink-textarea-');
 
       $add.on('click', function( e ) {
 
@@ -1271,9 +1271,9 @@
 
         $add.trigger('click');
 
-        $('#wp-link-url').val($this.find('.csf--url').val());
-        $('#wp-link-text').val($this.find('.csf--text').val());
-        $('#wp-link-target').prop('checked', ($this.find('.csf--target').val() === '_blank'));
+        $('#wp-link-url').val($this.find('.taf--url').val());
+        $('#wp-link-text').val($this.find('.taf--text').val());
+        $('#wp-link-target').prop('checked', ($this.find('.taf--target').val() === '_blank'));
 
       });
 
@@ -1281,9 +1281,9 @@
 
         e.preventDefault();
 
-        $this.find('.csf--url').val('').trigger('change');
-        $this.find('.csf--text').val('');
-        $this.find('.csf--target').val('');
+        $this.find('.taf--url').val('').trigger('change');
+        $this.find('.taf--text').val('');
+        $this.find('.taf--target').val('');
 
         $add.removeClass('hidden');
         $edit.addClass('hidden');
@@ -1299,9 +1299,9 @@
             text   = $('#wp-link-text').val(),
             target = ( atts.target ) ? atts.target : '';
 
-        $this.find('.csf--url').val(href).trigger('change');
-        $this.find('.csf--text').val(text);
-        $this.find('.csf--target').val(target);
+        $this.find('.taf--url').val(href).trigger('change');
+        $this.find('.taf--text').val(text);
+        $this.find('.taf--target').val(target);
 
         $result.html('{url:"'+href+'", text:"'+text+'", target:"'+target+'"}');
 
@@ -1319,14 +1319,14 @@
   //
   // Field: media
   //
-  $.fn.csf_field_media = function() {
+  $.fn.taf_field_media = function() {
     return this.each( function() {
 
       var $this            = $(this),
-          $upload_button   = $this.find('.csf--button'),
-          $remove_button   = $this.find('.csf--remove'),
+          $upload_button   = $this.find('.taf--button'),
+          $remove_button   = $this.find('.taf--remove'),
           $library         = $upload_button.data('library') && $upload_button.data('library').split(',') || '',
-          $auto_attributes = ( $this.hasClass('csf-assign-field-background') ) ? $this.closest('.csf-field-background').find('.csf--auto-attributes') : false,
+          $auto_attributes = ( $this.hasClass('taf-assign-field-background') ) ? $this.closest('.taf-field-background').find('.taf--auto-attributes') : false,
           wp_media_frame;
 
       $upload_button.on('click', function( e ) {
@@ -1358,12 +1358,12 @@
             return;
           }
 
-          $this.find('.csf--id').val( attributes.id );
-          $this.find('.csf--width').val( attributes.width );
-          $this.find('.csf--height').val( attributes.height );
-          $this.find('.csf--alt').val( attributes.alt );
-          $this.find('.csf--title').val( attributes.title );
-          $this.find('.csf--description').val( attributes.description );
+          $this.find('.taf--id').val( attributes.id );
+          $this.find('.taf--width').val( attributes.width );
+          $this.find('.taf--height').val( attributes.height );
+          $this.find('.taf--alt').val( attributes.alt );
+          $this.find('.taf--title').val( attributes.title );
+          $this.find('.taf--description').val( attributes.description );
 
           if ( typeof attributes.sizes !== 'undefined' && typeof attributes.sizes.thumbnail !== 'undefined' && preview_size === 'thumbnail' ) {
             thumbnail = attributes.sizes.thumbnail.url;
@@ -1376,15 +1376,15 @@
           }
 
           if ( $auto_attributes ) {
-            $auto_attributes.removeClass('csf--attributes-hidden');
+            $auto_attributes.removeClass('taf--attributes-hidden');
           }
 
           $remove_button.removeClass('hidden');
 
-          $this.find('.csf--preview').removeClass('hidden');
-          $this.find('.csf--src').attr('src', thumbnail);
-          $this.find('.csf--thumbnail').val( thumbnail );
-          $this.find('.csf--url').val( attributes.url ).trigger('change');
+          $this.find('.taf--preview').removeClass('hidden');
+          $this.find('.taf--src').attr('src', thumbnail);
+          $this.find('.taf--thumbnail').val( thumbnail );
+          $this.find('.taf--url').val( attributes.url ).trigger('change');
 
         });
 
@@ -1397,13 +1397,13 @@
         e.preventDefault();
 
         if ( $auto_attributes ) {
-          $auto_attributes.addClass('csf--attributes-hidden');
+          $auto_attributes.addClass('taf--attributes-hidden');
         }
 
         $remove_button.addClass('hidden');
         $this.find('input').val('');
-        $this.find('.csf--preview').addClass('hidden');
-        $this.find('.csf--url').trigger('change');
+        $this.find('.taf--preview').addClass('hidden');
+        $this.find('.taf--url').trigger('change');
 
       });
 
@@ -1414,42 +1414,42 @@
   //
   // Field: repeater
   //
-  $.fn.csf_field_repeater = function() {
+  $.fn.taf_field_repeater = function() {
     return this.each( function() {
 
       var $this     = $(this),
-          $fieldset = $this.children('.csf-fieldset'),
+          $fieldset = $this.children('.taf-fieldset'),
           $repeater = $fieldset.length ? $fieldset : $this,
-          $wrapper  = $repeater.children('.csf-repeater-wrapper'),
-          $hidden   = $repeater.children('.csf-repeater-hidden'),
-          $max      = $repeater.children('.csf-repeater-max'),
-          $min      = $repeater.children('.csf-repeater-min'),
+          $wrapper  = $repeater.children('.taf-repeater-wrapper'),
+          $hidden   = $repeater.children('.taf-repeater-hidden'),
+          $max      = $repeater.children('.taf-repeater-max'),
+          $min      = $repeater.children('.taf-repeater-min'),
           field_id  = $wrapper.data('field-id'),
           max       = parseInt( $wrapper.data('max') ),
           min       = parseInt( $wrapper.data('min') );
 
-      $wrapper.children('.csf-repeater-item').children('.csf-repeater-content').csf_reload_script();
+      $wrapper.children('.taf-repeater-item').children('.taf-repeater-content').taf_reload_script();
 
       $wrapper.sortable({
         axis: 'y',
-        handle: '.csf-repeater-sort',
+        handle: '.taf-repeater-sort',
         helper: 'original',
         cursor: 'move',
         placeholder: 'widget-placeholder',
         update: function( event, ui ) {
 
-          CSF.helper.name_nested_replace( $wrapper.children('.csf-repeater-item'), field_id );
-          $wrapper.csf_customizer_refresh();
-          ui.item.csf_reload_script_retry();
+          TAF.helper.name_nested_replace( $wrapper.children('.taf-repeater-item'), field_id );
+          $wrapper.taf_customizer_refresh();
+          ui.item.taf_reload_script_retry();
 
         }
       });
 
-      $repeater.children('.csf-repeater-add').on('click', function( e ) {
+      $repeater.children('.taf-repeater-add').on('click', function( e ) {
 
         e.preventDefault();
 
-        var count = $wrapper.children('.csf-repeater-item').length;
+        var count = $wrapper.children('.taf-repeater-item').length;
 
         $min.hide();
 
@@ -1458,18 +1458,18 @@
           return;
         }
 
-        var $cloned_item = $hidden.csf_clone(true);
+        var $cloned_item = $hidden.taf_clone(true);
 
-        $cloned_item.removeClass('csf-repeater-hidden');
+        $cloned_item.removeClass('taf-repeater-hidden');
 
         $cloned_item.find(':input[name!="_pseudo"]').each( function() {
           this.name = this.name.replace( '___', '' ).replace( field_id +'[0]', field_id +'['+ count +']' );
         });
 
         $wrapper.append($cloned_item);
-        $cloned_item.children('.csf-repeater-content').csf_reload_script();
-        $wrapper.csf_customizer_refresh();
-        $wrapper.csf_customizer_listen({closest: true});
+        $cloned_item.children('.taf-repeater-content').taf_reload_script();
+        $wrapper.taf_customizer_refresh();
+        $wrapper.taf_customizer_listen({closest: true});
 
       });
 
@@ -1477,7 +1477,7 @@
 
         e.preventDefault();
 
-        var count = $wrapper.children('.csf-repeater-item').length;
+        var count = $wrapper.children('.taf-repeater-item').length;
 
         $min.hide();
 
@@ -1488,32 +1488,32 @@
 
         var $this           = $(this),
             $parent         = $this.parent().parent().parent(),
-            $cloned_content = $parent.children('.csf-repeater-content').csf_clone(),
-            $cloned_helper  = $parent.children('.csf-repeater-helper').csf_clone(true),
-            $cloned_item    = $('<div class="csf-repeater-item" />');
+            $cloned_content = $parent.children('.taf-repeater-content').taf_clone(),
+            $cloned_helper  = $parent.children('.taf-repeater-helper').taf_clone(true),
+            $cloned_item    = $('<div class="taf-repeater-item" />');
 
         $cloned_item.append($cloned_content);
         $cloned_item.append($cloned_helper);
 
         $wrapper.children().eq($parent.index()).after($cloned_item);
 
-        $cloned_item.children('.csf-repeater-content').csf_reload_script();
+        $cloned_item.children('.taf-repeater-content').taf_reload_script();
 
-        CSF.helper.name_nested_replace( $wrapper.children('.csf-repeater-item'), field_id );
+        TAF.helper.name_nested_replace( $wrapper.children('.taf-repeater-item'), field_id );
 
-        $wrapper.csf_customizer_refresh();
-        $wrapper.csf_customizer_listen({closest: true});
+        $wrapper.taf_customizer_refresh();
+        $wrapper.taf_customizer_listen({closest: true});
 
       };
 
-      $wrapper.children('.csf-repeater-item').children('.csf-repeater-helper').on('click', '.csf-repeater-clone', event_clone);
-      $repeater.children('.csf-repeater-hidden').children('.csf-repeater-helper').on('click', '.csf-repeater-clone', event_clone);
+      $wrapper.children('.taf-repeater-item').children('.taf-repeater-helper').on('click', '.taf-repeater-clone', event_clone);
+      $repeater.children('.taf-repeater-hidden').children('.taf-repeater-helper').on('click', '.taf-repeater-clone', event_clone);
 
       var event_remove = function( e ) {
 
         e.preventDefault();
 
-        var count = $wrapper.children('.csf-repeater-item').length;
+        var count = $wrapper.children('.taf-repeater-item').length;
 
         $max.hide();
         $min.hide();
@@ -1523,16 +1523,16 @@
           return;
         }
 
-        $(this).closest('.csf-repeater-item').remove();
+        $(this).closest('.taf-repeater-item').remove();
 
-        CSF.helper.name_nested_replace( $wrapper.children('.csf-repeater-item'), field_id );
+        TAF.helper.name_nested_replace( $wrapper.children('.taf-repeater-item'), field_id );
 
-        $wrapper.csf_customizer_refresh();
+        $wrapper.taf_customizer_refresh();
 
       };
 
-      $wrapper.children('.csf-repeater-item').children('.csf-repeater-helper').on('click', '.csf-repeater-remove', event_remove);
-      $repeater.children('.csf-repeater-hidden').children('.csf-repeater-helper').on('click', '.csf-repeater-remove', event_remove);
+      $wrapper.children('.taf-repeater-item').children('.taf-repeater-helper').on('click', '.taf-repeater-remove', event_remove);
+      $repeater.children('.taf-repeater-hidden').children('.taf-repeater-helper').on('click', '.taf-repeater-remove', event_remove);
 
     });
   };
@@ -1540,12 +1540,12 @@
   //
   // Field: slider
   //
-  $.fn.csf_field_slider = function() {
+  $.fn.taf_field_slider = function() {
     return this.each( function() {
 
       var $this   = $(this),
           $input  = $this.find('input'),
-          $slider = $this.find('.csf-slider-ui'),
+          $slider = $this.find('.taf-slider-ui'),
           data    = $input.data(),
           value   = $input.val() || 0;
 
@@ -1574,10 +1574,10 @@
   //
   // Field: sortable
   //
-  $.fn.csf_field_sortable = function() {
+  $.fn.taf_field_sortable = function() {
     return this.each( function() {
 
-      var $sortable = $(this).find('.csf-sortable');
+      var $sortable = $(this).find('.taf-sortable');
 
       $sortable.sortable({
         axis: 'y',
@@ -1585,11 +1585,11 @@
         cursor: 'move',
         placeholder: 'widget-placeholder',
         update: function( event, ui ) {
-          $sortable.csf_customizer_refresh();
+          $sortable.taf_customizer_refresh();
         }
       });
 
-      $sortable.find('.csf-sortable-content').csf_reload_script();
+      $sortable.find('.taf-sortable-content').taf_reload_script();
 
     });
   };
@@ -1597,12 +1597,12 @@
   //
   // Field: sorter
   //
-  $.fn.csf_field_sorter = function() {
+  $.fn.taf_field_sorter = function() {
     return this.each( function() {
 
       var $this         = $(this),
-          $enabled      = $this.find('.csf-enabled'),
-          $has_disabled = $this.find('.csf-disabled'),
+          $enabled      = $this.find('.taf-enabled'),
+          $has_disabled = $this.find('.taf-disabled'),
           $disabled     = ( $has_disabled.length ) ? $has_disabled : false;
 
       $enabled.sortable({
@@ -1612,13 +1612,13 @@
 
           var $el = ui.item.find('input');
 
-          if ( ui.item.parent().hasClass('csf-enabled') ) {
+          if ( ui.item.parent().hasClass('taf-enabled') ) {
             $el.attr('name', $el.attr('name').replace('disabled', 'enabled'));
           } else {
             $el.attr('name', $el.attr('name').replace('enabled', 'disabled'));
           }
 
-          $this.csf_customizer_refresh();
+          $this.taf_customizer_refresh();
 
         }
       });
@@ -1629,7 +1629,7 @@
           connectWith: $enabled,
           placeholder: 'ui-sortable-placeholder',
           update: function( event, ui ) {
-            $this.csf_customizer_refresh();
+            $this.taf_customizer_refresh();
           }
         });
 
@@ -1641,7 +1641,7 @@
   //
   // Field: spinner
   //
-  $.fn.csf_field_spinner = function() {
+  $.fn.taf_field_spinner = function() {
     return this.each( function() {
 
       var $this   = $(this),
@@ -1659,7 +1659,7 @@
         step: data.step || 1,
         create: function( event, ui ) {
           if ( data.unit ) {
-            $input.after('<span class="ui-button csf--unit">'+ data.unit +'</span>');
+            $input.after('<span class="ui-button taf--unit">'+ data.unit +'</span>');
           }
         },
         spin: function (event, ui ) {
@@ -1673,21 +1673,21 @@
   //
   // Field: switcher
   //
-  $.fn.csf_field_switcher = function() {
+  $.fn.taf_field_switcher = function() {
     return this.each( function() {
 
-      var $switcher = $(this).find('.csf--switcher');
+      var $switcher = $(this).find('.taf--switcher');
 
       $switcher.on('click', function() {
 
         var value  = 0;
         var $input = $switcher.find('input');
 
-        if ( $switcher.hasClass('csf--active') ) {
-          $switcher.removeClass('csf--active');
+        if ( $switcher.hasClass('taf--active') ) {
+          $switcher.removeClass('taf--active');
         } else {
           value = 1;
-          $switcher.addClass('csf--active');
+          $switcher.addClass('taf--active');
         }
 
         $input.val(value).trigger('change');
@@ -1700,14 +1700,14 @@
   //
   // Field: tabbed
   //
-  $.fn.csf_field_tabbed = function() {
+  $.fn.taf_field_tabbed = function() {
     return this.each( function() {
 
       var $this     = $(this),
-          $links    = $this.find('.csf-tabbed-nav a'),
-          $contents = $this.find('.csf-tabbed-content');
+          $links    = $this.find('.taf-tabbed-nav a'),
+          $contents = $this.find('.taf-tabbed-content');
 
-      $contents.eq(0).csf_reload_script();
+      $contents.eq(0).taf_reload_script();
 
       $links.on( 'click', function( e ) {
 
@@ -1717,8 +1717,8 @@
             index    = $link.index(),
             $content = $contents.eq(index);
 
-        $link.addClass('csf-tabbed-active').siblings().removeClass('csf-tabbed-active');
-        $content.csf_reload_script();
+        $link.addClass('taf-tabbed-active').siblings().removeClass('taf-tabbed-active');
+        $content.taf_reload_script();
         $content.removeClass('hidden').siblings().addClass('hidden');
 
       });
@@ -1729,15 +1729,15 @@
   //
   // Field: typography
   //
-  $.fn.csf_field_typography = function() {
+  $.fn.taf_field_typography = function() {
     return this.each(function () {
 
       var base          = this;
       var $this         = $(this);
       var loaded_fonts  = [];
-      var webfonts      = csf_typography_json.webfonts;
-      var googlestyles  = csf_typography_json.googlestyles;
-      var defaultstyles = csf_typography_json.defaultstyles;
+      var webfonts      = taf_typography_json.webfonts;
+      var googlestyles  = taf_typography_json.googlestyles;
+      var defaultstyles = taf_typography_json.defaultstyles;
 
       //
       //
@@ -1810,7 +1810,7 @@
 
         });
 
-        $select.append(opts).trigger('csf.change').trigger('chosen:updated');
+        $select.append(opts).trigger('taf.change').trigger('chosen:updated');
 
       };
 
@@ -1820,9 +1820,9 @@
         //
         // Constants
         var selected_styles  = [];
-        var $typography      = $this.find('.csf--typography');
-        var $type            = $this.find('.csf--type');
-        var $styles          = $this.find('.csf--block-font-style');
+        var $typography      = $this.find('.taf--typography');
+        var $type            = $this.find('.taf--type');
+        var $styles          = $this.find('.taf--block-font-style');
         var unit             = $typography.data('unit');
         var line_height_unit = $typography.data('line-height-unit');
         var exclude_fonts    = $typography.data('exclude') ? $typography.data('exclude').split(',') : [];
@@ -1830,7 +1830,7 @@
         //
         //
         // Chosen init
-        if ( $this.find('.csf--chosen').length ) {
+        if ( $this.find('.taf--chosen').length ) {
 
           var $chosen_selects = $this.find('select');
 
@@ -1856,7 +1856,7 @@
         //
         //
         // Font family select
-        var $font_family_select = $this.find('.csf--font-family');
+        var $font_family_select = $this.find('.taf--font-family');
         var first_font_family   = $font_family_select.val();
 
         // Clear default font family select options
@@ -1890,16 +1890,16 @@
         //
         //
         // Font style select
-        var $font_style_block = $this.find('.csf--block-font-style');
+        var $font_style_block = $this.find('.taf--block-font-style');
 
         if ( $font_style_block.length ) {
 
-          var $font_style_select = $this.find('.csf--font-style-select');
+          var $font_style_select = $this.find('.taf--font-style-select');
           var first_style_value  = $font_style_select.val() ? $font_style_select.val().replace(/normal/g, '' ) : '';
 
           //
           // Font Style on on change listener
-          $font_style_select.on('change csf.change', function( event ) {
+          $font_style_select.on('change taf.change', function( event ) {
 
             var style_value = $font_style_select.val();
 
@@ -1913,18 +1913,18 @@
             var font_weight = ( style_value && style_value !== 'italic' && style_value !== 'normal' ) ? style_value.replace('italic', '') : font_normal;
             var font_style  = ( style_value && style_value.substr(-6) === 'italic' ) ? 'italic' : '';
 
-            $this.find('.csf--font-weight').val( font_weight );
-            $this.find('.csf--font-style').val( font_style );
+            $this.find('.taf--font-weight').val( font_weight );
+            $this.find('.taf--font-style').val( font_style );
 
           });
 
           //
           //
           // Extra font style select
-          var $extra_font_style_block = $this.find('.csf--block-extra-styles');
+          var $extra_font_style_block = $this.find('.taf--block-extra-styles');
 
           if ( $extra_font_style_block.length ) {
-            var $extra_font_style_select = $this.find('.csf--extra-styles');
+            var $extra_font_style_select = $this.find('.taf--extra-styles');
             var first_extra_style_value  = $extra_font_style_select.val();
           }
 
@@ -1933,9 +1933,9 @@
         //
         //
         // Subsets select
-        var $subset_block = $this.find('.csf--block-subset');
+        var $subset_block = $this.find('.taf--block-subset');
         if ( $subset_block.length ) {
-          var $subset_select = $this.find('.csf--subset');
+          var $subset_select = $this.find('.taf--subset');
           var first_subset_select_value = $subset_select.val();
           var subset_multi_select = $subset_select.data('multiple') || false;
         }
@@ -1943,12 +1943,12 @@
         //
         //
         // Backup font family
-        var $backup_font_family_block = $this.find('.csf--block-backup-font-family');
+        var $backup_font_family_block = $this.find('.taf--block-backup-font-family');
 
         //
         //
         // Font Family on Change Listener
-        $font_family_select.on('change csf.change', function( event ) {
+        $font_family_select.on('change taf.change', function( event ) {
 
           // Hide subsets on change
           if ( $subset_block.length ) {
@@ -2060,36 +2060,36 @@
           // Update font type input value
           $type.val(type);
 
-        }).trigger('csf.change');
+        }).trigger('taf.change');
 
         //
         //
         // Preview
-        var $preview_block = $this.find('.csf--block-preview');
+        var $preview_block = $this.find('.taf--block-preview');
 
         if ( $preview_block.length ) {
 
-          var $preview = $this.find('.csf--preview');
+          var $preview = $this.find('.taf--preview');
 
           // Set preview styles on change
-          $this.on('change', CSF.helper.debounce( function( event ) {
+          $this.on('change', TAF.helper.debounce( function( event ) {
 
             $preview_block.removeClass('hidden');
 
             var font_family       = $font_family_select.val(),
-                font_weight       = $this.find('.csf--font-weight').val(),
-                font_style        = $this.find('.csf--font-style').val(),
-                font_size         = $this.find('.csf--font-size').val(),
-                font_variant      = $this.find('.csf--font-variant').val(),
-                line_height       = $this.find('.csf--line-height').val(),
-                text_align        = $this.find('.csf--text-align').val(),
-                text_transform    = $this.find('.csf--text-transform').val(),
-                text_decoration   = $this.find('.csf--text-decoration').val(),
-                text_color        = $this.find('.csf--color').val(),
-                word_spacing      = $this.find('.csf--word-spacing').val(),
-                letter_spacing    = $this.find('.csf--letter-spacing').val(),
-                custom_style      = $this.find('.csf--custom-style').val(),
-                type              = $this.find('.csf--type').val();
+                font_weight       = $this.find('.taf--font-weight').val(),
+                font_style        = $this.find('.taf--font-style').val(),
+                font_size         = $this.find('.taf--font-size').val(),
+                font_variant      = $this.find('.taf--font-variant').val(),
+                line_height       = $this.find('.taf--line-height').val(),
+                text_align        = $this.find('.taf--text-align').val(),
+                text_transform    = $this.find('.taf--text-transform').val(),
+                text_decoration   = $this.find('.taf--text-decoration').val(),
+                text_color        = $this.find('.taf--color').val(),
+                word_spacing      = $this.find('.taf--word-spacing').val(),
+                letter_spacing    = $this.find('.taf--letter-spacing').val(),
+                custom_style      = $this.find('.taf--custom-style').val(),
+                type              = $this.find('.taf--type').val();
 
             if ( type === 'google' ) {
               base.load_google_font(font_family, font_weight, font_style);
@@ -2122,9 +2122,9 @@
           // Preview black and white backgrounds trigger
           $preview_block.on('click', function() {
 
-            $preview.toggleClass('csf--black-background');
+            $preview.toggleClass('taf--black-background');
 
-            var $toggle = $preview_block.find('.csf--toggle');
+            var $toggle = $preview_block.find('.taf--toggle');
 
             if ( $toggle.hasClass('fa-toggle-off') ) {
               $toggle.removeClass('fa-toggle-off').addClass('fa-toggle-on');
@@ -2150,15 +2150,15 @@
   //
   // Field: upload
   //
-  $.fn.csf_field_upload = function() {
+  $.fn.taf_field_upload = function() {
     return this.each( function() {
 
       var $this          = $(this),
           $input         = $this.find('input'),
-          $upload_button = $this.find('.csf--button'),
-          $remove_button = $this.find('.csf--remove'),
-          $preview_wrap  = $this.find('.csf--preview'),
-          $preview_src   = $this.find('.csf--src'),
+          $upload_button = $this.find('.taf--button'),
+          $remove_button = $this.find('.taf--remove'),
+          $preview_wrap  = $this.find('.taf--preview'),
+          $preview_src   = $this.find('.taf--src'),
           $library       = $upload_button.data('library') && $upload_button.data('library').split(',') || '',
           wp_media_frame;
 
@@ -2233,15 +2233,15 @@
   //
   // Field: wp_editor
   //
-  $.fn.csf_field_wp_editor = function() {
+  $.fn.taf_field_wp_editor = function() {
     return this.each( function() {
 
-      if ( typeof window.wp.editor === 'undefined' || typeof window.tinyMCEPreInit === 'undefined' || typeof window.tinyMCEPreInit.mceInit.csf_wp_editor === 'undefined' ) {
+      if ( typeof window.wp.editor === 'undefined' || typeof window.tinyMCEPreInit === 'undefined' || typeof window.tinyMCEPreInit.mceInit.taf_wp_editor === 'undefined' ) {
         return;
       }
 
       var $this     = $(this),
-          $editor   = $this.find('.csf-wp-editor'),
+          $editor   = $this.find('.taf-wp-editor'),
           $textarea = $this.find('textarea');
 
       // If there is wp-editor remove it for avoid dupliated wp-editor conflicts.
@@ -2254,14 +2254,14 @@
       }
 
       // Generate a unique id
-      var uid = CSF.helper.uid('csf-editor-');
+      var uid = TAF.helper.uid('taf-editor-');
 
       $textarea.attr('id', uid);
 
       // Get default editor settings
       var default_editor_settings = {
-        tinymce: window.tinyMCEPreInit.mceInit.csf_wp_editor,
-        quicktags: window.tinyMCEPreInit.qtInit.csf_wp_editor
+        tinymce: window.tinyMCEPreInit.mceInit.taf_wp_editor,
+        quicktags: window.tinyMCEPreInit.qtInit.taf_wp_editor
       };
 
       // Get default editor settings
@@ -2290,13 +2290,13 @@
       // Override editor tinymce settings
       if ( field_editor_settings.tinymce === false ) {
         default_editor_settings.tinymce = false;
-        $editor.addClass('csf-no-tinymce');
+        $editor.addClass('taf-no-tinymce');
       }
 
       // Override editor quicktags settings
       if ( field_editor_settings.quicktags === false ) {
         default_editor_settings.quicktags = false;
-        $editor.addClass('csf-no-quicktags');
+        $editor.addClass('taf-no-quicktags');
       }
 
       // Wait until :visible
@@ -2308,19 +2308,19 @@
       });
 
       // Add Media buttons
-      if ( field_editor_settings.media_buttons && window.csf_media_buttons ) {
+      if ( field_editor_settings.media_buttons && window.taf_media_buttons ) {
 
         var $editor_buttons = $editor.find('.wp-media-buttons');
 
         if ( $editor_buttons.length ) {
 
-          $editor_buttons.find('.csf-shortcode-button').data('editor-id', uid);
+          $editor_buttons.find('.taf-shortcode-button').data('editor-id', uid);
 
         } else {
 
-          var $media_buttons = $(window.csf_media_buttons);
+          var $media_buttons = $(window.taf_media_buttons);
 
-          $media_buttons.find('.csf-shortcode-button').data('editor-id', uid);
+          $media_buttons.find('.taf-shortcode-button').data('editor-id', uid);
 
           $editor.prepend( $media_buttons );
 
@@ -2335,16 +2335,16 @@
   //
   // Confirm
   //
-  $.fn.csf_confirm = function() {
+  $.fn.taf_confirm = function() {
     return this.each( function() {
       $(this).on('click', function( e ) {
 
-        var confirm_text   = $(this).data('confirm') || window.csf_vars.i18n.confirm;
+        var confirm_text   = $(this).data('confirm') || window.taf_vars.i18n.confirm;
         var confirm_answer = confirm( confirm_text );
 
         if ( confirm_answer ) {
-          CSF.vars.is_confirm = true;
-          CSF.vars.form_modified = false;
+          TAF.vars.is_confirm = true;
+          TAF.vars.form_modified = false;
         } else {
           e.preventDefault();
           return false;
@@ -2374,12 +2374,12 @@
   //
   // Options Save
   //
-  $.fn.csf_save = function() {
+  $.fn.taf_save = function() {
     return this.each( function() {
 
       var $this    = $(this),
-          $buttons = $('.csf-save'),
-          $panel   = $('.csf-options'),
+          $buttons = $('.taf-save'),
+          $panel   = $('.taf-options'),
           flooding = false,
           timeout;
 
@@ -2392,55 +2392,55 @@
 
           $buttons.attr('value', $text);
 
-          if ( $this.hasClass('csf-save-ajax') ) {
+          if ( $this.hasClass('taf-save-ajax') ) {
 
             e.preventDefault();
 
-            $panel.addClass('csf-saving');
+            $panel.addClass('taf-saving');
             $buttons.prop('disabled', true);
 
-            window.wp.ajax.post( 'csf_'+ $panel.data('unique') +'_ajax_save', {
-              data: $('#csf-form').serializeJSONCSF()
+            window.wp.ajax.post( 'taf_'+ $panel.data('unique') +'_ajax_save', {
+              data: $('#taf-form').serializeJSONTAF()
             })
             .done( function( response ) {
 
               // clear errors
-              $('.csf-error').remove();
+              $('.taf-error').remove();
 
               if ( Object.keys( response.errors ).length ) {
 
-                var error_icon = '<i class="csf-label-error csf-error">!</i>';
+                var error_icon = '<i class="taf-label-error taf-error">!</i>';
 
                 $.each(response.errors, function( key, error_message ) {
 
                   var $field = $('[data-depend-id="'+ key +'"]'),
-                      $link  = $('a[href="#tab='+ $field.closest('.csf-section').data('section-id') +'"]' ),
-                      $tab   = $link.closest('.csf-tab-item');
+                      $link  = $('a[href="#tab='+ $field.closest('.taf-section').data('section-id') +'"]' ),
+                      $tab   = $link.closest('.taf-tab-item');
 
-                  $field.closest('.csf-fieldset').append( '<p class="csf-error csf-error-text">'+ error_message +'</p>' );
+                  $field.closest('.taf-fieldset').append( '<p class="taf-error taf-error-text">'+ error_message +'</p>' );
 
-                  if ( !$link.find('.csf-error').length ) {
+                  if ( !$link.find('.taf-error').length ) {
                     $link.append( error_icon );
                   }
 
-                  if ( !$tab.find('.csf-arrow .csf-error').length ) {
-                    $tab.find('.csf-arrow').append( error_icon );
+                  if ( !$tab.find('.taf-arrow .taf-error').length ) {
+                    $tab.find('.taf-arrow').append( error_icon );
                   }
 
                 });
 
               }
 
-              $panel.removeClass('csf-saving');
+              $panel.removeClass('taf-saving');
               $buttons.prop('disabled', false).attr('value', $value);
               flooding = false;
 
-              CSF.vars.form_modified = false;
-              CSF.vars.$form_warning.hide();
+              TAF.vars.form_modified = false;
+              TAF.vars.$form_warning.hide();
 
               clearTimeout(timeout);
 
-              var $result_success = $('.csf-form-success');
+              var $result_success = $('.taf-form-success');
               $result_success.empty().append(response.notice).fadeIn('fast', function() {
                 timeout = setTimeout( function() {
                   $result_success.fadeOut('fast');
@@ -2454,7 +2454,7 @@
 
           } else {
 
-            CSF.vars.form_modified = false;
+            TAF.vars.form_modified = false;
 
           }
 
@@ -2470,35 +2470,35 @@
   //
   // Option Framework
   //
-  $.fn.csf_options = function() {
+  $.fn.taf_options = function() {
     return this.each( function() {
 
       var $this         = $(this),
-          $content      = $this.find('.csf-content'),
-          $form_success = $this.find('.csf-form-success'),
-          $form_warning = $this.find('.csf-form-warning'),
-          $save_button  = $this.find('.csf-header .csf-save');
+          $content      = $this.find('.taf-content'),
+          $form_success = $this.find('.taf-form-success'),
+          $form_warning = $this.find('.taf-form-warning'),
+          $save_button  = $this.find('.taf-header .taf-save');
 
-      CSF.vars.$form_warning = $form_warning;
+      TAF.vars.$form_warning = $form_warning;
 
       // Shows a message white leaving theme options without saving
       if ( $form_warning.length ) {
 
         window.onbeforeunload = function() {
-          return ( CSF.vars.form_modified ) ? true : undefined;
+          return ( TAF.vars.form_modified ) ? true : undefined;
         };
 
         $content.on('change keypress', ':input', function() {
-          if ( !CSF.vars.form_modified ) {
+          if ( !TAF.vars.form_modified ) {
             $form_success.hide();
             $form_warning.fadeIn('fast');
-            CSF.vars.form_modified = true;
+            TAF.vars.form_modified = true;
           }
         });
 
       }
 
-      if ( $form_success.hasClass('csf-form-show') ) {
+      if ( $form_success.hasClass('taf-form-show') ) {
         setTimeout( function() {
           $form_success.fadeOut('fast');
         }, 1000);
@@ -2518,7 +2518,7 @@
   //
   // Taxonomy Framework
   //
-  $.fn.csf_taxonomy = function() {
+  $.fn.taf_taxonomy = function() {
     return this.each( function() {
 
       var $this = $(this),
@@ -2527,7 +2527,7 @@
       if ( $form.attr('id') === 'addtag' ) {
 
         var $submit = $form.find('#submit'),
-            $cloned = $this.children('.csf-field').csf_clone();
+            $cloned = $this.children('.taf-field').taf_clone();
 
         $submit.on( 'click', function() {
 
@@ -2539,9 +2539,9 @@
 
             $this.html( $cloned );
 
-            $cloned = $cloned.csf_clone();
+            $cloned = $cloned.taf_clone();
 
-            $this.csf_reload_script();
+            $this.taf_reload_script();
 
           }
 
@@ -2555,7 +2555,7 @@
   //
   // Shortcode Framework
   //
-  $.fn.csf_shortcode = function() {
+  $.fn.taf_shortcode = function() {
 
     var base = this;
 
@@ -2664,10 +2664,10 @@
     return this.each( function() {
 
       var $modal   = $(this),
-          $load    = $modal.find('.csf-modal-load'),
-          $content = $modal.find('.csf-modal-content'),
-          $insert  = $modal.find('.csf-modal-insert'),
-          $loading = $modal.find('.csf-modal-loading'),
+          $load    = $modal.find('.taf-modal-load'),
+          $content = $modal.find('.taf-modal-content'),
+          $insert  = $modal.find('.taf-modal-insert'),
+          $loading = $modal.find('.taf-modal-loading'),
           $select  = $modal.find('select'),
           modal_id = $modal.data('modal-id'),
           nonce    = $modal.data('nonce'),
@@ -2681,7 +2681,7 @@
           $cloned,
           $button;
 
-      $(document).on('click', '.csf-shortcode-button[data-modal-id="'+ modal_id +'"]', function( e ) {
+      $(document).on('click', '.taf-shortcode-button[data-modal-id="'+ modal_id +'"]', function( e ) {
 
         e.preventDefault();
 
@@ -2693,7 +2693,7 @@
         $modal.removeClass('hidden');
 
         // single usage trigger first shortcode
-        if ( $modal.hasClass('csf-shortcode-single') && sc_name === undefined ) {
+        if ( $modal.hasClass('taf-shortcode-single') && sc_name === undefined ) {
           $select.trigger('change');
         }
 
@@ -2715,7 +2715,7 @@
 
           $loading.show();
 
-          window.wp.ajax.post( 'csf-get-shortcode-'+ modal_id, {
+          window.wp.ajax.post( 'taf-get-shortcode-'+ modal_id, {
             shortcode_key: sc_key,
             nonce: nonce
           })
@@ -2727,10 +2727,10 @@
 
             $insert.parent().removeClass('hidden');
 
-            $cloned = $appended.find('.csf--repeat-shortcode').csf_clone();
+            $cloned = $appended.find('.taf--repeat-shortcode').taf_clone();
 
-            $appended.csf_reload_script();
-            $appended.find('.csf-fields').csf_reload_script();
+            $appended.taf_reload_script();
+            $appended.find('.taf-fields').taf_reload_script();
 
           });
 
@@ -2749,7 +2749,7 @@
         if ( $insert.prop('disabled') || $insert.attr('disabled') ) { return; }
 
         var shortcode = '';
-        var serialize = $modal.find('.csf-field:not(.csf-depend-on)').find(':input:not(.ignore)').serializeObjectCSF();
+        var serialize = $modal.find('.taf-field:not(.taf-depend-on)').find(':input:not(.ignore)').serializeObjectTAF();
 
         switch ( sc_view ) {
 
@@ -2787,8 +2787,8 @@
 
         if ( gutenberg_id ) {
 
-          var content = window.csf_gutenberg_props.attributes.hasOwnProperty('shortcode') ? window.csf_gutenberg_props.attributes.shortcode : '';
-          window.csf_gutenberg_props.setAttributes({shortcode: content + shortcode});
+          var content = window.taf_gutenberg_props.attributes.hasOwnProperty('shortcode') ? window.taf_gutenberg_props.attributes.shortcode : '';
+          window.taf_gutenberg_props.setAttributes({shortcode: content + shortcode});
 
         } else if ( editor_id ) {
 
@@ -2805,31 +2805,31 @@
 
       });
 
-      $modal.on('click', '.csf--repeat-button', function( e ) {
+      $modal.on('click', '.taf--repeat-button', function( e ) {
 
         e.preventDefault();
 
-        var $repeatable = $modal.find('.csf--repeatable');
-        var $new_clone  = $cloned.csf_clone();
-        var $remove_btn = $new_clone.find('.csf-repeat-remove');
+        var $repeatable = $modal.find('.taf--repeatable');
+        var $new_clone  = $cloned.taf_clone();
+        var $remove_btn = $new_clone.find('.taf-repeat-remove');
 
         var $appended = $new_clone.appendTo( $repeatable );
 
-        $new_clone.find('.csf-fields').csf_reload_script();
+        $new_clone.find('.taf-fields').taf_reload_script();
 
-        CSF.helper.name_nested_replace( $modal.find('.csf--repeat-shortcode'), sc_group );
+        TAF.helper.name_nested_replace( $modal.find('.taf--repeat-shortcode'), sc_group );
 
         $remove_btn.on('click', function() {
 
           $new_clone.remove();
 
-          CSF.helper.name_nested_replace( $modal.find('.csf--repeat-shortcode'), sc_group );
+          TAF.helper.name_nested_replace( $modal.find('.taf--repeat-shortcode'), sc_group );
 
         });
 
       });
 
-      $modal.on('click', '.csf-modal-close, .csf-modal-overlay', function() {
+      $modal.on('click', '.taf-modal-close, .taf-modal-overlay', function() {
         $modal.addClass('hidden');
       });
 
@@ -2863,7 +2863,7 @@
 
   }
 
-  CSF.funcs.parse_color = function( color ) {
+  TAF.funcs.parse_color = function( color ) {
 
     var value = color.replace(/\s+/g, ''),
         trans = ( value.indexOf('rgba') !== -1 ) ? parseFloat( value.replace(/^.*,(.+)\)/, '$1') * 100 ) : 100,
@@ -2873,12 +2873,12 @@
 
   };
 
-  $.fn.csf_color = function() {
+  $.fn.taf_color = function() {
     return this.each( function() {
 
       var $input        = $(this),
-          picker_color  = CSF.funcs.parse_color( $input.val() ),
-          palette_color = window.csf_vars.color_palette.length ? window.csf_vars.color_palette : true,
+          picker_color  = TAF.funcs.parse_color( $input.val() ),
+          palette_color = window.taf_vars.color_palette.length ? window.taf_vars.color_palette : true,
           $container;
 
       // Destroy and Reinit
@@ -2892,8 +2892,8 @@
 
           var ui_color_value = ui.color.toString();
 
-          $container.removeClass('csf--transparent-active');
-          $container.find('.csf--transparent-offset').css('background-color', ui_color_value);
+          $container.removeClass('taf--transparent-active');
+          $container.find('.taf--transparent-offset').css('background-color', ui_color_value);
           $input.val(ui_color_value).trigger('change');
 
         },
@@ -2902,28 +2902,28 @@
           $container = $input.closest('.wp-picker-container');
 
           var a8cIris = $input.data('a8cIris'),
-              $transparent_wrap = $('<div class="csf--transparent-wrap">' +
-                                '<div class="csf--transparent-slider"></div>' +
-                                '<div class="csf--transparent-offset"></div>' +
-                                '<div class="csf--transparent-text"></div>' +
-                                '<div class="csf--transparent-button">transparent <i class="fas fa-toggle-off"></i></div>' +
+              $transparent_wrap = $('<div class="taf--transparent-wrap">' +
+                                '<div class="taf--transparent-slider"></div>' +
+                                '<div class="taf--transparent-offset"></div>' +
+                                '<div class="taf--transparent-text"></div>' +
+                                '<div class="taf--transparent-button">transparent <i class="fas fa-toggle-off"></i></div>' +
                                 '</div>').appendTo( $container.find('.wp-picker-holder') ),
-              $transparent_slider = $transparent_wrap.find('.csf--transparent-slider'),
-              $transparent_text   = $transparent_wrap.find('.csf--transparent-text'),
-              $transparent_offset = $transparent_wrap.find('.csf--transparent-offset'),
-              $transparent_button = $transparent_wrap.find('.csf--transparent-button');
+              $transparent_slider = $transparent_wrap.find('.taf--transparent-slider'),
+              $transparent_text   = $transparent_wrap.find('.taf--transparent-text'),
+              $transparent_offset = $transparent_wrap.find('.taf--transparent-offset'),
+              $transparent_button = $transparent_wrap.find('.taf--transparent-button');
 
           if ( $input.val() === 'transparent' ) {
-            $container.addClass('csf--transparent-active');
+            $container.addClass('taf--transparent-active');
           }
 
           $transparent_button.on('click', function() {
             if ( $input.val() !== 'transparent' ) {
               $input.val('transparent').trigger('change').removeClass('iris-error');
-              $container.addClass('csf--transparent-active');
+              $container.addClass('taf--transparent-active');
             } else {
               $input.val( a8cIris._color.toString() ).trigger('change');
-              $container.removeClass('csf--transparent-active');
+              $container.removeClass('taf--transparent-active');
             }
           });
 
@@ -2953,14 +2953,14 @@
                 a8cIris._color._alpha = 1;
                 $transparent_text.text('');
                 $transparent_slider.slider('option', 'value', 100);
-                $container.removeClass('csf--transparent-active');
+                $container.removeClass('taf--transparent-active');
                 $input.trigger('change');
 
               });
 
               $container.on('click', '.wp-picker-default', function() {
 
-                var default_color = CSF.funcs.parse_color( $input.data('default-color') ),
+                var default_color = TAF.funcs.parse_color( $input.data('default-color') ),
                     default_value = parseFloat( default_color.transparent / 100 ),
                     default_text  = default_value < 1 ? default_value : '';
 
@@ -2970,7 +2970,7 @@
 
                 if ( default_color.value === 'transparent' ) {
                   $input.removeClass('iris-error');
-                  $container.addClass('csf--transparent-active');
+                  $container.addClass('taf--transparent-active');
                 }
 
               });
@@ -2986,20 +2986,20 @@
   //
   // ChosenJS
   //
-  $.fn.csf_chosen = function() {
+  $.fn.taf_chosen = function() {
     return this.each( function() {
 
       var $this       = $(this),
           $inited     = $this.parent().find('.chosen-container'),
-          is_sortable = $this.hasClass('csf-chosen-sortable') || false,
-          is_ajax     = $this.hasClass('csf-chosen-ajax') || false,
+          is_sortable = $this.hasClass('taf-chosen-sortable') || false,
+          is_ajax     = $this.hasClass('taf-chosen-ajax') || false,
           is_multiple = $this.attr('multiple') || false,
           set_width   = is_multiple ? '100%' : 'auto',
           set_options = $.extend({
             allow_single_deselect: true,
             disable_search_threshold: 10,
             width: set_width,
-            no_results_text: window.csf_vars.i18n.no_results_text,
+            no_results_text: window.taf_vars.i18n.no_results_text,
           }, $this.data('chosen-settings'));
 
       if ( $inited.length ) {
@@ -3019,12 +3019,12 @@
           width: '100%',
           min_length: 3,
           type_delay: 500,
-          typing_text: window.csf_vars.i18n.typing_text,
-          searching_text: window.csf_vars.i18n.searching_text,
-          no_results_text: window.csf_vars.i18n.no_results_text,
+          typing_text: window.taf_vars.i18n.typing_text,
+          searching_text: window.taf_vars.i18n.searching_text,
+          no_results_text: window.taf_vars.i18n.no_results_text,
         }, $this.data('chosen-settings'));
 
-        $this.CSFAjaxChosen(set_ajax_options);
+        $this.TAFAjaxChosen(set_ajax_options);
 
       } else {
 
@@ -3035,7 +3035,7 @@
       // Chosen keep options order
       if ( is_multiple ) {
 
-        var $hidden_select = $this.parent().find('.csf-hide-select');
+        var $hidden_select = $this.parent().find('.taf-hide-select');
         var $hidden_value  = $hidden_select.val() || [];
 
         $this.on('change', function(obj, result) {
@@ -3056,7 +3056,7 @@
         });
 
         // Chosen order abstract
-        $this.CSFChosenOrder($hidden_value, true);
+        $this.TAFChosenOrder($hidden_value, true);
 
       }
 
@@ -3085,7 +3085,7 @@
 
             var select_options = '';
             var chosen_object  = $this.data('chosen');
-            var $prev_select   = $this.parent().find('.csf-hide-select');
+            var $prev_select   = $this.parent().find('.taf-hide-select');
 
             $chosen_choices.find('.search-choice-close').each( function() {
               var option_array_index = $(this).data('option-array-index');
@@ -3111,12 +3111,12 @@
   //
   // Helper Checkbox Checker
   //
-  $.fn.csf_checkbox = function() {
+  $.fn.taf_checkbox = function() {
     return this.each( function() {
 
       var $this     = $(this),
-          $input    = $this.find('.csf--input'),
-          $checkbox = $this.find('.csf--checkbox');
+          $input    = $this.find('.taf--input'),
+          $checkbox = $this.find('.taf--checkbox');
 
       $checkbox.on('click', function() {
         $input.val( Number( $checkbox.prop('checked') ) ).trigger('change');
@@ -3128,14 +3128,14 @@
   //
   // Helper Check/Uncheck All
   //
-  $.fn.csf_checkbox_all = function() {
+  $.fn.taf_checkbox_all = function() {
     return this.each( function() {
 
       var $this = $(this);
 
       $this.on('click', function() {
 
-        var $inputs = $this.closest('.csf-field-checkbox').find(':input'),
+        var $inputs = $this.closest('.taf-field-checkbox').find(':input'),
             uncheck = false;
 
         $inputs.each(function() {
@@ -3162,11 +3162,11 @@
   //
   // Siblings
   //
-  $.fn.csf_siblings = function() {
+  $.fn.taf_siblings = function() {
     return this.each( function() {
 
       var $this     = $(this),
-          $siblings = $this.find('.csf--sibling'),
+          $siblings = $this.find('.taf--sibling'),
           multiple  = $this.data('multiple') || false;
 
       $siblings.on('click', function() {
@@ -3175,11 +3175,11 @@
 
         if ( multiple ) {
 
-          if ( $sibling.hasClass('csf--active') ) {
-            $sibling.removeClass('csf--active');
+          if ( $sibling.hasClass('taf--active') ) {
+            $sibling.removeClass('taf--active');
             $sibling.find('input').prop('checked', false).trigger('change');
           } else {
-            $sibling.addClass('csf--active');
+            $sibling.addClass('taf--active');
             $sibling.find('input').prop('checked', true).trigger('change');
           }
 
@@ -3187,7 +3187,7 @@
 
           $this.find('input').prop('checked', false);
           $sibling.find('input').prop('checked', true).trigger('change');
-          $sibling.addClass('csf--active').siblings().removeClass('csf--active');
+          $sibling.addClass('taf--active').siblings().removeClass('taf--active');
 
         }
 
@@ -3199,7 +3199,7 @@
   //
   // Help Tooltip
   //
-  $.fn.csf_help = function() {
+  $.fn.taf_help = function() {
     return this.each( function() {
 
       var $this = $(this),
@@ -3209,8 +3209,8 @@
       $this.on({
         mouseenter: function() {
 
-          $tooltip = $( '<div class="csf-tooltip"></div>' ).html( $this.find('.csf-help-text').html() ).appendTo('body');
-          offset_left = ( CSF.vars.is_rtl ) ? ( $this.offset().left + 24 ) : ( $this.offset().left - $tooltip.outerWidth() );
+          $tooltip = $( '<div class="taf-tooltip"></div>' ).html( $this.find('.taf-help-text').html() ).appendTo('body');
+          offset_left = ( TAF.vars.is_rtl ) ? ( $this.offset().left + 24 ) : ( $this.offset().left - $tooltip.outerWidth() );
 
           $tooltip.css({
             top: $this.offset().top - ( ( $tooltip.outerHeight() / 2 ) - 14 ),
@@ -3234,11 +3234,11 @@
   //
   // Customize Refresh
   //
-  $.fn.csf_customizer_refresh = function() {
+  $.fn.taf_customizer_refresh = function() {
     return this.each( function() {
 
       var $this    = $(this),
-          $complex = $this.closest('.csf-customize-complex');
+          $complex = $this.closest('.taf-customize-complex');
 
       if ( $complex.length ) {
 
@@ -3250,7 +3250,7 @@
 
         var $input    = $complex.find(':input'),
             option_id = $complex.data('option-id'),
-            obj       = $input.serializeObjectCSF(),
+            obj       = $input.serializeObjectTAF(),
             data      = ( ! $.isEmptyObject(obj) && obj[unique_id] && obj[unique_id][option_id] ) ? obj[unique_id][option_id] : '',
             control   = window.wp.customize.control(unique_id +'['+ option_id +']');
 
@@ -3265,7 +3265,7 @@
 
       }
 
-      $(document).trigger('csf-customizer-refresh', $this);
+      $(document).trigger('taf-customizer-refresh', $this);
 
     });
   };
@@ -3273,7 +3273,7 @@
   //
   // Customize Listen Form Elements
   //
-  $.fn.csf_customizer_listen = function( options ) {
+  $.fn.taf_customizer_listen = function( options ) {
 
     var settings = $.extend({
       closest: false,
@@ -3283,7 +3283,7 @@
 
       if ( window.wp.customize === undefined ) { return; }
 
-      var $this     = ( settings.closest ) ? $(this).closest('.csf-customize-complex') : $(this),
+      var $this     = ( settings.closest ) ? $(this).closest('.taf-customize-complex') : $(this),
           $input    = $this.find(':input'),
           unique_id = $this.data('unique-id'),
           option_id = $this.data('option-id');
@@ -3292,9 +3292,9 @@
         return;
       }
 
-      $input.on('change keyup csf.change', function() {
+      $input.on('change keyup taf.change', function() {
 
-        var obj = $this.find(':input').serializeObjectCSF();
+        var obj = $this.find(':input').serializeObjectTAF();
         var val = ( !$.isEmptyObject(obj) && obj[unique_id] && obj[unique_id][option_id] ) ? obj[unique_id][option_id] : '';
 
         window.wp.customize.control( unique_id +'['+ option_id +']' ).setting.set( val );
@@ -3313,13 +3313,13 @@
 
     if ( $this.hasClass('open') && !$this.data('inited') ) {
 
-      var $fields  = $this.find('.csf-customize-field');
-      var $complex = $this.find('.csf-customize-complex');
+      var $fields  = $this.find('.taf-customize-field');
+      var $complex = $this.find('.taf-customize-complex');
 
       if ( $fields.length ) {
-        $this.csf_dependency();
-        $fields.csf_reload_script({dependency: false});
-        $complex.csf_customizer_listen();
+        $this.taf_dependency();
+        $fields.taf_reload_script({dependency: false});
+        $complex.taf_customizer_listen();
       }
 
       $this.data('inited', true);
@@ -3331,45 +3331,45 @@
   //
   // Window on resize
   //
-  CSF.vars.$window.on('resize csf.resize', CSF.helper.debounce( function( event ) {
+  TAF.vars.$window.on('resize taf.resize', TAF.helper.debounce( function( event ) {
 
-    var window_width = navigator.userAgent.indexOf('AppleWebKit/') > -1 ? CSF.vars.$window.width() : window.innerWidth;
+    var window_width = navigator.userAgent.indexOf('AppleWebKit/') > -1 ? TAF.vars.$window.width() : window.innerWidth;
 
-    if ( window_width <= 782 && !CSF.vars.onloaded ) {
-      $('.csf-section').csf_reload_script();
-      CSF.vars.onloaded  = true;
+    if ( window_width <= 782 && !TAF.vars.onloaded ) {
+      $('.taf-section').taf_reload_script();
+      TAF.vars.onloaded  = true;
     }
 
-  }, 200)).trigger('csf.resize');
+  }, 200)).trigger('taf.resize');
 
   //
   // Widgets Framework
   //
-  $.fn.csf_widgets = function() {
+  $.fn.taf_widgets = function() {
     return this.each( function() {
 
       $(document).on('widget-added widget-updated', function( event, $widget ) {
 
-        var $fields = $widget.find('.csf-fields');
+        var $fields = $widget.find('.taf-fields');
 
         if ( $fields.length ) {
-          $fields.csf_reload_script();
+          $fields.taf_reload_script();
         }
 
       });
 
       $(document).on('click', '.widget-top', function( event ) {
 
-        var $fields = $(this).parent().find('.csf-fields');
+        var $fields = $(this).parent().find('.taf-fields');
 
         if ( $fields.length ) {
-          $fields.csf_reload_script();
+          $fields.taf_reload_script();
         }
 
       });
 
       $('.widgets-sortables, .control-section-sidebar').on('sortstop', function( event, ui ) {
-        ui.item.find('.csf-fields').csf_reload_script_retry();
+        ui.item.find('.taf-fields').taf_reload_script_retry();
       });
 
     });
@@ -3378,17 +3378,17 @@
   //
   // Nav Menu Options Framework
   //
-  $.fn.csf_nav_menu = function() {
+  $.fn.taf_nav_menu = function() {
     return this.each( function() {
 
       var $navmenu = $(this);
 
       $navmenu.on('click', 'a.item-edit', function() {
-        $(this).closest('li.menu-item').find('.csf-fields').csf_reload_script();
+        $(this).closest('li.menu-item').find('.taf-fields').taf_reload_script();
       });
 
       $navmenu.on('sortstop', function( event, ui ) {
-        ui.item.find('.csf-fields').csf_reload_script_retry();
+        ui.item.find('.taf-fields').taf_reload_script_retry();
       });
 
     });
@@ -3397,13 +3397,13 @@
   //
   // Retry Plugins
   //
-  $.fn.csf_reload_script_retry = function() {
+  $.fn.taf_reload_script_retry = function() {
     return this.each( function() {
 
       var $this = $(this);
 
       if ( $this.data('inited') ) {
-        $this.children('.csf-field-wp_editor').csf_field_wp_editor();
+        $this.children('.taf-field-wp_editor').taf_field_wp_editor();
       }
 
     });
@@ -3412,7 +3412,7 @@
   //
   // Reload Plugins
   //
-  $.fn.csf_reload_script = function( options ) {
+  $.fn.taf_reload_script = function( options ) {
 
     var settings = $.extend({
       dependency: true,
@@ -3426,60 +3426,60 @@
       if ( !$this.data('inited') ) {
 
         // Field plugins
-        $this.children('.csf-field-accordion').csf_field_accordion();
-        $this.children('.csf-field-backup').csf_field_backup();
-        $this.children('.csf-field-background').csf_field_background();
-        $this.children('.csf-field-code_editor').csf_field_code_editor();
-        $this.children('.csf-field-date').csf_field_date();
-        $this.children('.csf-field-datetime').csf_field_datetime();
-        $this.children('.csf-field-fieldset').csf_field_fieldset();
-        $this.children('.csf-field-gallery').csf_field_gallery();
-        $this.children('.csf-field-group').csf_field_group();
-        $this.children('.csf-field-icon').csf_field_icon();
-        $this.children('.csf-field-link').csf_field_link();
-        $this.children('.csf-field-media').csf_field_media();
-        $this.children('.csf-field-map').csf_field_map();
-        $this.children('.csf-field-repeater').csf_field_repeater();
-        $this.children('.csf-field-slider').csf_field_slider();
-        $this.children('.csf-field-sortable').csf_field_sortable();
-        $this.children('.csf-field-sorter').csf_field_sorter();
-        $this.children('.csf-field-spinner').csf_field_spinner();
-        $this.children('.csf-field-switcher').csf_field_switcher();
-        $this.children('.csf-field-tabbed').csf_field_tabbed();
-        $this.children('.csf-field-typography').csf_field_typography();
-        $this.children('.csf-field-upload').csf_field_upload();
-        $this.children('.csf-field-wp_editor').csf_field_wp_editor();
+        $this.children('.taf-field-accordion').taf_field_accordion();
+        $this.children('.taf-field-backup').taf_field_backup();
+        $this.children('.taf-field-background').taf_field_background();
+        $this.children('.taf-field-code_editor').taf_field_code_editor();
+        $this.children('.taf-field-date').taf_field_date();
+        $this.children('.taf-field-datetime').taf_field_datetime();
+        $this.children('.taf-field-fieldset').taf_field_fieldset();
+        $this.children('.taf-field-gallery').taf_field_gallery();
+        $this.children('.taf-field-group').taf_field_group();
+        $this.children('.taf-field-icon').taf_field_icon();
+        $this.children('.taf-field-link').taf_field_link();
+        $this.children('.taf-field-media').taf_field_media();
+        $this.children('.taf-field-map').taf_field_map();
+        $this.children('.taf-field-repeater').taf_field_repeater();
+        $this.children('.taf-field-slider').taf_field_slider();
+        $this.children('.taf-field-sortable').taf_field_sortable();
+        $this.children('.taf-field-sorter').taf_field_sorter();
+        $this.children('.taf-field-spinner').taf_field_spinner();
+        $this.children('.taf-field-switcher').taf_field_switcher();
+        $this.children('.taf-field-tabbed').taf_field_tabbed();
+        $this.children('.taf-field-typography').taf_field_typography();
+        $this.children('.taf-field-upload').taf_field_upload();
+        $this.children('.taf-field-wp_editor').taf_field_wp_editor();
 
         // Field colors
-        $this.children('.csf-field-border').find('.csf-color').csf_color();
-        $this.children('.csf-field-background').find('.csf-color').csf_color();
-        $this.children('.csf-field-color').find('.csf-color').csf_color();
-        $this.children('.csf-field-color_group').find('.csf-color').csf_color();
-        $this.children('.csf-field-link_color').find('.csf-color').csf_color();
-        $this.children('.csf-field-typography').find('.csf-color').csf_color();
+        $this.children('.taf-field-border').find('.taf-color').taf_color();
+        $this.children('.taf-field-background').find('.taf-color').taf_color();
+        $this.children('.taf-field-color').find('.taf-color').taf_color();
+        $this.children('.taf-field-color_group').find('.taf-color').taf_color();
+        $this.children('.taf-field-link_color').find('.taf-color').taf_color();
+        $this.children('.taf-field-typography').find('.taf-color').taf_color();
 
         // Field chosenjs
-        $this.children('.csf-field-select').find('.csf-chosen').csf_chosen();
+        $this.children('.taf-field-select').find('.taf-chosen').taf_chosen();
 
         // Field Checkbox
-        $this.children('.csf-field-checkbox').find('.csf-checkbox').csf_checkbox();
-        $this.children('.csf-field-checkbox').find('.csf-checkbox-all').csf_checkbox_all();
+        $this.children('.taf-field-checkbox').find('.taf-checkbox').taf_checkbox();
+        $this.children('.taf-field-checkbox').find('.taf-checkbox-all').taf_checkbox_all();
 
         // Field Siblings
-        $this.children('.csf-field-button_set').find('.csf-siblings').csf_siblings();
-        $this.children('.csf-field-image_select').find('.csf-siblings').csf_siblings();
-        $this.children('.csf-field-palette').find('.csf-siblings').csf_siblings();
+        $this.children('.taf-field-button_set').find('.taf-siblings').taf_siblings();
+        $this.children('.taf-field-image_select').find('.taf-siblings').taf_siblings();
+        $this.children('.taf-field-palette').find('.taf-siblings').taf_siblings();
 
         // Help Tooptip
-        $this.children('.csf-field').find('.csf-help').csf_help();
+        $this.children('.taf-field').find('.taf-help').taf_help();
 
         if ( settings.dependency ) {
-          $this.csf_dependency();
+          $this.taf_dependency();
         }
 
         $this.data('inited', true);
 
-        $(document).trigger('csf-reload-script', $this);
+        $(document).trigger('taf-reload-script', $this);
 
       }
 
@@ -3491,22 +3491,22 @@
   //
   $(document).ready( function() {
 
-    $('.csf-save').csf_save();
-    $('.csf-options').csf_options();
-    $('.csf-sticky-header').csf_sticky();
-    $('.csf-nav-options').csf_nav_options();
-    $('.csf-nav-metabox').csf_nav_metabox();
-    $('.csf-taxonomy').csf_taxonomy();
-    $('.csf-page-templates').csf_page_templates();
-    $('.csf-post-formats').csf_post_formats();
-    $('.csf-shortcode').csf_shortcode();
-    $('.csf-search').csf_search();
-    $('.csf-confirm').csf_confirm();
-    $('.csf-expand-all').csf_expand_all();
-    $('.csf-onload').csf_reload_script();
-    $('#widgets-editor').csf_widgets();
-    $('#widgets-right').csf_widgets();
-    $('#menu-to-edit').csf_nav_menu();
+    $('.taf-save').taf_save();
+    $('.taf-options').taf_options();
+    $('.taf-sticky-header').taf_sticky();
+    $('.taf-nav-options').taf_nav_options();
+    $('.taf-nav-metabox').taf_nav_metabox();
+    $('.taf-taxonomy').taf_taxonomy();
+    $('.taf-page-templates').taf_page_templates();
+    $('.taf-post-formats').taf_post_formats();
+    $('.taf-shortcode').taf_shortcode();
+    $('.taf-search').taf_search();
+    $('.taf-confirm').taf_confirm();
+    $('.taf-expand-all').taf_expand_all();
+    $('.taf-onload').taf_reload_script();
+    $('#widgets-editor').taf_widgets();
+    $('#widgets-right').taf_widgets();
+    $('#menu-to-edit').taf_nav_menu();
 
   });
 

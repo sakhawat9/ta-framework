@@ -8,14 +8,14 @@ $prefix = '_prefix_menu_options';
 //
 // Create menu options
 //
-CSF::createNavMenuOptions( $prefix, array(
+TAF::createNavMenuOptions( $prefix, array(
   'data_type' => 'serialize'
 ) );
 
 //
 // Create a section
 //
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'fields' => array(
 
     //

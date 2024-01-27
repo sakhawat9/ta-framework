@@ -5,9 +5,9 @@
 /**
  * 02. 01. Theme Dark
  */
-.csf-theme-dark{
+.taf-theme-dark{
 
-  .csf-header-inner{
+  .taf-header-inner{
     background-color: #050505;
 
     h1{
@@ -19,7 +19,7 @@
     }
   }
 
-  .csf-expand-all{
+  .taf-expand-all{
     color: #999;
     background-color: #222;
 
@@ -29,7 +29,7 @@
     }
   }
 
-  .csf-search{
+  .taf-search{
 
     input{
       color: #fff;
@@ -45,7 +45,7 @@
     }
   }
 
-  .csf-nav{
+  .taf-nav{
 
     ul{
 
@@ -61,7 +61,7 @@
           }
         }
 
-        .csf-active{
+        .taf-active{
           color: #fff;
           background-color: #111;
         }
@@ -76,7 +76,7 @@
             background-color: #191919;
           }
 
-          .csf-active{
+          .taf-active{
             background-color: #101010;
           }
         }
@@ -92,7 +92,7 @@
     }
   }
 
-  .csf-nav-normal{
+  .taf-nav-normal{
 
     ul{
 
@@ -103,7 +103,7 @@
           border-bottom-style: solid;
         }
 
-        .csf-active:after{
+        .taf-active:after{
           content: " ";
           position: absolute;
           right: 0;
@@ -120,7 +120,7 @@
     }
   }
 
-  .csf-nav-inline{
+  .taf-nav-inline{
     background-color: #222;
 
     ul{
@@ -133,7 +133,7 @@
           border-right-style: solid;
         }
 
-        .csf-active:after{
+        .taf-active:after{
           content: " ";
           position: absolute;
           left: 50%;
@@ -150,11 +150,11 @@
     }
   }
 
-  .csf-nav-background{
+  .taf-nav-background{
     background-color: #222;
   }
 
-  .csf-footer{
+  .taf-footer{
     color: #555;
     background-color: #050505;
   }
@@ -163,14 +163,14 @@
 /**
  * 02. 02. Theme Light
  */
-.csf-theme-light{
+.taf-theme-light{
 
-  .csf-container{
+  .taf-container{
     border: 1px solid #ccd0d4;
     box-shadow: 0 0 15 rgba(0,0,0,0.04);
   }
 
-  .csf-header-inner{
+  .taf-header-inner{
     border-bottom: 1px solid #ccd0d4;
     background-color: #f5f5f5;
     background: linear-gradient(#fefefe, #f5f5f5);
@@ -183,7 +183,7 @@
     }
   }
 
-  .csf-expand-all{
+  .taf-expand-all{
     color: #999;
     background-color: #eee;
 
@@ -192,7 +192,7 @@
     }
   }
 
-  .csf-search{
+  .taf-search{
 
     input{
       color: #555;
@@ -204,7 +204,7 @@
     }
   }
 
-  .csf-nav{
+  .taf-nav{
 
     ul{
 
@@ -221,7 +221,7 @@
           }
         }
 
-        .csf-active{
+        .taf-active{
           color: #111;
           background-color: #fff;
         }
@@ -239,7 +239,7 @@
     }
   }
 
-  .csf-nav-normal{
+  .taf-nav-normal{
 
     > ul{
       margin-right: -1px;
@@ -252,14 +252,14 @@
           border-right: 1px solid #ccd0d4;
         }
 
-        .csf-active{
+        .taf-active{
           border-right-color: #fff;
         }
       }
     }
   }
 
-  .csf-nav-inline{
+  .taf-nav-inline{
     background-color: #f5f5f5;
     border-bottom: 1px solid #ccd0d4;
 
@@ -274,7 +274,7 @@
           border-bottom: 1px solid #ccd0d4;
         }
 
-        .csf-active{
+        .taf-active{
           border-bottom-color: #fff;
         }
       }
@@ -284,17 +284,17 @@
       }
     }
 
-    .csf-arrow:after{
+    .taf-arrow:after{
       display: none;
     }
   }
 
-  .csf-nav-background{
+  .taf-nav-background{
     background-color: #f5f5f5;
     border-right: 1px solid #ccd0d4;
   }
 
-  .csf-footer{
+  .taf-footer{
     color: #555;
     border-top: 1px solid #ccd0d4;
     background-color: #f5f5f5;

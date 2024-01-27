@@ -3,9 +3,9 @@
 //
 // Create a widget 1
 //
-CSF::createWidget( 'csf_widget_example_1', array(
+TAF::createWidget( 'taf_widget_example_1', array(
   'title'       => 'Codestar Widget Example 1',
-  'classname'   => 'csf-widget-classname',
+  'classname'   => 'taf-widget-classname',
   'description' => 'A description for widget example 1',
   'fields'      => array(
 
@@ -48,8 +48,8 @@ CSF::createWidget( 'csf_widget_example_1', array(
 // Front-end display of widget example 1
 // Attention: This function named considering above widget base id.
 //
-if ( ! function_exists( 'csf_widget_example_1' ) ) {
-  function csf_widget_example_1( $args, $instance ) {
+if ( ! function_exists( 'taf_widget_example_1' ) ) {
+  function taf_widget_example_1( $args, $instance ) {
 
     echo $args['before_widget'];
 
@@ -74,9 +74,9 @@ if ( ! function_exists( 'csf_widget_example_1' ) ) {
 //
 // Create a widget 2
 //
-CSF::createWidget( 'csf_widget_example_2', array(
+TAF::createWidget( 'taf_widget_example_2', array(
   'title'       => 'Codestar Widget Example 2',
-  'classname'   => 'csf-widget-classname',
+  'classname'   => 'taf-widget-classname',
   'description' => 'A description for widget example 2',
   'fields'      => array(
 
@@ -155,8 +155,8 @@ CSF::createWidget( 'csf_widget_example_2', array(
 // Front-end display of widget example 2
 // Attention: This function named considering above widget base id.
 //
-if ( ! function_exists( 'csf_widget_example_2' ) ) {
-  function csf_widget_example_2( $args, $instance ) {
+if ( ! function_exists( 'taf_widget_example_2' ) ) {
+  function taf_widget_example_2( $args, $instance ) {
 
     echo $args['before_widget'];
 

@@ -1,18 +1,18 @@
 /**
  * 06. Profile
  */
-.csf-profile-options{
+.taf-profile-options{
 
   > h2 > .fa {
     padding-right: 7px;
   }
 
-  > .csf-field{
+  > .taf-field{
     max-width: 750px;
     padding: 15px 0;
     border-top: none !important;
 
-    > .csf-title{
+    > .taf-title{
       width: 200px;
 
       h4{
@@ -24,35 +24,35 @@
       }
     }
 
-    > .csf-fieldset{
+    > .taf-fieldset{
       width: calc(100% - 220px);
 
-      > .csf-help{
+      > .taf-help{
         top: -15px;
         right: -5px;
       }
     }
   }
 
-  > .csf-field-heading{
+  > .taf-field-heading{
     font-size: 1.1em;
   }
 
-  > .csf-field-subheading{
+  > .taf-field-subheading{
     font-size: 12px;
   }
 
-  > .csf-field-subheading,
-  > .csf-field-heading{
+  > .taf-field-subheading,
+  > .taf-field-heading{
     margin: 10px 0;
     padding: 15px !important;
     border: 1px solid #ddd;
   }
 
-  > .csf-field-submessage{
+  > .taf-field-submessage{
     margin: 20px 0;
 
-    .csf-submessage{
+    .taf-submessage{
       padding: 10px;
       border-left-width: 1px;
       border-left-style: solid;
@@ -61,7 +61,7 @@
     }
   }
 
-  > .csf-field-notice{
+  > .taf-field-notice{
     background-color: transparent;
   }
 }

@@ -9,7 +9,7 @@ $prefix_page_opts = '_prefix_page_options';
 //
 // Create a metabox
 //
-CSF::createMetabox( $prefix_page_opts, array(
+TAF::createMetabox( $prefix_page_opts, array(
   'title'        => 'Custom Page Options',
   'post_type'    => 'page',
   'show_restore' => true,
@@ -18,7 +18,7 @@ CSF::createMetabox( $prefix_page_opts, array(
 //
 // Create a section
 //
-CSF::createSection( $prefix_page_opts, array(
+TAF::createSection( $prefix_page_opts, array(
   'title'  => 'Overview',
   'icon'   => 'fas fa-rocket',
   'fields' => array(
@@ -95,7 +95,7 @@ CSF::createSection( $prefix_page_opts, array(
 //
 // Create a section
 //
-CSF::createSection( $prefix_page_opts, array(
+TAF::createSection( $prefix_page_opts, array(
   'title'  => 'More Fields',
   'icon'   => 'fas fa-tint',
   'fields' => array(
@@ -143,7 +143,7 @@ CSF::createSection( $prefix_page_opts, array(
       'type'       => 'textarea',
       'title'      => 'Textarea',
       'subtitle'   => 'A textarea with shortcoder.',
-      'shortcoder' => 'csf_demo_shortcodes',
+      'shortcoder' => 'taf_demo_shortcodes',
     ),
 
   )
@@ -158,7 +158,7 @@ $prefix_post_opts = '_prefix_post_options';
 //
 // Create a metabox
 //
-CSF::createMetabox( $prefix_post_opts, array(
+TAF::createMetabox( $prefix_post_opts, array(
   'title'        => 'Custom Post Options',
   'post_type'    => 'post',
   'show_restore' => true,
@@ -167,7 +167,7 @@ CSF::createMetabox( $prefix_post_opts, array(
 //
 // Create a section
 //
-CSF::createSection( $prefix_post_opts, array(
+TAF::createSection( $prefix_post_opts, array(
   'fields' => array(
 
     //
@@ -247,7 +247,7 @@ $prefix_meta_opts = '_prefix_meta_options';
 //
 // Create a metabox
 //
-CSF::createMetabox( $prefix_meta_opts, array(
+TAF::createMetabox( $prefix_meta_opts, array(
   'title'     => 'Custom Options',
   'post_type' => array( 'post', 'page' ),
   'context'   => 'side',
@@ -256,7 +256,7 @@ CSF::createMetabox( $prefix_meta_opts, array(
 //
 // Create a section
 //
-CSF::createSection( $prefix_meta_opts, array(
+TAF::createSection( $prefix_meta_opts, array(
   'fields' => array(
 
     //

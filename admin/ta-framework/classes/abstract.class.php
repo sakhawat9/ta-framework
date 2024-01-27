@@ -7,8 +7,8 @@
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'CSF_Abstract' ) ) {
-  abstract class CSF_Abstract {
+if ( ! class_exists( 'TAF_Abstract' ) ) {
+  abstract class TAF_Abstract {
 
     public $abstract   = '';
     public $output_css = '';
@@ -18,7 +18,7 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
       // Collect output css and typography
       if ( ! empty( $this->args['output_css'] ) || ! empty( $this->args['enqueue_webfont'] ) ) {
         add_action( 'wp_enqueue_scripts', array( $this, 'collect_output_css_and_typography' ), 10 );
-        CSF::$css = apply_filters( "csf_{$this->unique}_output_css", CSF::$css, $this );
+        TAF::$css = apply_filters( "taf_{$this->unique}_output_css", TAF::$css, $this );
       }
 
     }
@@ -37,7 +37,7 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
           $field_type   = ( ! empty( $field['type'] ) ) ? $field['type'] : '';
           $field_output = ( ! empty( $field['output'] ) ) ? $field['output'] : '';
           $field_check  = ( $field_type === 'typography' || $field_output ) ? true : false;
-          $field_class  = 'CSF_Field_' . $field_type;
+          $field_class  = 'TAF_Field_' . $field_type;
 
           if ( $field_type && $field_id ) {
 
@@ -111,7 +111,7 @@ if ( ! class_exists( 'CSF_Abstract' ) ) {
 
                 // output css
                 if ( $field_output && $this->args['output_css'] ) {
-                  CSF::$css .= $instance->output();
+                  TAF::$css .= $instance->output();
                 }
 
                 unset( $instance );

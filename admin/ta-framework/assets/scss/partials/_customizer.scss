@@ -3,10 +3,10 @@
  */
 .control-section{
 
-  .csf-field{
+  .taf-field{
     padding: 0;
 
-    .csf-title{
+    .taf-title{
       float: none;
       width: 100%;
       margin-bottom: 6px;
@@ -20,22 +20,22 @@
       }
     }
 
-    .csf-fieldset{
+    .taf-fieldset{
       float: none;
       width: 100%;
     }
   }
 
-  .csf-help{
+  .taf-help{
     top: -5px;
     right: -5px;
   }
 
-  .csf-field-select select{
+  .taf-field-select select{
     width: 100%;
   }
 
-  .csf-field-heading{
+  .taf-field-heading{
     color: inherit;
     font-size: 14px;
     line-height: 1em;
@@ -44,7 +44,7 @@
     padding: 15px;
   }
 
-  .csf-field-subheading{
+  .taf-field-subheading{
     color: inherit;
     font-size: 11px;
     margin-right: -15px;
@@ -52,73 +52,73 @@
     padding: 10px 15px;
   }
 
-  .csf-subtitle-text{
+  .taf-subtitle-text{
     margin-top: 4px;
     font-size: 12px;
   }
 
-  .csf-field-submessage .csf-submessage{
+  .taf-field-submessage .taf-submessage{
     margin-right: -15px;
     margin-left: -15px;
     padding: 15px;
   }
 
-  .csf-fieldset{
+  .taf-fieldset{
 
-    .csf-field-submessage .csf-submessage,
-    .csf-field-heading,
-    .csf-field-subheading{
+    .taf-field-submessage .taf-submessage,
+    .taf-field-heading,
+    .taf-field-subheading{
       margin-left: 0;
       margin-right: 0;
     }
   }
 
-  .csf-field-date,
-  .csf-field-datetime{
+  .taf-field-date,
+  .taf-field-datetime{
 
     label{
       display: block;
     }
 
-    .csf--to{
+    .taf--to{
       margin-top: 4px;
       margin-left: 0;
     }
   }
 
-  .csf-field-sorter{
+  .taf-field-sorter{
 
     ul li{
       padding: 5px;
     }
 
-    .csf-modules{
+    .taf-modules{
       float: none;
       width: 100%;
     }
 
-    .csf-modules:first-child{
+    .taf-modules:first-child{
       padding-right: 0;
       padding-bottom: 15px;
     }
   }
 
-  .csf-field-background{
+  .taf-field-background{
 
-    .csf--background-attributes{
+    .taf--background-attributes{
       flex-direction: column;
     }
   }
 
-  .csf-field-spacing{
+  .taf-field-spacing{
     input{
       width: 90px;
     }
   }
 
-  .csf-field-border{
+  .taf-field-border{
 
-    .csf--input{
+    .taf--input{
       flex: 1 50%;
     }
 
@@ -128,44 +128,44 @@
     }
   }
 
-  .csf-field-spinner{
+  .taf-field-spinner{
     input{
       width: 50px;
     }
   }
 
-  .csf-field-number{
+  .taf-field-number{
 
-    .csf--wrap{
+    .taf--wrap{
       width: 100%;
     }
   }
 
-  .csf-field-backup{
+  .taf-field-backup{
 
-    .csf-export-data{
+    .taf-export-data{
       display: none;
     }
   }
 
-  .csf-field-fieldset{
+  .taf-field-fieldset{
 
-    .csf-fieldset-content{
+    .taf-fieldset-content{
       border-color: #e5e5e5;
     }
   }
 
-  .csf-tabbed-content,
-  .csf-sortable-content,
-  .csf-repeater-content,
-  .csf-fieldset-content,
-  .csf-cloneable-content,
-  .csf-accordion-content{
+  .taf-tabbed-content,
+  .taf-sortable-content,
+  .taf-repeater-content,
+  .taf-fieldset-content,
+  .taf-cloneable-content,
+  .taf-accordion-content{
 
-    > .csf-field{
+    > .taf-field{
       padding: 10px;
 
-      .csf-title{
+      .taf-title{
         margin-bottom: 5px;
       }
 
@@ -175,11 +175,11 @@
     }
   }
 
-  .csf-depend-hidden.csf-depend-on{
+  .taf-depend-hidden.taf-depend-on{
     display: none !important;
   }
 
-  .csf-depend-visible.csf-depend-on{
+  .taf-depend-visible.taf-depend-on{
     border-top: 0 !important;
   }
 }

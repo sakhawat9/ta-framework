@@ -1,176 +1,175 @@
-<?php if ( ! defined( 'ABSPATH' ) ) { die; } // Cannot access directly.
+<?php if ( ! defined( 'ABSPATH' ) ) {
+	die; } // Cannot access directly.
 /**
  *
  * Field: border
  *
  * @since 1.0.0
  * @version 1.0.0
- *
  */
-if ( ! class_exists( 'CSF_Field_border' ) ) {
-  class CSF_Field_border extends CSF_Fields {
+if ( ! class_exists( 'TAF_Field_border' ) ) {
+	class TAF_Field_border extends TAF_Fields {
 
-    public function __construct( $field, $value = '', $unique = '', $where = '', $parent = '' ) {
-      parent::__construct( $field, $value, $unique, $where, $parent );
-    }
+		public function __construct( $field, $value = '', $unique = '', $where = '', $parent = '' ) {
+			parent::__construct( $field, $value, $unique, $where, $parent );
+		}
 
-    public function render() {
+		public function render() {
 
-      $args = wp_parse_args( $this->field, array(
-        'top_icon'           => '<i class="fas fa-long-arrow-alt-up"></i>',
-        'left_icon'          => '<i class="fas fa-long-arrow-alt-left"></i>',
-        'bottom_icon'        => '<i class="fas fa-long-arrow-alt-down"></i>',
-        'right_icon'         => '<i class="fas fa-long-arrow-alt-right"></i>',
-        'all_icon'           => '<i class="fas fa-arrows-alt"></i>',
-        'top_placeholder'    => esc_html__( 'top', 'csf' ),
-        'right_placeholder'  => esc_html__( 'right', 'csf' ),
-        'bottom_placeholder' => esc_html__( 'bottom', 'csf' ),
-        'left_placeholder'   => esc_html__( 'left', 'csf' ),
-        'all_placeholder'    => esc_html__( 'all', 'csf' ),
-        'top'                => true,
-        'left'               => true,
-        'bottom'             => true,
-        'right'              => true,
-        'all'                => false,
-        'color'              => true,
-        'style'              => true,
-        'unit'               => 'px',
-      ) );
+			$args = wp_parse_args(
+				$this->field,
+				array(
+					'top_icon'           => '<i class="fas fa-long-arrow-alt-up"></i>',
+					'left_icon'          => '<i class="fas fa-long-arrow-alt-left"></i>',
+					'bottom_icon'        => '<i class="fas fa-long-arrow-alt-down"></i>',
+					'right_icon'         => '<i class="fas fa-long-arrow-alt-right"></i>',
+					'all_icon'           => '<i class="fas fa-arrows-alt"></i>',
+					'top_placeholder'    => esc_html__( 'top', 'ta-framework' ),
+					'right_placeholder'  => esc_html__( 'right', 'ta-framework' ),
+					'bottom_placeholder' => esc_html__( 'bottom', 'ta-framework' ),
+					'left_placeholder'   => esc_html__( 'left', 'ta-framework' ),
+					'all_placeholder'    => esc_html__( 'all', 'ta-framework' ),
+					'top'                => true,
+					'left'               => true,
+					'bottom'             => true,
+					'right'              => true,
+					'all'                => false,
+					'color'              => true,
+					'style'              => true,
+					'unit'               => 'px',
+				)
+			);
 
-      $default_value = array(
-        'top'        => '',
-        'right'      => '',
-        'bottom'     => '',
-        'left'       => '',
-        'color'      => '',
-        'style'      => 'solid',
-        'all'        => '',
-      );
+			$default_value = array(
+				'top'    => '',
+				'right'  => '',
+				'bottom' => '',
+				'left'   => '',
+				'color'  => '',
+				'style'  => 'solid',
+				'all'    => '',
+			);
 
-      $border_props = array(
-        'solid'     => esc_html__( 'Solid', 'csf' ),
-        'dashed'    => esc_html__( 'Dashed', 'csf' ),
-        'dotted'    => esc_html__( 'Dotted', 'csf' ),
-        'double'    => esc_html__( 'Double', 'csf' ),
-        'inset'     => esc_html__( 'Inset', 'csf' ),
-        'outset'    => esc_html__( 'Outset', 'csf' ),
-        'groove'    => esc_html__( 'Groove', 'csf' ),
-        'ridge'     => esc_html__( 'ridge', 'csf' ),
-        'none'      => esc_html__( 'None', 'csf' )
-      );
+			$border_props = array(
+				'solid'  => esc_html__( 'Solid', 'ta-framework' ),
+				'dashed' => esc_html__( 'Dashed', 'ta-framework' ),
+				'dotted' => esc_html__( 'Dotted', 'ta-framework' ),
+				'double' => esc_html__( 'Double', 'ta-framework' ),
+				'inset'  => esc_html__( 'Inset', 'ta-framework' ),
+				'outset' => esc_html__( 'Outset', 'ta-framework' ),
+				'groove' => esc_html__( 'Groove', 'ta-framework' ),
+				'ridge'  => esc_html__( 'ridge', 'ta-framework' ),
+				'none'   => esc_html__( 'None', 'ta-framework' ),
+			);
 
-      $default_value = ( ! empty( $this->field['default'] ) ) ? wp_parse_args( $this->field['default'], $default_value ) : $default_value;
+			$default_value = ( ! empty( $this->field['default'] ) ) ? wp_parse_args( $this->field['default'], $default_value ) : $default_value;
 
-      $value = wp_parse_args( $this->value, $default_value );
+			$value = wp_parse_args( $this->value, $default_value );
 
-      echo $this->field_before();
+			echo wp_kses_post( $this->field_before() );
 
-      echo '<div class="csf--inputs" data-depend-id="'. esc_attr( $this->field['id'] ) .'">';
+			echo '<div class="taf--inputs" data-depend-id="' . esc_attr( $this->field['id'] ) . '">';
 
-      if ( ! empty( $args['all'] ) ) {
+			if ( ! empty( $args['all'] ) ) {
 
-        $placeholder = ( ! empty( $args['all_placeholder'] ) ) ? ' placeholder="'. esc_attr( $args['all_placeholder'] ) .'"' : '';
+				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? ' placeholder="' . esc_attr( $args['all_placeholder'] ) . '"' : '';
 
-        echo '<div class="csf--input">';
-        echo ( ! empty( $args['all_icon'] ) ) ? '<span class="csf--label csf--icon">'. $args['all_icon'] .'</span>' : '';
-        echo '<input type="number" name="'. esc_attr( $this->field_name( '[all]' ) ) .'" value="'. esc_attr( $value['all'] ) .'"'. $placeholder .' class="csf-input-number csf--is-unit" step="any" />';
-        echo ( ! empty( $args['unit'] ) ) ? '<span class="csf--label csf--unit">'. esc_attr( $args['unit'] ) .'</span>' : '';
-        echo '</div>';
+				echo '<div class="taf--input">';
+				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="taf--label taf--icon">' . $args['all_icon'] . '</span>' : '';
+				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '"' . $placeholder . ' class="taf-input-number taf--is-unit" step="any" />';
+				echo ( ! empty( $args['unit'] ) ) ? '<span class="taf--label taf--unit">' . esc_attr( $args['unit'] ) . '</span>' : '';
+				echo '</div>';
 
-      } else {
+			} else {
 
-        $properties = array();
+				$properties = array();
 
-        foreach ( array( 'top', 'right', 'bottom', 'left' ) as $prop ) {
-          if ( ! empty( $args[$prop] ) ) {
-            $properties[] = $prop;
-          }
-        }
+				foreach ( array( 'top', 'right', 'bottom', 'left' ) as $prop ) {
+					if ( ! empty( $args[ $prop ] ) ) {
+						$properties[] = $prop;
+					}
+				}
 
-        $properties = ( $properties === array( 'right', 'left' ) ) ? array_reverse( $properties ) : $properties;
+				$properties = ( $properties === array( 'right', 'left' ) ) ? array_reverse( $properties ) : $properties;
 
-        foreach ( $properties as $property ) {
+				foreach ( $properties as $property ) {
 
-          $placeholder = ( ! empty( $args[$property.'_placeholder'] ) ) ? ' placeholder="'. esc_attr( $args[$property.'_placeholder'] ) .'"' : '';
+					$placeholder = ( ! empty( $args[ $property . '_placeholder' ] ) ) ? ' placeholder="' . esc_attr( $args[ $property . '_placeholder' ] ) . '"' : '';
 
-          echo '<div class="csf--input">';
-          echo ( ! empty( $args[$property.'_icon'] ) ) ? '<span class="csf--label csf--icon">'. $args[$property.'_icon'] .'</span>' : '';
-          echo '<input type="number" name="'. esc_attr( $this->field_name( '['. $property .']' ) ) .'" value="'. esc_attr( $value[$property] ) .'"'. $placeholder .' class="csf-input-number csf--is-unit" step="any" />';
-          echo ( ! empty( $args['unit'] ) ) ? '<span class="csf--label csf--unit">'. esc_attr( $args['unit'] ) .'</span>' : '';
-          echo '</div>';
+					echo '<div class="taf--input">';
+					echo ( ! empty( $args[ $property . '_icon' ] ) ) ? '<span class="taf--label taf--icon">' . $args[ $property . '_icon' ] . '</span>' : '';
+					echo '<input type="number" name="' . esc_attr( $this->field_name( '[' . $property . ']' ) ) . '" value="' . esc_attr( $value[ $property ] ) . '"' . $placeholder . ' class="taf-input-number taf--is-unit" step="any" />';
+					echo ( ! empty( $args['unit'] ) ) ? '<span class="taf--label taf--unit">' . esc_attr( $args['unit'] ) . '</span>' : '';
+					echo '</div>';
 
-        }
+				}
+			}
 
-      }
+			if ( ! empty( $args['style'] ) ) {
+				echo '<div class="taf--input">';
+				echo '<select name="' . esc_attr( $this->field_name( '[style]' ) ) . '">';
+				foreach ( $border_props as $border_prop_key => $border_prop_value ) {
+					$selected = ( $value['style'] === $border_prop_key ) ? ' selected' : '';
+					echo '<option value="' . esc_attr( $border_prop_key ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $border_prop_value ) . '</option>';
+				}
+				echo '</select>';
+				echo '</div>';
+			}
 
-      if ( ! empty( $args['style'] ) ) {
-        echo '<div class="csf--input">';
-        echo '<select name="'. esc_attr( $this->field_name( '[style]' ) ) .'">';
-        foreach ( $border_props as $border_prop_key => $border_prop_value ) {
-          $selected = ( $value['style'] === $border_prop_key ) ? ' selected' : '';
-          echo '<option value="'. esc_attr( $border_prop_key ) .'"'. esc_attr( $selected ) .'>'. esc_attr( $border_prop_value ) .'</option>';
-        }
-        echo '</select>';
-        echo '</div>';
-      }
+			echo '</div>';
 
-      echo '</div>';
+			if ( ! empty( $args['color'] ) ) {
+				$default_color_attr = ( ! empty( $default_value['color'] ) ) ? ' data-default-color="' . esc_attr( $default_value['color'] ) . '"' : '';
+				echo '<div class="taf--color">';
+				echo '<div class="taf-field-color">';
+				echo '<input type="text" name="' . esc_attr( $this->field_name( '[color]' ) ) . '" value="' . esc_attr( $value['color'] ) . '" class="taf-color"' . $default_color_attr . ' />';
+				echo '</div>';
+				echo '</div>';
+			}
 
-      if ( ! empty( $args['color'] ) ) {
-        $default_color_attr = ( ! empty( $default_value['color'] ) ) ? ' data-default-color="'. esc_attr( $default_value['color'] ) .'"' : '';
-        echo '<div class="csf--color">';
-        echo '<div class="csf-field-color">';
-        echo '<input type="text" name="'. esc_attr( $this->field_name( '[color]' ) ) .'" value="'. esc_attr( $value['color'] ) .'" class="csf-color"'. $default_color_attr .' />';
-        echo '</div>';
-        echo '</div>';
-      }
+			echo wp_kses_post( $this->field_after() );
+		}
 
-      echo $this->field_after();
+		public function output() {
 
-    }
+			$output    = '';
+			$unit      = ( ! empty( $this->value['unit'] ) ) ? $this->value['unit'] : 'px';
+			$important = ( ! empty( $this->field['output_important'] ) ) ? '!important' : '';
+			$element   = ( is_array( $this->field['output'] ) ) ? join( ',', $this->field['output'] ) : $this->field['output'];
 
-    public function output() {
+			// properties
+			$top    = ( isset( $this->value['top'] ) && $this->value['top'] !== '' ) ? $this->value['top'] : '';
+			$right  = ( isset( $this->value['right'] ) && $this->value['right'] !== '' ) ? $this->value['right'] : '';
+			$bottom = ( isset( $this->value['bottom'] ) && $this->value['bottom'] !== '' ) ? $this->value['bottom'] : '';
+			$left   = ( isset( $this->value['left'] ) && $this->value['left'] !== '' ) ? $this->value['left'] : '';
+			$style  = ( isset( $this->value['style'] ) && $this->value['style'] !== '' ) ? $this->value['style'] : '';
+			$color  = ( isset( $this->value['color'] ) && $this->value['color'] !== '' ) ? $this->value['color'] : '';
+			$all    = ( isset( $this->value['all'] ) && $this->value['all'] !== '' ) ? $this->value['all'] : '';
 
-      $output    = '';
-      $unit      = ( ! empty( $this->value['unit'] ) ) ? $this->value['unit'] : 'px';
-      $important = ( ! empty( $this->field['output_important'] ) ) ? '!important' : '';
-      $element   = ( is_array( $this->field['output'] ) ) ? join( ',', $this->field['output'] ) : $this->field['output'];
+			if ( ! empty( $this->field['all'] ) && ( $all !== '' || $color !== '' ) ) {
 
-      // properties
-      $top     = ( isset( $this->value['top'] )    && $this->value['top']    !== '' ) ? $this->value['top']    : '';
-      $right   = ( isset( $this->value['right'] )  && $this->value['right']  !== '' ) ? $this->value['right']  : '';
-      $bottom  = ( isset( $this->value['bottom'] ) && $this->value['bottom'] !== '' ) ? $this->value['bottom'] : '';
-      $left    = ( isset( $this->value['left'] )   && $this->value['left']   !== '' ) ? $this->value['left']   : '';
-      $style   = ( isset( $this->value['style'] )  && $this->value['style']  !== '' ) ? $this->value['style']  : '';
-      $color   = ( isset( $this->value['color'] )  && $this->value['color']  !== '' ) ? $this->value['color']  : '';
-      $all     = ( isset( $this->value['all'] )    && $this->value['all']    !== '' ) ? $this->value['all']    : '';
+				$output  = $element . '{';
+				$output .= ( $all !== '' ) ? 'border-width:' . $all . $unit . $important . ';' : '';
+				$output .= ( $color !== '' ) ? 'border-color:' . $color . $important . ';' : '';
+				$output .= ( $style !== '' ) ? 'border-style:' . $style . $important . ';' : '';
+				$output .= '}';
 
-      if ( ! empty( $this->field['all'] ) && ( $all !== '' || $color !== '' ) ) {
+			} elseif ( $top !== '' || $right !== '' || $bottom !== '' || $left !== '' || $color !== '' ) {
 
-        $output  = $element .'{';
-        $output .= ( $all   !== '' ) ? 'border-width:'. $all . $unit . $important .';' : '';
-        $output .= ( $color !== '' ) ? 'border-color:'. $color . $important .';'       : '';
-        $output .= ( $style !== '' ) ? 'border-style:'. $style . $important .';'       : '';
-        $output .= '}';
+				$output  = $element . '{';
+				$output .= ( $top !== '' ) ? 'border-top-width:' . $top . $unit . $important . ';' : '';
+				$output .= ( $right !== '' ) ? 'border-right-width:' . $right . $unit . $important . ';' : '';
+				$output .= ( $bottom !== '' ) ? 'border-bottom-width:' . $bottom . $unit . $important . ';' : '';
+				$output .= ( $left !== '' ) ? 'border-left-width:' . $left . $unit . $important . ';' : '';
+				$output .= ( $color !== '' ) ? 'border-color:' . $color . $important . ';' : '';
+				$output .= ( $style !== '' ) ? 'border-style:' . $style . $important . ';' : '';
+				$output .= '}';
 
-      } else if ( $top !== '' || $right !== '' || $bottom !== '' || $left !== '' || $color !== '' ) {
+			}
 
-        $output  = $element .'{';
-        $output .= ( $top    !== '' ) ? 'border-top-width:'. $top . $unit . $important .';'       : '';
-        $output .= ( $right  !== '' ) ? 'border-right-width:'. $right . $unit . $important .';'   : '';
-        $output .= ( $bottom !== '' ) ? 'border-bottom-width:'. $bottom . $unit . $important .';' : '';
-        $output .= ( $left   !== '' ) ? 'border-left-width:'. $left . $unit . $important .';'     : '';
-        $output .= ( $color  !== '' ) ? 'border-color:'. $color . $important .';'                 : '';
-        $output .= ( $style  !== '' ) ? 'border-style:'. $style . $important .';'                 : '';
-        $output .= '}';
+			$this->parent->output_css .= $output;
 
-      }
-
-      $this->parent->output_css .= $output;
-
-      return $output;
-
-    }
-
-  }
+			return $output;
+		}
+	}
 }

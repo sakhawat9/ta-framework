@@ -8,14 +8,14 @@ $prefix = '_prefix_taxonomy_options';
 //
 // Create taxonomy options
 //
-CSF::createTaxonomyOptions( $prefix, array(
+TAF::createTaxonomyOptions( $prefix, array(
   'taxonomy' => 'category',
 ) );
 
 //
 // Create a section
 //
-CSF::createSection( $prefix, array(
+TAF::createSection( $prefix, array(
   'fields' => array(
 
     //

@@ -1,42 +1,42 @@
 /**
  * 08. Nav Menu
  */
-.csf-nav-menu-options{
+.taf-nav-menu-options{
   clear: both;
   float: left;
   width: 100%;
 
-  > .csf-fields{
+  > .taf-fields{
     margin: 10px -10px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
 
-    > .csf-field{
+    > .taf-field{
       padding: 12px;
 
-      .csf-title{
+      .taf-title{
         float: none;
         width: 100%;
         margin-bottom: 5px;
       }
 
-      .csf-fieldset{
+      .taf-fieldset{
         float: none;
         width: 100%;
       }
     }
   }
 
-  .csf-field-text input{
+  .taf-field-text input{
     width: 100%;
   }
 
-  .csf-field-notice .csf-notice{
+  .taf-field-notice .taf-notice{
     padding: 15px;
   }
 }
 
-.csf-nav-menu-title{
+.taf-nav-menu-title{
   padding: 12px;
   background-color: #f5f5f5;
   border-top: 1px solid #eee;
@@ -53,6 +53,6 @@
   }
 }
 
-.csf-nav-menu-icon{
+.taf-nav-menu-icon{
   margin-right: 5px;
 }

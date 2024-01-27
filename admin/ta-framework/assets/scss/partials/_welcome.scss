@@ -1,7 +1,7 @@
 /**
  * 11. Welcome Page
  */
-.csf-welcome-wrap{
+.taf-welcome-wrap{
   position: relative;
   margin: 25px 40px 0 20px;
   font-size: 15px;
@@ -21,7 +21,7 @@
     font-weight: 400;
   }
 
-  .csf-logo{
+  .taf-logo{
     position: absolute;
     overflow: hidden;
     top: 0;
@@ -31,7 +31,7 @@
     background-image: linear-gradient( 45deg, #2d67cb, #ad19f3);
     box-shadow: 0 1px 4px rgba(0,0,0,0.25), inset 0 0 0 4px rgba(0,0,0,0.25);
 
-    .csf--effects i{
+    .taf--effects i{
       position: absolute;
       width: 200px;
       height: 100px;
@@ -39,33 +39,33 @@
       transform: rotate(-45deg);
     }
 
-    .csf--effects i:nth-child(1){
+    .taf--effects i:nth-child(1){
       bottom: -20px;
       right: -70px;
     }
 
-    .csf--effects i:nth-child(2){
+    .taf--effects i:nth-child(2){
       bottom: -35px;
       right: -80px;
     }
 
-    .csf--effects i:nth-child(3){
+    .taf--effects i:nth-child(3){
       bottom: -50px;
       right: -90px;
     }
 
-    .csf--effects i:nth-child(4){
+    .taf--effects i:nth-child(4){
       bottom: -65px;
       right: -100px;
     }
 
-    .csf--wp-logos{
+    .taf--wp-logos{
       position: relative;
       padding-top: 25px;
       text-align: center;
     }
 
-    .csf--wp-logo{
+    .taf--wp-logo{
       position: absolute;
       left: 20px;
       width: 20px;
@@ -75,7 +75,7 @@
       background-image: url(../images/wp-logo.svg);
     }
 
-    .csf--wp-plugin-logo{
+    .taf--wp-plugin-logo{
       display: inline-block;
       width: 50px;
       height: 50px;
@@ -88,7 +88,7 @@
       vertical-align: middle;
     }
 
-    .csf--text{
+    .taf--text{
       position: absolute;
       left: 0;
       right: 0;
@@ -102,7 +102,7 @@
       text-shadow: 1px 1px 0 rgba(0,0,0,0.25);
     }
 
-    .csf--version{
+    .taf--version{
       top: auto;
       left: auto;
       right: 8px;
@@ -112,7 +112,7 @@
     }
   }
 
-  .csf-about-text{
+  .taf-about-text{
     font-weight: 400;
     line-height: 1.6em;
     font-size: 19px;
@@ -120,7 +120,7 @@
     color: #555d66;
   }
 
-  .csf-demo-button{
+  .taf-demo-button{
     margin: 1em 200px 2em 0;
   }
 
@@ -133,40 +133,40 @@
     padding-left: 15px;
   }
 
-  .csf--col{
+  .taf--col{
     float: left;
     padding-right: 20px;
     box-sizing: border-box;
   }
 
-  .csf--col-2{
+  .taf--col-2{
     width: 50%;
   }
 
-  .csf--col-3{
+  .taf--col-3{
     width: 33.333%;
   }
 
-  .csf--col-4{
+  .taf--col-4{
     width: 25%;
   }
 
-  .csf--col-5{
+  .taf--col-5{
     width: 20%;
   }
 
-  .csf--col-last{
+  .taf--col-last{
     padding-right: 0;
   }
 
-  .csf--col-upgrade{
+  .taf--col-upgrade{
     padding: 10px 0;
     text-align: center;
     border-top: 1px solid #e5e5e5;
   }
 }
 
-.csf--table-compare{
+.taf--table-compare{
 
   thead,
   tfoot{
@@ -205,7 +205,7 @@
   }
 }
 
-.csf-welcome-cols{
+.taf-welcome-cols{
   clear: both;
   margin: 20px 0;
   background-color: #fff;
@@ -213,7 +213,7 @@
   border-radius: 2px;
   border: 1px solid #e5e5e5;
 
-  .csf--col{
+  .taf--col{
     width: 33.333%;
     float: left;
     padding: 20px;
@@ -223,8 +223,8 @@
     border-right: 1px solid #e5e5e5;
   }
 
-  .csf--left,
-  .csf--block{
+  .taf--left,
+  .taf--block{
     float: left;
     width: 20%;
     padding: 0 30px;
@@ -232,23 +232,23 @@
     box-sizing: border-box;
   }
 
-  .csf--block{
+  .taf--block{
     width: 80%;
   }
 
-  .csf--col-first{
+  .taf--col-first{
     border-bottom: 1px solid #e5e5e5;
   }
 
-  .csf--last{
+  .taf--last{
     border-right: none;
   }
 
-  .csf--space{
+  .taf--space{
     height: 20px;
   }
 
-  .csf--icon{
+  .taf--icon{
     display: inline-block;
     font-size: 20px;
     width: 30px;
@@ -261,15 +261,15 @@
     border-radius: 30px;
   }
 
-  .csf--active{
+  .taf--active{
     background-color: #5cb85c;
   }
 
-  .csf--deactive{
+  .taf--deactive{
     background-color: #e14d43;
   }
 
-  .csf--title{
+  .taf--title{
     font-weight: bold;
     display: block;
   }
@@ -279,17 +279,17 @@
   }
 }
 
-.csf-features-cols{
+.taf-features-cols{
 
-  .csf--key-features{
+  .taf--key-features{
     width: 30%;
   }
-  .csf--available-fields{
+  .taf--available-fields{
     width: 70%;
   }
 }
 
-.csf-code-block{
+.taf-code-block{
   margin: 20px 0;
   padding: 5px 20px;
   background-color: #fff;
@@ -306,13 +306,13 @@
   }
 }
 
-.csf--table-fields{
+.taf--table-fields{
   td{
     font-size: 14px;
   }
 }
 
-.csf--upgrade a{
+.taf--upgrade a{
   color: #5cb85c;
   font-weight: bold;
 
@@ -326,8 +326,8 @@
 
 @media only screen and (max-width:782px){
 
-  .csf-welcome-cols{
-    .csf--col{
+  .taf-welcome-cols{
+    .taf--col{
       width: 100%;
       min-height: auto;
       border-right: none;
@@ -335,11 +335,11 @@
     }
   }
 
-  .csf-features-cols{
-    .csf--key-features{
+  .taf-features-cols{
+    .taf--key-features{
       width: 100%;
     }
-    .csf--available-fields{
+    .taf--available-fields{
       width: 100%;
     }
   }

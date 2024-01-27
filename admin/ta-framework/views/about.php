@@ -2,69 +2,69 @@
 
 <p>Welcome to the exciting world of Codestar Framework. Built in Object Oriented Programming paradigm with high number of custom fields and tons of options. Allows you to bring custom admin, metabox, taxonomy and customize settings to all of your pages, posts and categories. It's highly modern and advanced framework.</p>
 
-<div class="csf-welcome-cols">
+<div class="taf-welcome-cols">
 
-  <div class="csf--col csf--col-first">
-    <span class="csf--icon csf--active"><i class="fas fa-check"></i></span>
-    <div class="csf--title">Admin Option Framework</div>
-    <p class="csf--text">Built in Object Oriented Programming paradigm with high number of custom fields and tons of options. It's highly modern and advanced framework.</p>
+  <div class="taf--col taf--col-first">
+    <span class="taf--icon taf--active"><i class="fas fa-check"></i></span>
+    <div class="taf--title">Admin Option Framework</div>
+    <p class="taf--text">Built in Object Oriented Programming paradigm with high number of custom fields and tons of options. It's highly modern and advanced framework.</p>
   </div>
 
-  <div class="csf--col csf--col-first">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Customize Option Framework</div>
-    <p class="csf--text">Inherits the default WordPress Customizer with integration of own custom fields. It's more powerful to customize your site on live.</p>
+  <div class="taf--col taf--col-first">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Customize Option Framework</div>
+    <p class="taf--text">Inherits the default WordPress Customizer with integration of own custom fields. It's more powerful to customize your site on live.</p>
   </div>
 
-  <div class="csf--col csf--col-first csf--last">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Metabox Option Framework</div>
-    <p class="csf--text">Allows you to bring custom metabox settings to all of your pages and posts. We provide advanced settings with numerious number of fields.</p>
-  </div>
-
-  <div class="clear"></div>
-
-  <div class="csf--col csf--col-first">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Nav Menu Option Framework</div>
-    <p class="csf--text">Allows you to bring custom nav menu item settings to all of your menus. We provide advanced settings with numerious number of fields.</p>
-  </div>
-
-  <div class="csf--col csf--col-first">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Taxonomy Option Framework</div>
-    <p class="csf--text">Allows you to bring custom taxonomy settings to all of your categories, tags or CPT. We provide advanced settings with numerious number of fields.</p>
-  </div>
-
-  <div class="csf--col csf--col-first csf--last">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Profile Option Framework</div>
-    <p class="csf--text">Allows you to bring custom user profile settings to all of users. We provide advanced settings with numerious number of fields.</p>
+  <div class="taf--col taf--col-first taf--last">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Metabox Option Framework</div>
+    <p class="taf--text">Allows you to bring custom metabox settings to all of your pages and posts. We provide advanced settings with numerious number of fields.</p>
   </div>
 
   <div class="clear"></div>
 
-  <div class="csf--col">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Widget Option Framework</div>
-    <p class="csf--text">Allows you to creating custom widgets. We provide advanced settings wtih numerious number of fields.</p>
+  <div class="taf--col taf--col-first">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Nav Menu Option Framework</div>
+    <p class="taf--text">Allows you to bring custom nav menu item settings to all of your menus. We provide advanced settings with numerious number of fields.</p>
   </div>
 
-  <div class="csf--col">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Comment Option Framework</div>
-    <p class="csf--text">Allows you to bring custom comment metabox settings to all of comments. We provide advanced settings wtih numerious number of fields.</p>
+  <div class="taf--col taf--col-first">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Taxonomy Option Framework</div>
+    <p class="taf--text">Allows you to bring custom taxonomy settings to all of your categories, tags or CPT. We provide advanced settings with numerious number of fields.</p>
   </div>
 
-  <div class="csf--col csf--last">
-    <span class="csf--icon csf--<?php echo esc_attr( CSF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( CSF::$premium ? 'check' : 'times' ); ?>"></i></span>
-    <div class="csf--title">Shortcode Option Framework</div>
-    <p class="csf--text">Comes with pre-built shortcode editor to manage your content. It's easy and flexible to build unlimited layouts with endless possibilites.</p>
+  <div class="taf--col taf--col-first taf--last">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Profile Option Framework</div>
+    <p class="taf--text">Allows you to bring custom user profile settings to all of users. We provide advanced settings with numerious number of fields.</p>
   </div>
 
-  <?php if ( ! CSF::$premium ) { ?>
   <div class="clear"></div>
-  <div class="csf--col-upgrade">
+
+  <div class="taf--col">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Widget Option Framework</div>
+    <p class="taf--text">Allows you to creating custom widgets. We provide advanced settings wtih numerious number of fields.</p>
+  </div>
+
+  <div class="taf--col">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Comment Option Framework</div>
+    <p class="taf--text">Allows you to bring custom comment metabox settings to all of comments. We provide advanced settings wtih numerious number of fields.</p>
+  </div>
+
+  <div class="taf--col taf--last">
+    <span class="taf--icon taf--<?php echo esc_attr( TAF::$premium ? 'active' : 'deactive' ); ?>"><i class="fas fa-<?php echo esc_attr( TAF::$premium ? 'check' : 'times' ); ?>"></i></span>
+    <div class="taf--title">Shortcode Option Framework</div>
+    <p class="taf--text">Comes with pre-built shortcode editor to manage your content. It's easy and flexible to build unlimited layouts with endless possibilites.</p>
+  </div>
+
+  <?php if ( ! TAF::$premium ) { ?>
+  <div class="clear"></div>
+  <div class="taf--col-upgrade">
     <a href="http://codestarframework.com/" class="button button-primary" target="_blank" rel="nofollow"><i class="fas fa-share"></i> Upgrade Premium Version</a>
   </div>
   <?php } ?>
@@ -74,8 +74,8 @@
 
 <hr />
 
-<div class="csf-features-cols csf--col-wrap">
-  <div class="csf--col csf--key-features">
+<div class="taf-features-cols taf--col-wrap">
+  <div class="taf--col taf--key-features">
 
   <h4>Key Features</h4>
 
@@ -98,11 +98,11 @@
 
   </div>
 
-  <div class="csf--col csf--available-fields">
+  <div class="taf--col taf--available-fields">
 
   <h4>Available Fields</h4>
 
-  <table class="csf--table-fields fixed widefat">
+  <table class="taf--table-fields fixed widefat">
     <tbody>
       <tr>
         <td>text</td>
@@ -170,12 +170,12 @@
   <div class="clear"></div>
 </div>
 
-<?php if ( CSF::$premium ) { ?>
+<?php if ( TAF::$premium ) { ?>
 <hr />
 <h5>You can force to disable this page with (it would works for only premium users):</h5>
-<div class="csf-code-block">
+<div class="taf-code-block">
 <pre>
-add_filter( 'csf_welcome_page', '__return_false' );
+add_filter( 'taf_welcome_page', '__return_false' );
 </pre>
 </div>
 <?php } ?>

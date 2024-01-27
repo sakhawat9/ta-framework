@@ -7,8 +7,8 @@
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'CSF_Field_wp_editor' ) ) {
-  class CSF_Field_wp_editor extends CSF_Fields {
+if ( ! class_exists( 'TAF_Field_wp_editor' ) ) {
+  class TAF_Field_wp_editor extends TAF_Fields {
 
     public function __construct( $field, $value = '', $unique = '', $where = '', $parent = '' ) {
       parent::__construct( $field, $value, $unique, $where, $parent );
@@ -39,21 +39,21 @@ if ( ! class_exists( 'CSF_Field_wp_editor' ) ) {
         'wpautop'       => $args['wpautop'],
       );
 
-      echo $this->field_before();
+      echo wp_kses_post( $this->field_before() );
 
-      echo ( csf_wp_editor_api() ) ? '<div class="csf-wp-editor" data-editor-settings="'. esc_attr( json_encode( $editor_settings ) ) .'">' : '';
+      echo ( taf_wp_editor_api() ) ? '<div class="taf-wp-editor" data-editor-settings="'. esc_attr( json_encode( $editor_settings ) ) .'">' : '';
 
       echo '<textarea name="'. esc_attr( $this->field_name() ) .'"'. $this->field_attributes( $attributes ) . $editor_height .'>'. $this->value .'</textarea>';
 
-      echo ( csf_wp_editor_api() ) ? '</div>' : '';
+      echo ( taf_wp_editor_api() ) ? '</div>' : '';
 
-      echo $this->field_after();
+      echo wp_kses_post( $this->field_after() );
 
     }
 
     public function enqueue() {
 
-      if ( csf_wp_editor_api() && function_exists( 'wp_enqueue_editor' ) ) {
+      if ( taf_wp_editor_api() && function_exists( 'wp_enqueue_editor' ) ) {
 
         wp_enqueue_editor();
 
@@ -79,7 +79,7 @@ if ( ! class_exists( 'CSF_Field_wp_editor' ) ) {
       $media_buttons = ob_get_clean();
 
       echo '<script type="text/javascript">';
-      echo 'var csf_media_buttons = '. json_encode( $media_buttons ) .';';
+      echo 'var taf_media_buttons = '. json_encode( $media_buttons ) .';';
       echo '</script>';
 
     }
@@ -87,17 +87,17 @@ if ( ! class_exists( 'CSF_Field_wp_editor' ) ) {
     // Setup wp editor settings
     public function setup_wp_editor_settings() {
 
-      if ( csf_wp_editor_api() && class_exists( '_WP_Editors') ) {
+      if ( taf_wp_editor_api() && class_exists( '_WP_Editors') ) {
 
-        $defaults = apply_filters( 'csf_wp_editor', array(
+        $defaults = apply_filters( 'taf_wp_editor', array(
           'tinymce' => array(
             'wp_skip_init' => true
           ),
         ) );
 
-        $setup = _WP_Editors::parse_settings( 'csf_wp_editor', $defaults );
+        $setup = _WP_Editors::parse_settings( 'taf_wp_editor', $defaults );
 
-        _WP_Editors::editor_settings( 'csf_wp_editor', $setup );
+        _WP_Editors::editor_settings( 'taf_wp_editor', $setup );
 
       }
 
