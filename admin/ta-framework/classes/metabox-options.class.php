@@ -206,7 +206,7 @@ if ( ! class_exists( 'TAF_Metabox' ) ) {
                 $tab_error = ( ! empty( $errors['sections'][$tab_key] ) ) ? '<i class="taf-label-error taf-error">!</i>' : '';
                 $tab_icon  = ( ! empty( $section['icon'] ) ) ? '<i class="taf-tab-icon '. esc_attr( $section['icon'] ) .'"></i>' : '';
 
-                echo '<li><a href="#">'. wp_kses_post($tab_icon) . esc_html($tab['title']) . esc_html($tab_error) .'</a></li>';
+                echo '<li><a href="#">'. wp_kses_post($tab_icon) . esc_html($section['title']) . esc_html($tab_error) .'</a></li>';
 
                 $tab_key++;
 
