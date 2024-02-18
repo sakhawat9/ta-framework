@@ -508,7 +508,7 @@ TAF::createSection(
 				'placeholder' => 'Select a category',
 				'options'     => 'categories',
 				'query_args'  => array(
-					'taxonomy' => 'your_taxonomy_name',
+					'taxonomy' => 'post',
 				),
 			),
 

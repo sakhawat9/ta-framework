@@ -47,7 +47,7 @@ if ( ! class_exists( 'TAF_Field_wp_editor' ) ) {
 
 			echo wp_kses_post( $this->field_before() );
 
-			echo ( taf_wp_editor_api() ) ? '<div class="taf-wp-editor" data-editor-settings="' . esc_attr( json_encode( $editor_settings ) ) . '">' : '';
+			echo ( taf_wp_editor_api() ) ? '<div class="taf-wp-editor" data-editor-settings="' . esc_attr( wp_json_encode( $editor_settings ) ) . '">' : '';
 
 			echo '<textarea name="' . esc_attr( $this->field_name() ) . '"' . wp_kses_post( $this->field_attributes( $attributes ) ) . wp_kses_post( $editor_height ) . '>' . wp_kses_post( $this->value ) . '</textarea>';
 
@@ -83,7 +83,7 @@ if ( ! class_exists( 'TAF_Field_wp_editor' ) ) {
 			$media_buttons = ob_get_clean();
 
 			echo '<script type="text/javascript">';
-			echo 'var taf_media_buttons = ' . json_encode( $media_buttons ) . ';';
+			echo 'var taf_media_buttons = ' . wp_json_encode( $media_buttons ) . ';';
 			echo '</script>';
 		}
 

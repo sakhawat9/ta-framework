@@ -468,6 +468,17 @@ TAF::createSection(
 			),
 
 			array(
+				'id'          => 'opt-select-10',
+				'type'        => 'select',
+				'title'       => 'Select with AJAX search Taxonomy',
+				'options' => 'taxonomy',
+				'query_args' => array(
+					'type' => 'post',
+				),
+				'placeholder' => 'Select a category',
+			),
+
+			array(
 				'type'    => 'notice',
 				'style'   => 'info',
 				'content' => 'Select with <strong>predefined wp query</strong> options.',
@@ -552,7 +563,7 @@ TAF::createSection(
 				'placeholder' => 'Select a post',
 				'options'     => 'posts',
 				'query_args'  => array(
-					'post_type' => 'your_post_type_name',
+					'post_type' => 'post',
 				),
 			),
 
@@ -562,9 +573,9 @@ TAF::createSection(
 				'title'       => 'Select with CPT (custom post type) categories',
 				'placeholder' => 'Select a category',
 				'options'     => 'categories',
-				'query_args'  => array(
-					'taxonomy' => 'your_taxonomy_name',
-				),
+				// 'query_args'  => array(
+				// 	'taxonomy' => 'post',
+				// ),
 			),
 
 		),
