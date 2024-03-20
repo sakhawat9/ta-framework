@@ -496,7 +496,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
         echo '<div class="taf-header-inner">';
 
           echo '<div class="taf-header-left">';
-          echo '<h1>'. $this->args['framework_title'] .'</h1>';
+          echo '<h1>'. wp_kses_post($this->args['framework_title']) .'</h1>';
           echo '</div>';
 
           echo '<div class="taf-header-right">';
@@ -552,7 +552,7 @@ if ( ! class_exists( 'TAF_Options' ) ) {
                       $sub_error = $this->error_check( $sub );
                       $sub_icon  = ( ! empty( $sub['icon'] ) ) ? '<i class="taf-tab-icon '. esc_attr( $sub['icon'] ) .'"></i>' : '';
 
-                      echo '<li><a href="#tab='. esc_attr( $sub_id ) .'" data-tab-id="'. esc_attr( $sub_id ) .'">'. $sub_icon . $sub['title'] . $sub_error .'</a></li>';
+                      echo '<li><a href="#tab='. esc_attr( $sub_id ) .'" data-tab-id="'. esc_attr( $sub_id ) .'">'. wp_kses_post($sub_icon) . esc_html($sub['title']) . esc_html($sub_error) .'</a></li>';
 
                     }
 
