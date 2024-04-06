@@ -685,7 +685,7 @@ if ( ! class_exists( 'TAF_Setup' ) ) {
     public static function add_custom_css() {
 
       if ( ! empty( self::$css ) ) {
-        echo '<style type="text/css">'. wp_strip_all_tags( self::$css ) .'</style>';
+        echo '<style type="text/css">'. esc_html( wp_strip_all_tags( self::$css ) ) .'</style>';
       }
 
     }

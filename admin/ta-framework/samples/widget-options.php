@@ -55,19 +55,15 @@ TAF::createWidget(
 if ( ! function_exists( 'taf_widget_example_1' ) ) {
 	function taf_widget_example_1( $args, $instance ) {
 
-		echo $args['before_widget'];
-
-		// if ( ! empty( $instance['title'] ) ) {
-		// echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
-		// }
+		echo wp_kses_post($args['before_widget']);
 
 		echo '<div style="padding: 20px; background-color: #f7f7f7;">';
-		echo '<h3>Codestar Widget Example 1</h3>';
-		echo '<p><strong>Title:</strong> ' . $instance['title'] . '</p>';
-		echo '<p><strong>Text:</strong> ' . $instance['opt-text'] . '</p>';
-		echo '<p><strong>Color:</strong> ' . $instance['opt-color'] . '</p>';
-		echo '<p><strong>Upload:</strong> ' . $instance['opt-upload'] . '</p>';
-		echo '<p><strong>Textarea:</strong> ' . $instance['opt-textarea'] . '</p>';
+		echo '<h3>'.esc_html__('Codestar Widget Example 1', 'ta-framework').'</h3>';
+		echo '<p><strong>'.esc_html__('Title:', 'ta-framework').'</strong> ' . esc_html($instance['title']) . '</p>';
+		echo '<p><strong>'.esc_html__('Text:', 'ta-framework').'</strong> ' . esc_html($instance['opt-text']) . '</p>';
+		echo '<p><strong>'.esc_html__('Color:', 'ta-framework').'</strong> ' . esc_html($instance['opt-color']) . '</p>';
+		echo '<p><strong>'.esc_html__('Upload:', 'ta-framework').'</strong> ' . esc_html($instance['opt-upload']) . '</p>';
+		echo '<p><strong>'.esc_html__('Textarea:', 'ta-framework').'</strong> ' . esc_html($instance['opt-textarea']) . '</p>';
 		echo '</div>';
 
 		echo $args['after_widget'];
@@ -80,9 +76,9 @@ if ( ! function_exists( 'taf_widget_example_1' ) ) {
 TAF::createWidget(
 	'taf_widget_example_2',
 	array(
-		'title'       => 'Codestar Widget Example 2',
+		'title'       => esc_html__('Codestar Widget Example 2', 'ta-framework'),
 		'classname'   => 'taf-widget-classname',
-		'description' => 'A description for widget example 2',
+		'description' => esc_html__('A description for widget example 2', 'ta-framework'),
 		'fields'      => array(
 
 			array(
@@ -164,7 +160,7 @@ TAF::createWidget(
 if ( ! function_exists( 'taf_widget_example_2' ) ) {
 	function taf_widget_example_2( $args, $instance ) {
 
-		echo $args['before_widget'];
+		echo wp_kses_post($args['before_widget']);
 
 		// if ( ! empty( $instance['title'] ) ) {
 		// echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];

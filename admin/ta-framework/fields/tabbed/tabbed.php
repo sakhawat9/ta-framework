@@ -26,7 +26,7 @@ if ( ! class_exists( 'TAF_Field_tabbed' ) ) {
 				$tabbed_icon   = ( ! empty( $tab['icon'] ) ) ? '<i class="taf--icon ' . esc_attr( $tab['icon'] ) . '"></i>' : '';
 				$tabbed_active = ( empty( $key ) ) ? 'taf-tabbed-active' : '';
 
-				echo '<a href="#" class="' . esc_attr( $tabbed_active ) . '"">' . $tabbed_icon . esc_attr( $tab['title'] ) . '</a>';
+				echo '<a href="#" class="' . esc_attr( $tabbed_active ) . '"">' . wp_kses_post($tabbed_icon) . esc_attr( $tab['title'] ) . '</a>';
 
 			}
 			echo '</div>';
