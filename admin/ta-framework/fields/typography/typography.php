@@ -375,7 +375,7 @@ if ( ! class_exists( 'TAF_Field_typography' ) ) {
 
 				TAF::include_plugin_file( 'fields/typography/google-fonts.php' );
 
-				wp_enqueue_script( 'webfontloader', TAF_DIR_URL . 'admin/ta-framework/assets/js/webfontloader.min.js', array( 'ta-framework' ), '1.6.28', true );
+				wp_enqueue_script( 'webfontloader', TAF_DIR_URL . 'admin/ta-framework/assets/js/webfontloader.min.js', array( 'taf' ), '1.6.28', true );
 
 				$webfonts = array();
 

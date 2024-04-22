@@ -85,7 +85,7 @@ if ( ! class_exists( 'TAF_Field_map' ) ) {
 		public function enqueue() {
 
 			if ( ! wp_script_is( 'taf-leaflet' ) ) {
-				wp_enqueue_script( 'leaflet', TAF_DIR_URL . 'admin/ta-framework/assets/js/leaflet.js', array( 'ta-framework' ), $this->version, true );
+				wp_enqueue_script( 'leaflet', TAF_DIR_URL . 'admin/ta-framework/assets/js/leaflet.js', array('taf'), $this->version, true );
 			}
 
 			if ( ! wp_style_is( 'taf-leaflet' ) ) {
