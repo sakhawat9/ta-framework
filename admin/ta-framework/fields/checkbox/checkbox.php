@@ -22,7 +22,7 @@ if ( ! class_exists( 'TAF_Field_checkbox' ) ) {
 					'inline'         => false,
 					'query_args'     => array(),
 					'check_all'      => false,
-					'check_all_text' => esc_html__( 'Check/Uncheck All' ),
+					'check_all_text' => esc_html__( 'Check/Uncheck All', 'ta-framework' ),
 				)
 			);
 
