@@ -600,7 +600,7 @@
             $cssLink.attr({
               rel: 'stylesheet',
               id: 'taf-codemirror-'+ data_editor.theme +'-css',
-              href: data_editor.cdnURL +'/theme/'+ data_editor.theme +'.min.css',
+              href: data_editor.cdnURL +'/css/'+ data_editor.theme +'.min.css',
               type: 'text/css',
               media: 'all'
             });
@@ -609,7 +609,7 @@
 
           }
 
-          CodeMirror.modeURL = data_editor.cdnURL +'/mode/%N/%N.min.js';
+          CodeMirror.modeURL = data_editor.cdnURL +'/js/%N.min.js';
           CodeMirror.autoLoadMode(code_editor, data_editor.mode);
 
           code_editor.on( 'change', function( editor, event ) {
