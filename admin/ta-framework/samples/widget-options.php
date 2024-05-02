@@ -66,7 +66,7 @@ if ( ! function_exists( 'taf_widget_example_1' ) ) {
 		echo '<p><strong>'.esc_html__('Textarea:', 'ta-framework').'</strong> ' . esc_html($instance['opt-textarea']) . '</p>';
 		echo '</div>';
 
-		echo $args['after_widget'];
+		echo wp_kses_post($args['after_widget']);
 	}
 }
 
@@ -168,7 +168,7 @@ if ( ! function_exists( 'taf_widget_example_2' ) ) {
 
 		echo '<div style="padding: 20px; background-color: #f7f7f7;">';
 		echo '<h3>Codestar Widget Example 2</h3>';
-		echo '<p><strong>Title:</strong> ' . $instance['title'] . '</p>';
+		echo '<p><strong>Title:</strong> ' . esc_html($instance['title']) . '</p>';
 		echo '<p><strong>Text:</strong> ' . $instance['opt-text'] . '</p>';
 		echo '<p><strong>Color:</strong> ' . $instance['opt-color'] . '</p>';
 		echo '<p><strong>Switcher:</strong> ' . $instance['opt-switcher'] . '</p>';
@@ -178,6 +178,6 @@ if ( ! function_exists( 'taf_widget_example_2' ) ) {
 		echo '<p><strong>Textarea:</strong> ' . $instance['opt-textarea'] . '</p>';
 		echo '</div>';
 
-		echo $args['after_widget'];
+		echo wp_kses_post($args['after_widget']);
 	}
 }
